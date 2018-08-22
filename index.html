@@ -16,55 +16,79 @@
 		<link rel="Shortcut Icon" href="favicon.ico" type="image/x-icon" />
     <link href="https://unpkg.com/primer/build/build.css" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
-	</head>
+  </head>
 	<body>
     <div class="pb-12">
-      <div class="bg-blue pb-6">
-          <header class="main-content mx-auto p-responsive d-flex flex-items-center flex-wrap flex-md-nowrap py-6">
-            <div class="flex-auto pr-3">
-            </div>
-  
-            <div>
-              <a class="text-white mr-3" href="https://styleguide.github.com/primer/">Docs</a>
-              <a class="text-white mr-3" href="https://github.com/primer/primer#install">Install</a>
-              <a class="text-white mr-3" href="https://github.com/primer/primer/blob/master/CHANGELOG.md">Changelog</a>
-              <a class="text-white mr-3" href="https://primer.github.io/storybook/">Storybook</a>
-              <div class="d-inline-block v-align-middle">
-              </div>
-            </div>
-          </header>
-  
-          <div class="main-content mx-auto text-white py-6 p-responsive">
-            <h1 class="f00-light text-bold">BitcoinToken</h1>
+      <div class="bg-blue">  
+          <div class="main-content mx-auto text-white py-12 p-responsive">
+            <h1 class="f00-light text-bold" >Bitcoin Token</h1>
             <p class="f3 mb-4">Build tokens in Bitcoin Cash</p>
-            <a class="btn btn-transparent btn-large f3 mb-6" href="https://www.npmjs.com/package/primer">Install BitcoinToken 0.1</a>
+            <!-- <a class="btn btn-transparent btn-large f3 mb-6" href="https://www.npmjs.com/package/primer">Install BitcoinToken 0.1</a> -->
           </div>
         </div>
   
         <div class="main-content mx-auto p-responsive py-6">
-          <p class="alt-lead text-gray py-8">BitcoinToken is a platform for building tokens on top of Bitcoin Cash. Unlike other
+          <p class="alt-lead text-gray py-8">
+            BitcoinToken is a tool for developers to build tokens and other smart contracts on top of Bitcoin Cash. It grants the programmer very low level access, think of it as writing smart contracts in assembly code. You can also use a pre-defined library and launch a token in a few lines of Javascript. We are in prototype stage and plan to launch towards the end of the year.
           </p>
-  
-          <p class="alt-h2 border-bottom">Launch a Token in a few lines of Javascript</p>
+
+
+
+          <p class="alt-h2 border-bottom">Simple</p>
   
           <p class="f3">
-          BitcoinToken allows you to build your own token on top of Bitcoin Cash. It consists of a minimal standard called the Simple Token Standard as well as a reference implementation. The Simple Token Standard defines a way in which the stake holders of a token can agree on what consitutes a valid token. The definition of what constitutes a valid token is provided by the developer of the token as a Javascript function.
+            Launching a token is as simple as running a few lines of javascript code.
           </p>
-  
-  
-          <p class="alt-h2 pt-4 border-bottom">Infinite customization options</p>
+
+          <div class="markdown-body">
+<pre class="highlight"><span style='color:#800000; font-weight:bold; '>const</span> bitcoinToken <span style='color:#808030; '>=</span> <span style='color:#800000; font-weight:bold; '>new</span> BitcoinToken<span style='color:#808030; '>(</span><span style='color:#808030; '>)</span>
+await bitcoinToken<span style='color:#808030; '>.</span>init<span style='color:#808030; '>(</span><span style='color:#800000; '>'</span><span style='color:#0000e6; '>./erc20.js</span><span style='color:#800000; '>'</span><span style='color:#808030; '>)</span>
+bitcoinToken<span style='color:#808030; '>.</span>name <span style='color:#808030; '>=</span> <span style='color:#800000; '>'</span><span style='color:#0000e6; '>MyToken</span><span style='color:#800000; '>'</span>
+bitcoinToken<span style='color:#808030; '>.</span>supply <span style='color:#808030; '>=</span> <span style='color:#008c00; '>21000000</span>
+await bitcoinToken<span style='color:#808030; '>.</span>create<span style='color:#808030; '>(</span><span style='color:#808030; '>)</span>
+await bitcoinToken<span style='color:#808030; '>.</span>send<span style='color:#808030; '>(</span><span style='color:#008c00; '>500</span><span style='color:#808030; '>,</span> myFriendsPublicKey<span style='color:#808030; '>)</span>
+</pre>
+          </div>
+
+
+
+
+          <p class="alt-h2 pt-6 border-bottom">Expressive</p>
   
           <p class="f3">
-          BitcoinToken allows you to build your own token on top of Bitcoin Cash. It consists of a minimal standard called the Simple Token Standard as well as a reference implementation. The Simple Token Standard defines a way in which the stake holders of a token can agree on what consitutes a valid token. The definition of what constitutes a valid token is provided by the developer of the token as a Javascript function.
+          BitcoinToken relies on the well understood and battle tested ideas behind colored coins. However it greatly expands the expressiveness by allowing the issuer/developer of the token to define what a valid token transfer transaction is. For example, to define an ERC 20 token, the programmer will need to provide the following code to launch a token.
+.
           </p>
+
+          <div class="markdown-body">
+<pre class="highlight">async <span style='color:#800000; font-weight:bold; '>function</span> isValid<span style='color:#808030; '>(</span>tx<span style='color:#808030; '>)</span> <span style='color:#800080; '>{</span>
+<span style='color:#800000; font-weight:bold; '>  const</span> sumInputs <span style='color:#808030; '>=</span> tx<span style='color:#808030; '>.</span>inputs<span style='color:#808030; '>.</span>reduce<span style='color:#808030; '>(</span><span style='color:#808030; '>(</span>a<span style='color:#808030; '>,</span> b<span style='color:#808030; '>)</span> <span style='color:#808030; '>=</span><span style='color:#808030; '>></span> a<span style='color:#808030; '>.</span>data <span style='color:#808030; '>+</span> b<span style='color:#808030; '>.</span>data<span style='color:#808030; '>,</span> <span style='color:#008c00; '>0</span><span style='color:#808030; '>)</span>
+<span style='color:#800000; font-weight:bold; '>  const</span> sumOutputs <span style='color:#808030; '>=</span> tx<span style='color:#808030; '>.</span>outputs<span style='color:#808030; '>.</span>reduce<span style='color:#808030; '>(</span><span style='color:#808030; '>(</span>a<span style='color:#808030; '>,</span> b<span style='color:#808030; '>)</span> <span style='color:#808030; '>=</span><span style='color:#808030; '>></span> a<span style='color:#808030; '>.</span>data <span style='color:#808030; '>+</span> b<span style='color:#808030; '>.</span>data<span style='color:#808030; '>,</span> <span style='color:#008c00; '>0</span><span style='color:#808030; '>)</span>
+<span style='color:#800000; font-weight:bold; '>  return</span> sumInputs <span style='color:#808030; '>===</span> sumOutputs
+<span style='color:#800080; '>}</span>
+</pre>
+          </div>
   
   
-          <p class="alt-h2 pt-4 border-bottom">100x cheaper than Ethereum</p>
+          <p class="alt-h2 pt-6 border-bottom">Scalable</p>
   
           <p class="f3">
-          BitcoinToken allows you to build your own token on top of Bitcoin Cash. It consists of a minimal standard called the Simple Token Standard as well as a reference implementation. The Simple Token Standard defines a way in which the stake holders of a token can agree on what consitutes a valid token. The definition of what constitutes a valid token is provided by the developer of the token as a Javascript function.
+            BitcoinToken is as scalable as the underlying blockchain. Issuing a new token or sending tokens to another user can be done within seconds. Receiving tokens is usually the bottleneck for token solutions on top of Bitcoin. However our solution guaranties lightning fast token validation with minimal storage overhead.
           </p>
+
+          <p class="alt-h3 pt-12 pb-2 border-bottom">Sign up for updates</p>
+
+          <p class="f3 pb-2">
+            If you want to receive email updated please use the form below. If you are interested in building something on top of the Bitcoin Token then please email customers@bitcointoken.
+          </p>
+
+          <form action="https://formspree.io/info@bitcointoken.com" method="POST">
+            <input class="mb-2 form-control" type="text" placeholder="Name" type="text" name="name"><br>
+            <input class="mb-2 form-control" type="text" placeholder="Email" type="email" name="_replyto"><br>
+            <input class="btn" type="submit" value="Send">
+          </form>
         </div>
+
     </div>
 	</body>
 </html>
