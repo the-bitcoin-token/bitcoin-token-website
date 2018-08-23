@@ -10,3 +10,12 @@ ul {
 .main-content {
     max-width: 60em;
 }
+
+.f000-light {
+  font-size: 60px !important;
+  font-weight: 300;
+}
+
+.bg-blue-dark {
+  background-color: #05264c !important;
+}

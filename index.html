@@ -1,98 +1,100 @@
-<!DOCTYPE html> 
-
-<html>
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="author" content="Clemens Ley" />
-		<meta name="copyright" content="UNLICENCED" />
-		<meta name="robots" content="index, follow" />
-		<meta name="description" content="Create your own token on top of Bitcoin"/>
-    <meta name="copyright" content="UNLICENCED" />
-    <meta name="keywords" content="" />
+<html><head>
+		<meta charset="UTF-8">
+		<meta name="author" content="Clemens Ley">
+		<meta name="copyright" content="UNLICENCED">
+		<meta name="robots" content="index, follow">
+		<meta name="description" content="Create your own token on top of Bitcoin">
+    <meta name="copyright" content="UNLICENCED">
+    <meta name="keywords" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
 		<title>BitcoinDB</title>
 
-		<link rel="Shortcut Icon" href="favicon.ico" type="image/x-icon" />
+		<link rel="Shortcut Icon" href="favicon.ico" type="image/x-icon">
     <link href="https://unpkg.com/primer/build/build.css" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
   </head>
 	<body>
-    <div class="pb-12">
-      <div class="bg-blue">  
-          <div class="main-content mx-auto text-white py-12 p-responsive">
-            <h1 class="f00-light text-bold" >BitcoinToken</h1>
-            <p class="f3 mb-4">Build tokens in Bitcoin Cash</p>
-            <!-- <a class="btn btn-transparent btn-large f3 mb-6" href="https://www.npmjs.com/package/primer">Install BitcoinToken 0.1</a> -->
+    <div class="">
+        <div class="flex-row width-full bg-blue">
+          <div class="main-content mx-auto py-10 py-lg-12 px-3 px-md-6 px-lg-3 text-white">
+            <div class="">
+              <h1 class="f000-light">BitcoinToken</h1>
+                <div class="f2-light pb-4">
+                    Build tokens and smart contracts in Bitcoin Cash.
+                </div>
+            </div>
           </div>
         </div>
   
-        <div class="main-content mx-auto p-responsive py-6">
-          <p class="alt-lead text-gray py-8">
-            BitcoinToken is a tool for developers to build tokens and other smart contracts on top of Bitcoin Cash. It grants the programmer very low level access, think of it as writing smart contracts in assembly code. You can also use a pre-defined library and launch a token in a few lines of Javascript. We are in prototype stage and plan to launch towards the end of the year.
+        <section class="main-content mx-auto p-responsive pt-8 pb-6">
+          <p class="f3-light mb-4">
+              BitcoinToken is a tool for developers to build tokens and other smart contracts on top of Bitcoin Cash. It grants the programmer very low level access, think of it as writing smart contracts in assembly code. You can also use a pre-defined library and launch a token in a few lines of Javascript. 
           </p>
-
-
+          <p class="f3-light mb-4">We are in prototype stage and plan to launch towards the end of the year.</p>
+        </section>
+        <div class="main-content mx-auto p-responsive pb-12">
 
           <p class="alt-h2 border-bottom">Simple</p>
-  
-          <p class="f3">
+          <p class="f3-light">
             Launching a token is as simple as running a few lines of javascript code.
           </p>
 
           <div class="markdown-body">
-<pre class="highlight"><span style='color:#800000; font-weight:bold; '>const</span> bitcoinToken <span style='color:#808030; '>=</span> <span style='color:#800000; font-weight:bold; '>new</span> BitcoinToken<span style='color:#808030; '>(</span><span style='color:#808030; '>)</span>
-await bitcoinToken<span style='color:#808030; '>.</span>init<span style='color:#808030; '>(</span><span style='color:#800000; '>'</span><span style='color:#0000e6; '>./erc20.js</span><span style='color:#800000; '>'</span><span style='color:#808030; '>)</span>
-bitcoinToken<span style='color:#808030; '>.</span>name <span style='color:#808030; '>=</span> <span style='color:#800000; '>'</span><span style='color:#0000e6; '>MyToken</span><span style='color:#800000; '>'</span>
-bitcoinToken<span style='color:#808030; '>.</span>supply <span style='color:#808030; '>=</span> <span style='color:#008c00; '>21000000</span>
-await bitcoinToken<span style='color:#808030; '>.</span>create<span style='color:#808030; '>(</span><span style='color:#808030; '>)</span>
-await bitcoinToken<span style='color:#808030; '>.</span>send<span style='color:#808030; '>(</span><span style='color:#008c00; '>500</span><span style='color:#808030; '>,</span> myFriendsPublicKey<span style='color:#808030; '>)</span>
+<pre class="highlight"><span style="color:#800000; font-weight:bold; ">const</span> bitcoinToken <span style="color:#808030; ">=</span> <span style="color:#800000; font-weight:bold; ">new</span> BitcoinToken<span style="color:#808030; ">(</span><span style="color:#808030; ">)</span>
+await bitcoinToken<span style="color:#808030; ">.</span>init<span style="color:#808030; ">(</span><span style="color:#800000; ">'</span><span style="color:#0000e6; ">./erc20.js</span><span style="color:#800000; ">'</span><span style="color:#808030; ">)</span>
+bitcoinToken<span style="color:#808030; ">.</span>name <span style="color:#808030; ">=</span> <span style="color:#800000; ">'</span><span style="color:#0000e6; ">MyToken</span><span style="color:#800000; ">'</span>
+bitcoinToken<span style="color:#808030; ">.</span>supply <span style="color:#808030; ">=</span> <span style="color:#008c00; ">21000000</span>
+await bitcoinToken<span style="color:#808030; ">.</span>create<span style="color:#808030; ">(</span><span style="color:#808030; ">)</span>
+await bitcoinToken<span style="color:#808030; ">.</span>send<span style="color:#808030; ">(</span><span style="color:#008c00; ">500</span><span style="color:#808030; ">,</span> myFriendsPublicKey<span style="color:#808030; ">)</span>
 </pre>
           </div>
 
 
 
 
-          <p class="alt-h2 pt-6 border-bottom">Expressive</p>
+          <p class="alt-h2 pt-6 border-bottom">Programmable</p>
   
-          <p class="f3">
-          BitcoinToken relies on the well understood and battle tested ideas behind colored coins. However it greatly expands the expressiveness by allowing the issuer/developer of the token to define what a valid token transfer transaction is. For example, to define an ERC 20 token, the programmer will need to provide the following code to launch a token.
+          <p class="f3-light">
+          BitcoinToken relies on the well understood and battle tested ideas behind colored coins. However it greatly expands the range of smart contracts that can be defined by allowing the issuer/developer to customize the tokens behaviour in Javascript. For example, to define an ERC 20 token, the programmer will need to provide the following code to launch a token.
           </p>
 
           <div class="markdown-body">
-<pre class="highlight">async <span style='color:#800000; font-weight:bold; '>function</span> isValid<span style='color:#808030; '>(</span>tx<span style='color:#808030; '>)</span> <span style='color:#800080; '>{</span>
-<span style='color:#800000; font-weight:bold; '>  const</span> sumInputs <span style='color:#808030; '>=</span> tx<span style='color:#808030; '>.</span>inputs<span style='color:#808030; '>.</span>reduce<span style='color:#808030; '>(</span><span style='color:#808030; '>(</span>a<span style='color:#808030; '>,</span> b<span style='color:#808030; '>)</span> <span style='color:#808030; '>=</span><span style='color:#808030; '>></span> a<span style='color:#808030; '>.</span>data <span style='color:#808030; '>+</span> b<span style='color:#808030; '>.</span>data<span style='color:#808030; '>,</span> <span style='color:#008c00; '>0</span><span style='color:#808030; '>)</span>
-<span style='color:#800000; font-weight:bold; '>  const</span> sumOutputs <span style='color:#808030; '>=</span> tx<span style='color:#808030; '>.</span>outputs<span style='color:#808030; '>.</span>reduce<span style='color:#808030; '>(</span><span style='color:#808030; '>(</span>a<span style='color:#808030; '>,</span> b<span style='color:#808030; '>)</span> <span style='color:#808030; '>=</span><span style='color:#808030; '>></span> a<span style='color:#808030; '>.</span>data <span style='color:#808030; '>+</span> b<span style='color:#808030; '>.</span>data<span style='color:#808030; '>,</span> <span style='color:#008c00; '>0</span><span style='color:#808030; '>)</span>
-<span style='color:#800000; font-weight:bold; '>  return</span> sumInputs <span style='color:#808030; '>===</span> sumOutputs
-<span style='color:#800080; '>}</span>
+<pre class="highlight">async <span style="color:#800000; font-weight:bold; ">function</span> isValid<span style="color:#808030; ">(</span>tx<span style="color:#808030; ">)</span> <span style="color:#800080; ">{</span>
+<span style="color:#800000; font-weight:bold; ">  const</span> sumInputs <span style="color:#808030; ">=</span> tx<span style="color:#808030; ">.</span>inputs<span style="color:#808030; ">.</span>reduce<span style="color:#808030; ">(</span><span style="color:#808030; ">(</span>a<span style="color:#808030; ">,</span> b<span style="color:#808030; ">)</span> <span style="color:#808030; ">=</span><span style="color:#808030; ">&gt;</span> a<span style="color:#808030; ">.</span>data <span style="color:#808030; ">+</span> b<span style="color:#808030; ">.</span>data<span style="color:#808030; ">,</span> <span style="color:#008c00; ">0</span><span style="color:#808030; ">)</span>
+<span style="color:#800000; font-weight:bold; ">  const</span> sumOutputs <span style="color:#808030; ">=</span> tx<span style="color:#808030; ">.</span>outputs<span style="color:#808030; ">.</span>reduce<span style="color:#808030; ">(</span><span style="color:#808030; ">(</span>a<span style="color:#808030; ">,</span> b<span style="color:#808030; ">)</span> <span style="color:#808030; ">=</span><span style="color:#808030; ">&gt;</span> a<span style="color:#808030; ">.</span>data <span style="color:#808030; ">+</span> b<span style="color:#808030; ">.</span>data<span style="color:#808030; ">,</span> <span style="color:#008c00; ">0</span><span style="color:#808030; ">)</span>
+<span style="color:#800000; font-weight:bold; ">  return</span> sumInputs <span style="color:#808030; ">===</span> sumOutputs
+<span style="color:#800080; ">}</span>
 </pre>
           </div>
   
-  
           <p class="alt-h2 pt-6 border-bottom">Scalable</p>
   
-          <p class="f3">
+          <p class="f3-light pb-10">
             BitcoinToken is as scalable as the underlying blockchain. Issuing a new token or sending tokens to another user can be done within seconds. Receiving tokens is usually the bottleneck for token solutions on top of Bitcoin. However our solution guaranties lightning fast token validation with minimal storage overhead.
           </p>
 
-          <p class="alt-h3 pt-12 pb-2 border-bottom">Sign up for updates</p>
+          <div class="bg-gray py-6">
+              <div class="d-flex flex-wrap flex-md-nowrap px-6 gutter-lg">
+                <div class="pr-0 pr-lg-2">
+                  <h3 class="f3 text-normal">Sign up for updates</h3>
+                  <p class="mb-3">If you want to receive email updates please use the form below. If you are interested in building something on top of BitcoinToken then please email clemens@bitcointoken.com.</p>
 
-          <p class="f3 pb-2">
-            If you want to receive email updated please use the form below. If you are interested in building something on top of BitcoinToken then please email customers@bitcointoken.com
-          </p>
-
-          <form action="https://formspree.io/clemens@bitcointoken.com" method="POST">
-            <input class="mb-2 form-control" type="text" placeholder="Name" type="text" name="name"><br>
-            <input class="mb-2 form-control" type="text" placeholder="Email" type="email" name="_replyto"><br>
-            <input class="btn" type="submit" value="Send">
-          </form>
+                  <form action="https://formspree.io/clemens@bitcointoken.com" method="POST">
+                    <input class="form-control" type="text" placeholder="Name" name="name">
+                    <input class="form-control" type="text" placeholder="Email" name="_replyto">
+                    <input class="btn" type="submit" value="Send">
+                  </form>
+                </div>
+              </div>
+            </div>
         </div>
     </div>
 
-    <div class="py-12 bg-gray-dark"> 
+    <div class="py-10 bg-blue-dark">&nbsp;
 
-      <p class="text-white text-left text-sm-center text-lg-right"><a href="https://twitter.com/thebitcointoken" class="text-inherit">@TheBitcoinToken</a></p>
+      <p class="text-white text-center"><a href="https://twitter.com/thebitcointoken" class="text-inherit">@TheBitcoinToken</a></p>
 
     </div>
-	</body>
-</html>
+	
+</body></html>
