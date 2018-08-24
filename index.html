@@ -41,13 +41,11 @@
           </p>
 
           <div class="markdown-body">
-<pre class="highlight"><span style="color:#800000; font-weight:bold; ">const</span> bitcoinToken <span style="color:#808030; ">=</span> <span style="color:#800000; font-weight:bold; ">new</span> BitcoinToken<span style="color:#808030; ">(</span><span style="color:#808030; ">)</span>
-await bitcoinToken<span style="color:#808030; ">.</span>init<span style="color:#808030; ">(</span><span style="color:#800000; ">'</span><span style="color:#0000e6; ">./erc20.js</span><span style="color:#800000; ">'</span><span style="color:#808030; ">)</span>
-bitcoinToken<span style="color:#808030; ">.</span>name <span style="color:#808030; ">=</span> <span style="color:#800000; ">'</span><span style="color:#0000e6; ">MyToken</span><span style="color:#800000; ">'</span>
-bitcoinToken<span style="color:#808030; ">.</span>supply <span style="color:#808030; ">=</span> <span style="color:#008c00; ">21000000</span>
-await bitcoinToken<span style="color:#808030; ">.</span>create<span style="color:#808030; ">(</span><span style="color:#808030; ">)</span>
-await bitcoinToken<span style="color:#808030; ">.</span>send<span style="color:#808030; ">(</span><span style="color:#008c00; ">500</span><span style="color:#808030; ">,</span> myFriendsPublicKey<span style="color:#808030; ">)</span>
-</pre>
+<pre class="highlight"><span style='color:#800000; font-weight:bold; '>const</span> token <span style='color:#808030; '>=</span> <span style='color:#800000; font-weight:bold; '>new</span> BitcoinToken<span style='color:#808030; '>(</span><span style='color:#808030; '>)</span>
+token<span style='color:#808030; '>.</span>name <span style='color:#808030; '>=</span> <span style='color:#800000; '>'</span><span style='color:#0000e6; '>MyToken</span><span style='color:#800000; '>'</span>
+token<span style='color:#808030; '>.</span>supply <span style='color:#808030; '>=</span> <span style='color:#008c00; '>21000000</span>
+await token<span style='color:#808030; '>.</span>create<span style='color:#808030; '>(</span><span style='color:#800000; '>'</span><span style='color:#0000e6; '>./erc20.js</span><span style='color:#800000; '>'</span><span style='color:#808030; '>)</span>
+await token<span style='color:#808030; '>.</span>send<span style='color:#808030; '>(</span><span style='color:#008c00; '>500</span><span style='color:#808030; '>,</span> myFriendsPublicKey<span style='color:#808030; '>)</span></pre>
           </div>
 
 
@@ -60,11 +58,11 @@ await bitcoinToken<span style="color:#808030; ">.</span>send<span style="color:#
           </p>
 
           <div class="markdown-body">
-<pre class="highlight">async <span style="color:#800000; font-weight:bold; ">function</span> isValid<span style="color:#808030; ">(</span>tx<span style="color:#808030; ">)</span> <span style="color:#800080; ">{</span>
-<span style="color:#800000; font-weight:bold; ">  const</span> sumInputs <span style="color:#808030; ">=</span> tx<span style="color:#808030; ">.</span>inputs<span style="color:#808030; ">.</span>reduce<span style="color:#808030; ">(</span><span style="color:#808030; ">(</span>a<span style="color:#808030; ">,</span> b<span style="color:#808030; ">)</span> <span style="color:#808030; ">=</span><span style="color:#808030; ">&gt;</span> a<span style="color:#808030; ">.</span>data <span style="color:#808030; ">+</span> b<span style="color:#808030; ">.</span>data<span style="color:#808030; ">,</span> <span style="color:#008c00; ">0</span><span style="color:#808030; ">)</span>
-<span style="color:#800000; font-weight:bold; ">  const</span> sumOutputs <span style="color:#808030; ">=</span> tx<span style="color:#808030; ">.</span>outputs<span style="color:#808030; ">.</span>reduce<span style="color:#808030; ">(</span><span style="color:#808030; ">(</span>a<span style="color:#808030; ">,</span> b<span style="color:#808030; ">)</span> <span style="color:#808030; ">=</span><span style="color:#808030; ">&gt;</span> a<span style="color:#808030; ">.</span>data <span style="color:#808030; ">+</span> b<span style="color:#808030; ">.</span>data<span style="color:#808030; ">,</span> <span style="color:#008c00; ">0</span><span style="color:#808030; ">)</span>
-<span style="color:#800000; font-weight:bold; ">  return</span> sumInputs <span style="color:#808030; ">===</span> sumOutputs
-<span style="color:#800080; ">}</span>
+<pre class="highlight">async <span style='color:#800000; font-weight:bold; '>function</span> isValid<span style='color:#808030; '>(</span>tx<span style='color:#800080; '>:</span> Transaction<span style='color:#808030; '>)</span><span style='color:#800080; '>:</span> <span style='color:#800000; font-weight:bold; '>boolean</span> <span style='color:#800080; '>{</span>
+  <span style='color:#800000; font-weight:bold; '>const</span> sumInputs <span style='color:#808030; '>=</span> tx<span style='color:#808030; '>.</span>inputs<span style='color:#808030; '>.</span>reduce<span style='color:#808030; '>(</span><span style='color:#808030; '>(</span>a<span style='color:#808030; '>,</span> b<span style='color:#808030; '>)</span> <span style='color:#808030; '>=</span><span style='color:#808030; '>></span> a<span style='color:#808030; '>.</span>data <span style='color:#808030; '>+</span> b<span style='color:#808030; '>.</span>data<span style='color:#808030; '>,</span> <span style='color:#008c00; '>0</span><span style='color:#808030; '>)</span>
+  <span style='color:#800000; font-weight:bold; '>const</span> sumOutputs <span style='color:#808030; '>=</span> tx<span style='color:#808030; '>.</span>outputs<span style='color:#808030; '>.</span>reduce<span style='color:#808030; '>(</span><span style='color:#808030; '>(</span>a<span style='color:#808030; '>,</span> b<span style='color:#808030; '>)</span> <span style='color:#808030; '>=</span><span style='color:#808030; '>></span> a<span style='color:#808030; '>.</span>data <span style='color:#808030; '>+</span> b<span style='color:#808030; '>.</span>data<span style='color:#808030; '>,</span> <span style='color:#008c00; '>0</span><span style='color:#808030; '>)</span>
+  <span style='color:#800000; font-weight:bold; '>return</span> sumInputs <span style='color:#808030; '>===</span> sumOutputs
+<span style='color:#800080; '>}</span>
 </pre>
           </div>
   
