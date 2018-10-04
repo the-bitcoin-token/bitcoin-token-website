@@ -34,7 +34,7 @@
   
         <section class="main-content mx-auto p-responsive pt-8 pb-6">
           <p class="f3-light mb-4">
-              BitcoinToken is a tool for developers to build tokens and other smart contracts on top of Bitcoin Cash. It grants the programmer very low level access, think of it as writing smart contracts in assembly code. You can also use a pre-defined library and launch a token in a few lines of Javascript. 
+              BitcoinToken is a developer tool that makes it easy to create tokens and smart contracts on top of Bitcoin Cash. It empowers any Javascript developer to build sophisticated blockchain apps. You can use a pre-defined library and launch a token in a few lines of Javascript. Or you can code your own smart contracts in Javascript.  
           </p>
           <p class="f3-light mb-4">We are in prototype stage and plan to launch towards the end of the year.</p>
         </section>
@@ -46,11 +46,15 @@
           </p>
 
           <div class="markdown-body">
-<pre class="highlight"><span style='color:#800000; font-weight:bold; '>const</span> token <span style='color:#808030; '>=</span> <span style='color:#800000; font-weight:bold; '>new</span> BitcoinToken<span style='color:#808030; '>(</span><span style='color:#808030; '>)</span>
-token<span style='color:#808030; '>.</span>name <span style='color:#808030; '>=</span> <span style='color:#800000; '>'</span><span style='color:#0000e6; '>MyToken</span><span style='color:#800000; '>'</span>
-token<span style='color:#808030; '>.</span>supply <span style='color:#808030; '>=</span> <span style='color:#008c00; '>21000000</span>
-await token<span style='color:#808030; '>.</span>create<span style='color:#808030; '>(</span><span style='color:#800000; '>'</span><span style='color:#0000e6; '>./erc20.js</span><span style='color:#800000; '>'</span><span style='color:#808030; '>)</span>
-await token<span style='color:#808030; '>.</span>send<span style='color:#808030; '>(</span><span style='color:#008c00; '>500</span><span style='color:#808030; '>,</span> myFriendsPublicKey<span style='color:#808030; '>)</span></pre>
+<pre class="highlight"><span style='color:#005CC5;'>const</span> Token <span style='color:#555555; '>=</span> <span style='color:#005CC5;'>new</span> BitcoinToken<span style='color:#555555; '>(</span><span style='color:#555555; '>)</span>   <span style='color:#878787; '>// creates new token object</span>
+<span style='color:#005CC5;'>await</span> token<span style='color:#555555; '>.</span>getAddress<span style='color:#555555; '>(</span><span style='color:#555555; '>)</span>           <span style='color:#878787; '>// returns Bitcoin address that user can deposit to</span>
+<span style='color:#005CC5;'>await</span> token<span style='color:#555555; '>.</span>create<span style='color:#555555; '>(</span><span style='color:#555555; '>{</span> 
+  contract<span style='color:#555555; '>:</span> <span style='color:#2a2a2a; '>'</span><span style='color:#4c4c4c; '>./erc20</span><span style='color:#2a2a2a; '>'</span><span style='color:#555555; '>,</span>
+  data<span style='color:#555555; '>:</span> <span style='color:#555555; '>{</span> balance<span style='color:#555555; '>:</span> <span style='color:#2a2a2a; '>'</span><span style='color:#4c4c4c; '>10</span><span style='color:#2a2a2a; '>'</span> <span style='color:#555555; '>}</span>
+<span style='color:#555555; '>}</span><span style='color:#555555; '>)</span>                                 <span style='color:#878787; '>// issues new ERC20 token</span>
+<span style='color:#005CC5;'>await</span> token<span style='color:#555555; '>.</span>getBalance<span style='color:#555555; '>(</span><span style='color:#555555; '>)</span>           <span style='color:#878787; '>// returns 10</span>
+<span style='color:#005CC5;'>await</span> token<span style='color:#555555; '>.</span>send<span style='color:#555555; '>(</span><span style='color:#2e2e2e; '>1</span><span style='color:#555555; '>,</span> publicKeyBob<span style='color:#555555; '>)</span>  <span style='color:#878787; '>// sends one token to Bob's public key</span>
+</pre>
           </div>
 
 
@@ -63,11 +67,11 @@ await token<span style='color:#808030; '>.</span>send<span style='color:#808030;
           </p>
 
           <div class="markdown-body">
-<pre class="highlight">async <span style='color:#800000; font-weight:bold; '>function</span> isValid<span style='color:#808030; '>(</span>tx<span style='color:#800080; '>:</span> Transaction<span style='color:#808030; '>)</span><span style='color:#800080; '>:</span> <span style='color:#800000; font-weight:bold; '>boolean</span> <span style='color:#800080; '>{</span>
-  <span style='color:#800000; font-weight:bold; '>const</span> sumInputs <span style='color:#808030; '>=</span> tx<span style='color:#808030; '>.</span>inputs<span style='color:#808030; '>.</span>reduce<span style='color:#808030; '>(</span><span style='color:#808030; '>(</span>a<span style='color:#808030; '>,</span> b<span style='color:#808030; '>)</span> <span style='color:#808030; '>=</span><span style='color:#808030; '>></span> a<span style='color:#808030; '>.</span>data <span style='color:#808030; '>+</span> b<span style='color:#808030; '>.</span>data<span style='color:#808030; '>,</span> <span style='color:#008c00; '>0</span><span style='color:#808030; '>)</span>
-  <span style='color:#800000; font-weight:bold; '>const</span> sumOutputs <span style='color:#808030; '>=</span> tx<span style='color:#808030; '>.</span>outputs<span style='color:#808030; '>.</span>reduce<span style='color:#808030; '>(</span><span style='color:#808030; '>(</span>a<span style='color:#808030; '>,</span> b<span style='color:#808030; '>)</span> <span style='color:#808030; '>=</span><span style='color:#808030; '>></span> a<span style='color:#808030; '>.</span>data <span style='color:#808030; '>+</span> b<span style='color:#808030; '>.</span>data<span style='color:#808030; '>,</span> <span style='color:#008c00; '>0</span><span style='color:#808030; '>)</span>
-  <span style='color:#800000; font-weight:bold; '>return</span> sumInputs <span style='color:#808030; '>===</span> sumOutputs
-<span style='color:#800080; '>}</span>
+<pre class="highlight">async <span style='color:#005CC5;'>function</span> isValid<span style='color:#555555; '>(</span>tx<span style='color:#555555; '>:</span> Transaction<span style='color:#555555; '>)</span><span style='color:#555555; '>:</span> <span style='color:#005CC5;'>boolean</span> <span style='color:#555555; '>{</span>
+  <span style='color:#005CC5; '>const</span> sumInputs <span style='color:#555555; '>=</span> tx<span style='color:#555555; '>.</span>inputs<span style='color:#555555; '>.</span>reduce<span style='color:#555555; '>(</span><span style='color:#555555; '>(</span>a<span style='color:#555555; '>,</span> b<span style='color:#555555; '>)</span> <span style='color:#555555; '>=</span><span style='color:#555555; '>></span> a<span style='color:#555555; '>.</span>data <span style='color:#555555; '>+</span> b<span style='color:#555555; '>.</span>data<span style='color:#555555; '>,</span> <span style='color:#2e2e2e; '>0</span><span style='color:#555555; '>)</span>
+  <span style='color:#005CC5; '>const</span> sumOutputs <span style='color:#555555; '>=</span> tx<span style='color:#555555; '>.</span>outputs<span style='color:#555555; '>.</span>reduce<span style='color:#555555; '>(</span><span style='color:#555555; '>(</span>a<span style='color:#555555; '>,</span> b<span style='color:#555555; '>)</span> <span style='color:#555555; '>=</span><span style='color:#555555; '>></span> a<span style='color:#555555; '>.</span>data <span style='color:#555555; '>+</span> b<span style='color:#555555; '>.</span>data<span style='color:#555555; '>,</span> <span style='color:#2e2e2e; '>0</span><span style='color:#555555; '>)</span>
+  <span style='color:#005CC5; '>return</span> sumInputs <span style='color:#555555; '>===</span> sumOutputs
+<span style='color:#555555; '>}</span>
 </pre>
           </div>
   
