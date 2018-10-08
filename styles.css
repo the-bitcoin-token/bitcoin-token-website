@@ -41,3 +41,11 @@ ul {
     width:100%;
     position:absolute;
 }
+
+ul {
+    margin-bottom: 10px;
+}
+
+pre, code{
+    white-space: pre-line;
+}
