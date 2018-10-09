@@ -27,7 +27,7 @@
 
       <section class="main-content mx-auto p-responsive pb-10 pt-6">
         <p class="lead">
-          BitcoinToken is a suite of tools that make it easy to build smart contracts on top of Bitcoin Cash. All tools can be used without prior knowledge of Bitcoin. Currently the suite contains the following tools.
+          BitcoinToken is a suite of tools that make it easy to build smart contract enabled apps on top of Bitcoin Cash. All tools can be used without prior knowledge of Bitcoin, this page contains everything you need to know. Currently the suite contains three tools: BitcoinToken, BitcoinDb, and BitcoinWallet.
         </p>
 
         <a href="#bitcoin-token" class="card hover-card p-4 d-flex flex-items-center mb-2 mt-4 bg-blue-light">
@@ -191,7 +191,7 @@
           <h3 class="alt-h3 border-bottom border-gray-dark mb-2 mt-4">Initialization</h3>
 
           <p class="f4-light">
-              There are three ways to initialize a BitcoinWallet: To create a wallet and initialize it with a fresh random master private key, just call the constructor. To initialize from an existing private key call <code>fromHdPrivateKey</code>. The third option is to pass in a BitcoinDb object
+              There are three ways to initialize a BitcoinWallet: To create a wallet and initialize it with a fresh random master private key, just call the constructor. To initialize from an existing private key call <code>fromHdPrivateKey</code>. The third option is to pass in a BitcoinWallet object
           </p>
 
           <div class="markdown-body mb-2">
@@ -301,7 +301,7 @@
           <h2 class="alt-h2 border-bottom mb-2">BitcoinToken</h2>
 
           <p class="f4-light">
-            Todo: write the docs. Basic usage is as follows
+            Bitcoin token lets you create tokens and other smart contracts on top of Bitcoin Cash. The basic usage is as follows. We currently support fungible tokens, similar to Ethereums ERC20 contract. We will be adding support for more smart contracts soon.
           </p>
 
           <div class="markdown-body mb-2">
@@ -313,13 +313,55 @@
             </pre>
           </div>
 
+          <h3 class="alt-h3 border-bottom border-gray-dark mb-2 mt-4">Initialization</h3>
+
+          <p class="f4-light">
+              Like BitcoinDb, BitcoinToken can be initialized in three different ways: To create a token from a random master private key, call the constructor. Or, initialize from an existing private key using <code>fromHdPrivateKey</code>. The third option is to pass in a <em>BitcoinDb</em> object
+          </p>
+
+          <div class="markdown-body mb-2">
+            <pre class="box highlight">
+              const token1 = new BitcoinToken()
+
+              const masterPrivateKey = 'tprv8ZgxMBicQKsPefX1...'
+              const token2 = BitcoinToken.fromHdPrivateKey(masterPrivateKey)
+
+              const db = new BitcoinDb()
+              const token3 = new BitcoinToken(db)
+            </pre>
+          </div>
+
+          <h3 class="alt-h3 border-bottom border-gray-dark mb-2 mt-4">Creating (issuing) a Token</h3>
+
+          <p class="f4-light">
+            You can issue a token by calling <code>token.create</code>. To parameter must be the same kind of json object that is passed into <code>db.put</code>. You need to initialize the balance (the number of tokens existing at issuance) to some positive number
+          </p>
+
+          <div class="markdown-body mb-2">
+            <pre class="box highlight">
+              await token.create({ data: { balance: '10' }})
+            </pre>
+          </div>
+
+          <h3 class="alt-h3 border-bottom border-gray-dark mb-2 mt-4">Checking the token balance</h3>
+
+          <p class="f4-light">
+            You can check how many tokens you currently own by calling <code>token.getBalance</code>. The return value is a number.
+          </p>
+
+          <div class="markdown-body mb-2">
+            <pre class="box highlight">
+              await token.getBalance()
+            </pre>
+          </div>
+
         </section>
       </div>
 
 
 
 
-  <div class="py-10 bg-blue-dark-gradient">&nbsp;
+  <div class="py-10 bg-gray-dark">&nbsp;
     <p class="text-white text-center">
       Talk to us on <a href="https://twitter.com/thebitcointoken" class="text-inherit">Twitter</a> or <a href="https://t.me/joinchat/FMrjOUWRuUkNuIt7zJL8tg" class="text-inherit">Telegram</a>
     </p>
