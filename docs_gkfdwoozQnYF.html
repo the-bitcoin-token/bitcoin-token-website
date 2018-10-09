@@ -191,18 +191,18 @@
           <h3 class="alt-h3 border-bottom border-gray-dark mb-2 mt-4">Initialization</h3>
 
           <p class="f4-light">
-              There are three ways to initialize a BitcoinWallet: To create a wallet and initialize it with a fresh random master private key, just call the constructor. To initialize from an existing private key call <code>fromHdPrivateKey</code>. The third option is to pass in a bitcoinDb object
+              There are three ways to initialize a BitcoinWallet: To create a wallet and initialize it with a fresh random master private key, just call the constructor. To initialize from an existing private key call <code>fromHdPrivateKey</code>. The third option is to pass in a BitcoinDb object
           </p>
 
           <div class="markdown-body mb-2">
             <pre class="box highlight">
-              const bitcoinDb1 = new BitcoinDb()
+              const db1 = new BitcoinDb()
 
               const masterPrivateKey = 'tprv8ZgxMBicQKsPefX1...'
-              const bitcoinDb2 = BitcoinDb.fromHdPrivateKey(masterPrivateKey)
+              const db2 = BitcoinDb.fromHdPrivateKey(masterPrivateKey)
 
               const bitcoinWallet = new BitcoinWallet()
-              const bitcoinDb3 = new BitcoinDb(bitcoinWallet)
+              const db3 = new BitcoinDb(bitcoinWallet)
             </pre>
           </div>
 
@@ -215,46 +215,84 @@
           <div class="markdown-body mb-2">
             <pre class="box highlight">
               const data = { a: 'aaa', b: 'bbb' }
-              await bitcoinDb1.put({ data })
+              await db1.put({ data })
             </pre>
           </div>
 
           <p class="f4-light">
-              Anyone can read the data that is stored in BitcoinDB, however only the owner can update the data. By default the current user will be the owner of newly created data. To designate another user, just pass in that users public key
+              Anyone can read the data that is stored in BitcoinDB, however only the owner can update the data. By default the current user will be the owner of newly created data. To designate another owner, pass in that users public key
           </p>
 
           <div class="markdown-body mb-2">
             <pre class="box highlight">
               const data = { a: 'aaa', b: 'bbb' }
-              const owners = [ bitcoinDb2.getPublicKey() ]
-              await bitcoinDb1.put({ data, owners })
+              const owners = [ db2.getPublicKey() ]
+              await db1.put({ data, owners })
             </pre>
           </div>
+
+          <p class="f4-light">
+              The return value of <code>db.put</code> is a json object that contains the transaction id as well as the output number of the output encoding the data.
+          </p>
+
+          <div class="markdown-body mb-2">
+              <pre class="box highlight">
+                {
+                &nbsp;&nbsp;txId: 'f9ed485e2a528cf1c0570b8f1c65b1521a68b1e63b50f3011e9e7d4d2eeecf04',
+                &nbsp;&nbsp;outputNumber: 0
+                }
+              </pre>
+            </div>
+
+          <p class="f4-light">
+            Internally, the command <code>db.put</code> builds and broadcasts a Bitcoin Cash transaction with one output that contains a script encoding the data. The owner is the user that has the private key that can spend (and hence update) that data. 
+          </p>
+
+
 
           <h3 class="alt-h3 border-bottom border-gray-dark mb-2 mt-4">Reading data</h3>
 
           <p class="f4-light">
-            The value returned from bitcoinDb.put is an object with one key <code>txId</code> and one key <code>outputNumber</code>. This id can be used to read the json object from the blockchain. You can pass that identifier into bitcoinDb.get to retrieve the json object.
+            The id returned from <code>db.put</code> can be used to lookup the json object stored on the blockchain. You can pass that identifier into <code>db.get</code> to retrieve the json object.
           </p>
 
           <div class="markdown-body mb-2">
             <pre class="box highlight">
-              const id = await bitcoinDb.put({ data: { c: 'ccc' } })
-              const data = await bitcoinDb.get(id)
+              const id = await db.put({ data: { c: 'ccc' } })
+              await db.get(id)
             </pre>
           </div>
 
           <p class="f4-light">
-            <code>data</code> is an object with three keys: <code>data</code> contains the initially stored data, <code>publicKeys</code> (to be renamed <code>owners</code>) is the list of the public keys of the owners, and <code>amount</code> contains the number of satoshi contained in the output that stores the data.
+            The value returned from <code>db.get</code> is a json object with three keys: <code>data</code> contains the initially stored data, <code>owners</code> is the list of the public keys of the owners, and <code>amount</code> contains the number of satoshi contained in the output that stores the data.
           </p>
+
+          <div class="markdown-body mb-2">
+            <pre class="box highlight">
+              { 
+                &nbsp;&nbsp;data: { c: 'ccc' },
+                &nbsp;&nbsp;owners: [ &lt;PublicKey: 03fc00d6e3044a17b17ff443f14f2eb23181071c9140a71a7cdc26fcc5d6d597e8&gt; ],
+                &nbsp;&nbsp;amount: 5000
+              }
+            </pre>
+          </div>
 
           <h3 class="alt-h3 border-bottom border-gray-dark mb-2 mt-4">Updating data</h3>
 
           <p class="f4-light">
-            Todo: write the docs
+            You can use <code>db.update</code> to update data stored with BitcoinDb. <code>db.update</code> expects two lists as arguments: a list of output ids (as returned from <code>db.put</code>) that indicates which data to update, and a list of the same length that specifies what to update the data to. This list contains entries that are json objects with two keys, <code>data</code> and <code>owners</code>, just like the objects passed to <code>db.put</code>.
           </p>
 
+          <div class="markdown-body mb-2">
+            <pre class="box highlight">
+              const id1 = await db.put({ data: { c: 'ccc' } })
+              const id2 = await db.update([id1], [{ data: { d: 'ddd' } }])
+            </pre>
+          </div>
 
+          <p class="f4-light">
+            Internally, <code>db.update</code> builds and broadcasts a Bitcoin Cash transaction that spends the output <code>id1</code> and spends them into a new output at <code>id2</code> containing the new data. It is important to note that <code>id1</code> and <code>id2</code> are different outputs. To read the updated data you need to call <code>db.get(id2)</code>.
+          </p>
         </section>
       </div>
 
