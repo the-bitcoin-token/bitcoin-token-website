@@ -76,8 +76,17 @@
         <section id='bitcoin-wallet' class="main-content mx-auto p-responsive py-3 ">
           <h2 class="alt-h2 border-bottom border-gray-dark mb-2">BitcoinWallet</h2>
           <p class="f4-light">
-            BitcoinWallet is a Bitcoin wallet that works out of the box. It allows users to store, send, and receive Bitcoin Cash.
+            BitcoinWallet is a Bitcoin wallet that works out of the box. It allows users to store, send, and receive Bitcoin Cash. Basic usage is as follows.
           </p>
+
+          <div class="markdown-body mb-2">
+            <pre class="box highlight">
+              const wallet = new BitcoinWallet()
+              await wallet.getAddress()                  
+              await wallet.getBalance()                  
+              await wallet.send(1, &lt;public key&gt;)
+            </pre>
+          </div>
   
           <h3 class="alt-h3 border-bottom border-gray-dark mb-2 mt-4">Initialization</h3>
   
@@ -164,8 +173,20 @@
           <h2 class="alt-h2 border-bottom border-gray-dark mb-2">BitcoinDb</h2>
 
           <p class="f4-light">
-            BitcoinBd lets you store, read, and update json files on the blockchain. Every json file stored on the blockchain has an owner and only the owner can update that piece of json. We are currently only supporting json objects with string values of less than 350 charachters. In the future we will add support for arbitrary json data.
+            BitcoinBd lets you store, read, and update json files on the blockchain. Every json file stored on the blockchain has an owner and only the owner can update the json. We are currently only supporting json objects with string values of less than 350 charachters. In the future we will add support for arbitrary json data.
           </p>
+
+          <p>
+            Basic usage is as follows.
+          </p>
+
+          <div class="markdown-body mb-2">
+              <pre class="box highlight">
+                const db = new BitcoinDb()
+                const id = await db.put({ data: { hello: 'Bitcoin' }})
+                const res = await db.get(id)    // res will be { data: { hello: 'Bitcoin' }}
+              </pre>
+            </div>
 
           <h3 class="alt-h3 border-bottom border-gray-dark mb-2 mt-4">Initialization</h3>
 
@@ -246,23 +267,13 @@
           </p>
 
           <div class="markdown-body mb-2">
-              <pre class="box highlight">
-                  const Token = BitcoinTools.Token
-                  const tokenAlice = new Token(bitcoinDbAlice)
-                  const tokenBob = new Token(bitcoinDbBob)
-                  
-                  await tokenAlice.create({ data: { balance: '10' }})
-                  
-                  await tokenAlice.getBalance()
-                  await tokenBob.getBalance()
-                  
-                  const publicKeyBob = tokenBob.getPublicKey()
-                  await tokenAlice.send(1, publicKeyBob)
-                  
-                  await tokenAlice.getBalance()
-                  await tokenBob.getBalance()
-              </pre>
-            </div>
+            <pre class="box highlight">
+                const token = new BitcoinToken()
+                await token.create({ data: { balance: '10' }})
+                await token.getBalance()                  
+                await token.send(1, &lt;public key&gt;)
+            </pre>
+          </div>
 
         </section>
       </div>
