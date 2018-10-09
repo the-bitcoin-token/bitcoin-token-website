@@ -26,29 +26,82 @@
       </div>
 
       <section class="main-content mx-auto p-responsive py-3">
-        <p class="f4-light">
-          BitcoinToken is a suite of tools that make it easy to build smart contracts on top of Bitcoin Cash. It consist of three products: 
+        <p class="lead">
+          BitcoinToken is a suite of tools that make it easy to build smart contracts on top of Bitcoin Cash. All tools can be used without prior knowledge of Bitcoin.
         </p>
-        <ul>
-          <li><b>BitcoinWallet</b> - a wallet that works out of the box, no configuration required</li>
-          <li><b>BitcoinDb</b> - a tool to reade, write, and update data on the Bitcoin Cash blockchain</li>
-          <li><b>BitcoinToken</b> - a took that makes it east to create tokens and smart contracts</li>
-        </ul>
+
+        <!-- <p class="f4-light">
+          The BitcoinToken suite consists of three classes.        
+        </p> -->
+
+        <!-- <div class="Box my-4">
+          <div class="Box-body bg-blue-light">
+            <h3 class="Box-title">
+              BitcoinToken
+            </h3>
+            <div class="text-small text-gray-light">
+              Create tokens and smart contracts on Bitcoin Cash
+            </div>
+          </div>
+          <div class="Box-body bg-green-light">
+            <h3 class="Box-title">
+              BitcoinDb
+            </h3>
+            <div class="text-small text-gray-light">
+              Store, update, and retrieve json data on the Bitcoin Cash blockchain.
+            </div>
+          </div>
+          <div class="Box-body bg-yellow-light">
+            <h3 class="Box-title">
+              BitcoinWallet
+            </h3>
+            <div class="text-small text-gray-light">
+              Receive, store, and send Bitcoin Cash.
+            </div>
+          </div>
+        </div> -->
+
+        <a href="migration" class="card hover-card p-4 d-flex flex-items-center mb-2 mt-4 bg-blue-light">
+            <div>
+              <h3 class="h3 mb-2 text-normal">BitcoinToken</h3>
+              <p class="text-gray-dark">
+                Create tokens and smart contracts on Bitcoin Cash
+              </p>
+            </div>
+          </a>
+  
+          <a href="migration" class="card hover-card p-4 d-flex flex-items-center mb-2 bg-green-light">
+            <div>
+              <h3 class="h3 mb-2 text-normal">BitcoinDb</h3>
+              <p class="text-gray-dark">
+                Store, update, and retrieve json data on the Bitcoin Cash blockchain.
+              </p>
+            </div>
+          </a>
+  
+          <a href="migration" class="card hover-card p-4 d-flex flex-items-center mb-4 bg-yellow-light">
+            <div>
+              <h3 class="h3 mb-2 text-normal">BitcoinWallet</h3>
+              <p class="text-gray-dark">
+                Receive, hold, and send Bitcoin Cash.
+              </p>
+            </div>
+          </a>
+
         <p class="f4-light mb-4">
-          All three tools are exposed at the root level 
+            The BitcoinToken suite consists of three classes, all of which are exposed at the root level.
         </p>
 
         <div class="markdown-body mb-2">
           <pre class="highlight">
-            const BitcoinToken = require('./bitcoin-token')
+            const Bitcoin = require('./bitcoin-token')
 
-            const BitcoinWallet = BitcoinToken.Wallet
-            const BitcoinDb = BitcoinToken.BitcoinDb
-            const BitcoinToken = BitcoinToken.Token
+            const BitcoinWallet = Bitcoin.Wallet
+            const BitcoinDb = Bitcoin.Db
+            const BitcoinToken = Bitcoin.Token
           </pre>
         </div>
       </section>
-
 
       <section class="main-content mx-auto p-responsive py-3">
         <h2 class="alt-h2 border-bottom mb-2">BitcoinWallet</h2>
@@ -64,7 +117,7 @@
 
         <div class="markdown-body mb-2">
           <pre class="highlight">
-           const wallet = new Wallet()
+           const wallet = new BitcoinWallet()
           </pre>
         </div>
 
@@ -75,14 +128,14 @@
         <div class="markdown-body mb-2">
           <pre class="highlight">
             const masterPrivateKey = 'tprv8ZgxMBicQKsPefX1...'
-            const wallet = Wallet.fromHdPrivateKey(masterPrivateKey)
+            const wallet = BitcoinWallet.fromHdPrivateKey(masterPrivateKey)
           </pre>
         </div>
 
         <h3 class="alt-h3 border-bottom mb-2 mt-4">Receiving Bitcoin Cash</h3>
 
         <p class="f4-light">
-          You wallet comes with over 2 billion accounts, numbered from 0 to 2.147.483.648. You can access these accounts by executing the following commands.  
+          You wallet comes with over 2 billion accounts, numbered from 0 to 2.147.483.648. You can access these accounts by executing the following commands. The default account is 0. 
         </p>
 
         <div class="markdown-body mb-2">
@@ -101,7 +154,7 @@
         <h3 class="alt-h3 border-bottom mb-2 mt-4">Sending Bitcoin Cash</h3>
 
         <p class="f4-light">
-            To send Bitcoin Cash to another address run the following
+            After you have funded your wallet, you can send Bitcoin Cash to another address as follows.
         </p>
 
         <div class="markdown-body mb-2">
@@ -124,7 +177,7 @@
 
         <h3 class="alt-h3 border-bottom mb-2 mt-4">Checking the balance</h3>
         <p class="f4-light">
-            To check the balance of an account, just call <code>getBalance</code>.
+            You can check the balance of an account by calling <code>getBalance</code> with the account number. Like everywhere else the account number can be ommited and defaults to 0.
         </p>
         <div class="markdown-body mb-2">
           <pre class="highlight">
@@ -140,7 +193,7 @@
         <h2 class="alt-h2 border-bottom mb-2">BitcoinDb</h2>
 
         <p class="f4-light">
-        BitcoinBd lets you store, read, and update json files on the blockchain. Every json file stored has an owner and only the owner can update that piece of json
+          BitcoinBd lets you store, read, and update json files on the blockchain. Every json file stored on the blockchain has an owner and only the owner can update that piece of json. We are currently only supporting json objects with string values of less than 350 charachters. In the future we will add support for arbitrary json data.
         </p>
 
         <h3 class="alt-h3 border-bottom mb-2 mt-4">Initialization</h3>
@@ -164,7 +217,7 @@
         <h3 class="alt-h3 border-bottom mb-2 mt-4">Storing data</h3>
 
         <p class="f4-light">
-          To store some data in json format create and object containing that data as a value under the key <code>data</code>
+          To store some data in json format create and object containing that data as a value under the key <code>data</code>.
         </p>
 
         <div class="markdown-body mb-2">
@@ -175,7 +228,7 @@
         </div>
 
         <p class="f4-light">
-          By default the current user will be the owner of newly created data. To designate another user, just pass in that users public key
+            Anyone can read the data that is stored in BitcoinDB, however only the owner can update the data. By default the current user will be the owner of newly created data. To designate another user, just pass in that users public key
         </p>
 
         <div class="markdown-body mb-2">
@@ -203,7 +256,7 @@
           <code>data</code> is an object with three keys: <code>data</code> contains the initially stored data, <code>publicKeys</code> (to be renamed <code>owners</code>) is the list of the public keys of the owners, and <code>amount</code> contains the number of satoshi contained in the output that stores the data.
         </p>
 
-        <h3 class="alt-h3 border-bottom mb-2 mt-4">Reading data</h3>
+        <h3 class="alt-h3 border-bottom mb-2 mt-4">Updating data</h3>
 
         <p class="f4-light">
           Todo: write the docs
