@@ -11,9 +11,21 @@ ul {
     max-width: 60em;
 }
 
+.wide-content {
+    max-width: 80em;
+}
+
 .f000-light {
   font-size: 60px !important;
   font-weight: 300;
+}
+
+.bg-black {
+  background-color: #111111 !important;
+}
+
+.bg-light-blue {
+    background-color: #2188FF !important;
 }
 
 .bg-blue-dark {
@@ -43,10 +55,10 @@ ul {
 }
 
 ul {
-    margin-bottom: 10px;
+    /* margin-bottom: 10px; */
 }
 
-pre, code {
+pre, code, code span {
     white-space: pre-line;
 }
 
@@ -54,4 +66,43 @@ pre, code {
     border: 1px #e1e4e8 solid;
     border-radius: 6px;
     box-shadow: 0 1px 1px rgba(27,31,35,0.1);
+}
+
+.highlight {
+    margin: 0 0 12px;
+    border-radius: 4px;
+    background-color: whitesmoke;
+    border: 1px #e5e5e5 solid;
+}
+
+.code-block-light {
+    color: #000000;
+    background-color: #2b2e3b;
+    border-color: #111218;
+}
+
+.code-block-light .dark {
+    color: #666666;
+}
+
+.code-block-dark {
+    color: #fafbfc;
+    background-color: #6a737d;
+    border-color: #111218;
+}
+
+.code-block-dark .dark {
+    color: #959da5;
+}
+
+.highlight pre {
+    padding: 12px;
+    overflow: auto;
+    font-size: 16px;
+    line-height: 1.45;
+}
+
+#logo {
+    width: 30px;
+    height: auto;
 }

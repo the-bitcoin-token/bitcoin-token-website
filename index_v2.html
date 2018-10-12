@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta content="Clemens Ley" name="author">
+  <meta content="UNLICENCED" name="copyright">
+  <meta content="index, follow" name="robots">
+  <meta content="Create your own token on top of Bitcoin" name="description">
+  <meta content="UNLICENCED" name="copyright">
+  <meta content="" name="keywords">
+  <meta content="width=device-width, initial-scale=1" name="viewport">
+
+  <title>BitcoinToken</title>
+  <link href="favicon.ico" rel="Shortcut Icon" type="image/x-icon">
+  <link href="https://unpkg.com/primer/build/build.css" rel="stylesheet">
+  <link href="styles.css" rel="stylesheet">
+  <script type="text/javascript">
+        window.heap = window.heap || [], heap.load = function(e, t) {
+            window.heap.appid = e, window.heap.config = t = t || {};
+            var r = t.forceSSL || "https:" === document.location.protocol,
+                a = document.createElement("script");
+            a.type = "text/javascript", a.async = !0, a.src = (r ? "https:" : "http:") + "//cdn.heapanalytics.com/js/heap-" + e + ".js";
+            var n = document.getElementsByTagName("script")[0];
+            n.parentNode.insertBefore(a, n);
+            for (var o = function(e) {
+                    return function() {
+                        heap.push([e].concat(Array.prototype.slice.call(arguments, 0)))
+                    }
+                }, p = ["addEventProperties", "addUserProperties", "clearEventProperties", "identify", "resetIdentity", "removeEventProperty", "setEventProperties", "track", "unsetEventProperty"], c = 0; c < p.length; c++) heap[p[c]] = o(p[c])
+        };
+        heap.load("1968150498");
+  </script>
+</head>
+
+<body>
+  <div class="flex-row width-full bg-blue text-center">
+    <div class="main-content mx-auto pt-12 pb-12 px-3 px-md-6 px-lg-3 text-white">
+      <div class="">
+        <h1 class="f000-light">BitcoinToken</h1>
+        <div class="f2-light">
+          Build tokens and smart contracts in Bitcoin Cash.
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- <section class="main-content mx-auto p-responsive pt-8 pb-6">
+    <p class="f3-light mb-4">BitcoinToken is a suite of tools that makes it easy to create tokens and smart contracts on top of Bitcoin Cash. It empowers any Javascript developer to build sophisticated blockchain apps. You can use a pre-defined library and launch a token in a few lines of Javascript. Or you can code your own smart contracts in Javascript.</p>
+
+    <p class="f3-light mb-4">We are in prototype stage and plan to launch towards the end of the year.</p>
+  </section> -->
+
+  <!-- <h2 class="h00-mktg my-2 lh-condensed text-center mt-10 mb-4 text-gray-dark no-underline">
+      What is BitcoinToken?
+  </h2> -->
+  <section class="main-content mx-auto p-responsive pt-8 pb-6"></section>
+  <p class="lead text-normal text-center my-2 col-md-8 mx-auto text-gray">
+    BitcoinToken is a suite of tools to create tokens and smart contracts on top of Bitcoin Cash. If you have experience as a web developer you can use BitcoinToken to create a smart contract based application. You can use a pre-defined library and launch a token in a few lines of Javascript. Or you can code your own smart contracts in Javascript.
+  </p>
+</section>
+
+  <p class="lead text-normal text-center mb-4 col-md-8 mx-auto text-gray">
+    We are in prototype stage and plan to launch towards the end of the year.
+  </p>
+
+  <h2 class="h00-mktg my-2 lh-condensed text-center mt-10 mb-4 text-gray-dark no-underline">
+      Easy to use, cheap
+  </h2>
+
+  <div class="wide-content mx-auto p-responsive py-2">
+    <div class="d-md-flex flex-column flex-md-row my-5">
+      <div class="col-md-6 px-5">
+        <figure class="highlight code-block-dark text-left my-3 px-2">
+          <pre class="overflow-hidden">
+            <code>
+              <span class="no-select">&gt; </span>const token = new Token()
+              <span class="dark no-select">undefined
+              </span>
+              <span class="no-select">&gt; </span>await token.create({ balance: 100 })
+              <span class="dark no-select">Smart contract deployed at 0:f9ed485e2a528c...
+            </span>
+            <span class="no-select">&gt; </span>await token.send(1, &lt;public key&gt;)
+            <span class="dark no-select">1 token sent to &lt;public key&gt;
+          </span>
+            </code>
+          </pre>
+        </figure>
+      </div>
+      <div class="col-md-6 pl-md-5 flex-md-self-center">
+        <h3 class="h3-mktg text-normal mb-2">Easy to use</h3>
+        <p class="text-gray">
+          BitcoinToken allows you to build Bitcoin and smart contract enabled apps without prior knowledge of Bitcoin. For example, you can issue your own token in a few lines of Javascript.
+        </p>
+
+        <p class="text-gray">
+          We currently support ERC20-style fungible tokens. Support for non-fungible tokens will be added soon. Eventually you will be able to program your own smart contracts using BitcoinToken.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="wide-content mx-auto p-responsive pb-2">
+    <div class="d-md-flex flex-column flex-md-row-reverse my-5">
+      <div class="col-md-6 px-5">
+        <img src="https://i.imgur.com/tcNABkW.png" width="460" class="d-block width-fit mx-auto" alt="Bitcoin Cash vs Ethereum transaction fee chart">
+      </div>
+      <div class="col-md-6 pr-md-5 flex-md-self-center">
+        <h3 class="h3-mktg text-normal mb-2">Cheap to operate</h3>
+        <p class="text-gray">
+          Ethereum is a great tool for building smart contracts, but it is relatively expensive to use. Every action in a smart contract, such as sending a token or breading a kitten, costs one Ethereum transaction fee. This fee hovers around 10 cents (see red line in chart).
+        </p>
+
+        <p class="text-gray">
+          Fees on Bitcoin Cash are mostly a fraction of a cent (see green line in chart). BitcoinToken compiles smart contracts into Bitcoin Cash. Therefore actions in a smart contract build with BitcoinToken only cost a Bitcoin Cash transaction fee, which is often 100x below the price for an Ethereum transaction fee.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="wide-content mx-auto p-responsive pb-2">
+      <div class="d-md-flex flex-column flex-md-row my-5">
+        <div class="col-md-6 px-5">
+          <img src="https://i.imgur.com/MtHtK1e.png" width="460" class="d-block width-fit mx-auto" alt="Bitcoin Cash vs Ethereum transaction fee chart">
+
+        </div>
+        <div class="col-md-6 pl-md-5 flex-md-self-center">
+          <h3 class="h3-mktg text-normal mb-2">Unbounded computational scalibility</h3>
+          <p class="text-gray">
+            Smart contracts on BitcoinToken work differently from smart contracts on Ehtereum. In Ethereum every miner runs a computation for every action in a smart contract. The result of the computation is the new state that gets stored on the Ethereum Blockchain.
+          </p>
+
+          <p class="text-gray">
+            BitcionToken shifts some of the work from the miners to the users. In particular, users compute the new state and send only the new state to the miners. Miners only do minimal computational work. This is more scalable because there are usually only 2 or 3 users involved in a smart contract action, as opposed to thousands of users.
+          </p>
+
+          <p class="text-gray">  
+            This makes it possible to build smart contracts that could have never been built before. 
+          </p>
+        </div>
+      </div>
+    </div>
+
+  <div class="main-content mx-auto p-responsive pb-12">
+      <h2 class="h00-mktg my-2 lh-condensed text-center mt-10 mb-4 text-gray-dark no-underline">
+          The Tech Stack
+      </h2>
+
+      <p class="lead-mktg text-normal text-center mt-4 mb-6 col-md-8 mx-auto text-gray">
+        BitcoinToken makes it possible to develop smart contract enabled apps without prior knowledge of Bitcoin. We currently offer the three tools below, click on a box to get more info.
+      </p>
+
+      <a href="#bitcoin-token" class="card hover-card p-4 d-flex flex-items-center mb-2 mt-4">
+          <div>
+            <h3 class="h3 mb-2 text-normal">Your app</h3>
+            <p class="text-gray-dark">
+              Create your app and use the functionality provided from layers below
+            </p>
+          </div>
+        </a>
+
+      <a href="#bitcoin-token" class="card hover-card p-4 d-flex flex-items-center mb-2 mt-4 bg-blue-light">
+        <div>
+          <h3 class="h3 mb-2 text-normal">BitcoinToken</h3>
+          <p class="text-gray-dark">
+            Create tokens and smart contracts on Bitcoin Cash
+          </p>
+        </div>
+      </a>
+
+      <a href="#bitcoin-db" class="card hover-card p-4 d-flex flex-items-center mb-2 bg-green-light">
+        <div>
+          <h3 class="h3 mb-2 text-normal">BitcoinDb</h3>
+          <p class="text-gray-dark">
+            Store, update, and retrieve json data on the Bitcoin Cash blockchain.
+          </p>
+        </div>
+      </a>
+
+      <a href="#bitcoin-wallet" class="card hover-card p-4 d-flex flex-items-center mb-2 bg-yellow-light">
+        <div>
+          <h3 class="h3 mb-2 text-normal">BitcoinWallet</h3>
+          <p class="text-gray-dark">
+            Receive, hold, and send Bitcoin Cash.
+          </p>
+        </div>
+      </a>
+
+      <a href="#bitcoin-wallet" class="card hover-card p-4 d-flex flex-items-center mb-4 bg-red-light">
+          <div>
+            <h3 class="h3 mb-2 text-normal">BitcoinSource</h3>
+            <p class="text-gray-dark">
+              Modern Javascript implementation of Bitcoin Cash.
+            </p>
+          </div>
+        </a>
+  </div>
+
+  <div class="main-content mx-auto p-responsive pb-12">
+    <h2 class="h00-mktg my-2 lh-condensed text-center mt-10 mb-4 text-gray-dark no-underline">
+        Get the code!
+    </h2>
+  </div>
+
+
+  <div class="py-10 bg-blue-dark-gradient">
+    &nbsp;
+
+    <p class="text-white text-center">Talk to us on <a class="text-inherit" href="https://twitter.com/thebitcointoken">Twitter</a> or <a class="text-inherit" href="https://t.me/joinchat/FMrjOUWRuUkNuIt7zJL8tg">Telegram</a></p>
+  </div>
+</body>
+</html>

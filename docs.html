@@ -15,6 +15,31 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+  <header class="Header js-details-container Details f5 bg-gray-light" role="banner">
+      <div class="d-lg-flex p-responsive flex-justify-between px-3 container-lg">
+
+        <div class="my-2">
+          <a class="header-logo-invertocat d-lg-flex flex-items-center text-bold no-underline" href="http://www.bitcointoken.com" data-hotkey="g d" aria-label="Homepage" data-ga-click="Header, go to dashboard, icon:logo">
+            <img id="logo" src="https://i.imgur.com/R94kr0V.png">
+            <div class="mx-2 text-blue">
+                BitcoinToken
+            </div>
+          </a>
+        </div>
+
+        <div class="d-lg-flex flex-justify-between my-2">
+          <div class="d-lg-flex">
+              <ul class="d-lg-flex pl-lg-2 flex-items-center text-bold list-style-none mb-0" role="navigation">
+                <li class="position-relative">
+                  <a class="js-selected-navigation-item HeaderNavlink px-lg-2 py-2 py-lg-0 text-blue no-underline" data-ga-click="Header, click, Nav menu - item:docs" data-octo-click="docs" data-octo-dimensions="location:nav_bar" data-selected-links=" /docs" href="docs.html">
+                      Docs
+                  </a>                  
+                </li>
+              </ul>
+          </div>
+      </div>
+    </header>
+
   <div class="">
       <div class="flex-row width-full bg-gray-light">
         <div class="main-content mx-auto py-10 px-3 px-md-6 px-lg-3">
@@ -26,33 +51,64 @@
       </div>
 
       <section class="main-content mx-auto p-responsive pb-10 pt-6">
-        <p class="lead">
-          BitcoinToken is a suite of tools that make it easy to build smart contract enabled apps on top of Bitcoin Cash. All tools can be used without prior knowledge of Bitcoin, this page contains everything you need to know. Currently the suite contains three tools: BitcoinToken, BitcoinDb, and BitcoinWallet.
-        </p>
+
+          <p class="lead">
+            BitcoinToken currently consists of three tools: an easy to use client side wallet, a database for reading and writing to the blockchain, and a token solution. 
+          </p>
+
+          <h2 class="alt-h2 border-bottom border-gray-dark mb-2">The Tech Stack</h2>
+
+          <p class="mt-4">
+              BitcoinToken has a layered architecture, where lower levels provide functionality for the levels above. Integrating BitcoinToken into your app is as easy as requiring the npm package. 
+          </p>
+
+          <p>
+              <strong>Our software is not available on npm yet. Email clemens@bitcointoken.com to obtain an early preview of the library</strong>
+          </p>
+
+
+
+        <a href="#bitcoin-token" class="card hover-card p-4 d-flex flex-items-center my-4">
+            <div>
+              <h3 class="h3 mb-2 text-normal">Your app</h3>
+              <p class="text-gray-dark">
+                Make use of the functionality provided by the layers below
+              </p>
+            </div>
+          </a>
 
         <a href="#bitcoin-token" class="card hover-card p-4 d-flex flex-items-center mb-2 mt-4 bg-blue-light">
+          <div>
+            <h3 class="h3 mb-2 text-normal">BitcoinToken</h3>
+            <p class="text-gray-dark">
+              Create tokens and smart contracts on Bitcoin Cash
+            </p>
+          </div>
+        </a>
+
+        <a href="#bitcoin-db" class="card hover-card p-4 d-flex flex-items-center mb-2 bg-green-light">
+          <div>
+            <h3 class="h3 mb-2 text-normal">BitcoinDb</h3>
+            <p class="text-gray-dark">
+              Store, update, and retrieve json data on the Bitcoin Cash blockchain.
+            </p>
+          </div>
+        </a>
+
+        <a href="#bitcoin-wallet" class="card hover-card p-4 d-flex flex-items-center mb-2 bg-yellow-light">
+          <div>
+            <h3 class="h3 mb-2 text-normal">BitcoinWallet</h3>
+            <p class="text-gray-dark">
+              Receive, hold, and send Bitcoin Cash.
+            </p>
+          </div>
+        </a>
+
+        <a href="https://github.com/BitcoinDB/BitcoinSource" class="card hover-card p-4 d-flex flex-items-center mb-4 bg-red-light">
             <div>
-              <h3 class="h3 mb-2 text-normal">BitcoinToken</h3>
+              <h3 class="h3 mb-2 text-normal">BitcoinSource</h3>
               <p class="text-gray-dark">
-                Create tokens and smart contracts on Bitcoin Cash
-              </p>
-            </div>
-          </a>
-  
-          <a href="#bitcoin-db" class="card hover-card p-4 d-flex flex-items-center mb-2 bg-green-light">
-            <div>
-              <h3 class="h3 mb-2 text-normal">BitcoinDb</h3>
-              <p class="text-gray-dark">
-                Store, update, and retrieve json data on the Bitcoin Cash blockchain.
-              </p>
-            </div>
-          </a>
-  
-          <a href="#bitcoin-wallet" class="card hover-card p-4 d-flex flex-items-center mb-4 bg-yellow-light">
-            <div>
-              <h3 class="h3 mb-2 text-normal">BitcoinWallet</h3>
-              <p class="text-gray-dark">
-                Receive, hold, and send Bitcoin Cash.
+                A high quality Javascript implementation of Bitcoin Cash. Click to see source code on Github.
               </p>
             </div>
           </a>
