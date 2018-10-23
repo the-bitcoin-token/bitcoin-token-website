@@ -16,74 +16,56 @@
   <link href="https://unpkg.com/primer/build/build.css" rel="stylesheet">
   <link href="styles.css" rel="stylesheet">
   <script type="text/javascript">
-        window.heap = window.heap || [], heap.load = function(e, t) {
-            window.heap.appid = e, window.heap.config = t = t || {};
-            var r = t.forceSSL || "https:" === document.location.protocol,
-                a = document.createElement("script");
-            a.type = "text/javascript", a.async = !0, a.src = (r ? "https:" : "http:") + "//cdn.heapanalytics.com/js/heap-" + e + ".js";
-            var n = document.getElementsByTagName("script")[0];
-            n.parentNode.insertBefore(a, n);
-            for (var o = function(e) {
-                    return function() {
-                        heap.push([e].concat(Array.prototype.slice.call(arguments, 0)))
-                    }
-                }, p = ["addEventProperties", "addUserProperties", "clearEventProperties", "identify", "resetIdentity", "removeEventProperty", "setEventProperties", "track", "unsetEventProperty"], c = 0; c < p.length; c++) heap[p[c]] = o(p[c])
-        };
-        heap.load("1968150498");
+         window.heap = window.heap || [], heap.load = function(e, t) {
+             window.heap.appid = e, window.heap.config = t = t || {};
+             var r = t.forceSSL || "https:" === document.location.protocol,
+                 a = document.createElement("script");
+             a.type = "text/javascript", a.async = !0, a.src = (r ? "https:" : "http:") + "//cdn.heapanalytics.com/js/heap-" + e + ".js";
+             var n = document.getElementsByTagName("script")[0];
+             n.parentNode.insertBefore(a, n);
+             for (var o = function(e) {
+                     return function() {
+                         heap.push([e].concat(Array.prototype.slice.call(arguments, 0)))
+                     }
+                 }, p = ["addEventProperties", "addUserProperties", "clearEventProperties", "identify", "resetIdentity", "removeEventProperty", "setEventProperties", "track", "unsetEventProperty"], c = 0; c < p.length; c++) heap[p[c]] = o(p[c])
+         };
+         heap.load("1968150498");
   </script>
 </head>
 
 <body>
-
-    <header class="Header js-details-container Details f5 bg-light-blue" role="banner">
-      <div class="main-nav d-flex flex-justify-between px-3 pl-md-4 pr-md-4 py-3 bg-light-blue Details js-details-container container-lg">
-
-        <div class="my-2">
-          <a class="header-logo-invertocat d-flex flex-items-center text-bold no-underline" href="http://www.bitcointoken.com" data-hotkey="g d" aria-label="Homepage" data-ga-click="Header, go to dashboard, icon:logo">
-            <img id="logo" src="https://i.imgur.com/vwGH2D3.png">
-            <div class="mx-2 text-white">
-                BitcoinToken
-            </div>
-          </a>
-        </div>
-
-        <div class="d-lg-flex flex-justify-between my-2">
-          <div class="d-lg-flex">
-              <ul class="d-lg-flex pl-lg-2 flex-items-center text-bold list-style-none mb-0" role="navigation">
-                <li class="position-relative">
-                  <a class="js-selected-navigation-item HeaderNavlink px-lg-2 py-2 py-lg-0 text-white no-underline" data-ga-click="Header, click, Nav menu - item:docs" data-octo-click="docs" data-octo-dimensions="location:nav_bar" data-selected-links=" /docs" href="docs.html">
-                      Docs
-                  </a>                  
-                </li>
-              </ul>
-          </div>
+  <header class="Header js-details-container Details f5 bg-light-blue" role="banner">
+    <div class="main-nav d-flex flex-justify-between px-3 pl-md-4 pr-md-4 py-3 bg-light-blue Details js-details-container container-lg">
+      <div class="my-2">
+        <a aria-label="Homepage" class="header-logo-invertocat d-flex flex-items-center text-bold no-underline" data-ga-click="Header, go to dashboard, icon:logo" data-hotkey="g d" href="http://www.bitcointoken.com"><img id="logo" src="https://i.imgur.com/vwGH2D3.png">
+        <div class="mx-2 text-white">
+          BitcoinToken
+        </div></a>
       </div>
-    </header>
+      <div class="d-lg-flex flex-justify-between my-2">
+        <div class="d-lg-flex">
+          <ul class="d-lg-flex pl-lg-2 flex-items-center text-bold list-style-none mb-0" role="navigation">
+            <li class="position-relative">
+              <a class="js-selected-navigation-item HeaderNavlink px-lg-2 py-2 py-lg-0 text-white no-underline" data-ga-click="Header, click, Nav menu - item:docs" data-octo-click="docs" data-octo-dimensions="location:nav_bar" data-selected-links=" /docs" href="docs.html">Docs</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </header>
 
   <section class="flex-row width-full pt-8 pb-10 pt-md-10 pb-md-12 bg-blue-gradient text-center mx-auto px-3 px-md-6 px-lg-3 text-white">
-      <h1 class="f00-light mb-4 mb-md-0">Build smart contract powered apps</h1>
-      <h2 class="f2-light">
-        It's easier than you think
-      </h2>
+    <h1 class="f00-light mb-4 mb-md-0">Build smart contract powered apps</h1>
+    <h2 class="f2-light">It's easier than you think</h2>
   </section>
-
-
 
   <section class="main-content mx-auto p-responsive my-8">
-    <p class="lead text-center mx-auto p-responsive text-gray mb-4">
-      BitcoinToken is a suite of tools to integrate payments and smart contracts into your web app. We currently offer three products: a client-side wallet, a database system for storing data on the blockchain, and a token solution. Our smart contracts are compiled into Bitcoin Cash, which makes it possible to operate them at a cost that is orders of magnitude below the competition. The tools are easy to use, no prior blockchain knowledge is required.
-    </p>
-
-
+    <p class="lead text-center mx-auto p-responsive text-gray mb-4">BitcoinToken is a suite of tools to integrate payments and smart contracts into your web app. We currently offer three products: a client-side wallet, a database system for storing data on the blockchain, and a token solution. Our smart contracts are compiled into Bitcoin Cash, which makes it possible to operate them at a cost that is orders of magnitude below the competition. The tools are easy to use, no prior blockchain knowledge is required.</p>
     <!-- <p class="lead text-center mx-auto p-responsive text-gray mb-4">
       BitcoinToken is a suite of tools to create tokens and smart contracts on top of Bitcoin Cash. If you have experience as a web developer you can use BitcoinToken to create a smart contract based application. You can use a pre-defined library and launch a token in a few lines of Javascript. Or you can code your own smart contracts in Javascript.
-    </p> -->
-
-    <p class="lead text-center mx-auto p-responsive text-gray">
-      We are in prototype stage and plan to launch towards the end of the year.
-    </p>
+      </p> -->
+    <p class="lead text-center mx-auto p-responsive text-gray">We are in prototype stage and plan to launch towards the end of the year.</p>
   </section>
-
 
   <section class="mx-auto p-responsive my-6">
     <div class="wide-content mx-auto py-2">
@@ -104,20 +86,16 @@
             </pre>
           </figure>
         </div>
+
         <div class="col-md-6 pl-md-5 my-4 mx-auto flex-md-self-center">
           <h3 class="h3-mktg text-normal mb-2">BitcoinWallet - a wallet for your money and your data</h3>
-          <p class="text-gray">
-            BitcoinWallet is a Bitcoin Cash wallet that works out of the box. Just install the npm package and you are ready to store, send, and receive Bitcoin Cash. It works in the browser and in node which makes it possible to write non-custodial applications.
-          </p>
-
-
-          <p class="text-gray">
-            BitcoinWallet not only stores the keys to hold your Bitcoin Cash, it also stores keys that allow you to store your data on the blockchain.
-          </p>
+          <p class="text-gray">BitcoinWallet is a Bitcoin Cash wallet that works out of the box. Just install the npm package and you are ready to store, send, and receive Bitcoin Cash. It works in the browser and in node which makes it possible to write non-custodial applications.</p>
+          <p class="text-gray">BitcoinWallet not only stores the keys to hold your Bitcoin Cash, it also stores keys that allow you to store your data on the blockchain.</p>
         </div>
       </div>
     </div>
   </section>
+
 
   <section class="mx-auto p-responsive my-6">
     <div class="wide-content mx-auto py-2">
@@ -128,31 +106,24 @@
               <code>
                 <span class="dark no-select">create new bitcoinDb from your wallet</span>
                 <span class="no-select">&gt; </span>const db = new BitcoinDb(wallet)
-                
                 <span class="dark no-select">store json data on the blockchain</span>
                 <span class="no-select">&gt; </span>const id = db.put({ hello: 'world' })
-
                 <span class="dark no-select">retrive data stored on the blockchain</span>
                 <span class="no-select">&gt; </span>const data = db.get(id)
               </code>
             </pre>
           </figure>
         </div>
+
         <div class="col-md-6 pl-md-5 my-4 mx-auto flex-md-self-center">
           <h3 class="h3-mktg text-normal mb-2">BitcoinDb - store data forever at a one-time cost</h3>
-
-          <p class="text-gray">
-            BitcoinDb allows you to store, read, and update JSON objects on the Bitcoin Cash blockchain. It is always online, available worldwide, and extremely censorship resistant. It syncs across the globe within seconds making it possible to write real-time applications on top of it.
-          </p>
-
-          <p class="text-gray">
-            BitcoinDb stores every JSON object in an atomic unit with an amount of Bitcoin Cash. All data stored in BitcoinDb is globally visible, however, updates can be restricted using the same security apparatus that protects your Bitcoin.
-          </p>
-
+          <p class="text-gray">BitcoinDb allows you to store, read, and update JSON objects on the Bitcoin Cash blockchain. It is always online, available worldwide, and extremely censorship resistant. It syncs across the globe within seconds making it possible to write real-time applications on top of it.</p>
+          <p class="text-gray">BitcoinDb stores every JSON object in an atomic unit with an amount of Bitcoin Cash. All data stored in BitcoinDb is globally visible, however, updates can be restricted using the same security apparatus that protects your Bitcoin.</p>
         </div>
       </div>
     </div>
   </section>
+
 
   <section class="mx-auto p-responsive my-6">
     <div class="wide-content mx-auto py-2">
@@ -163,10 +134,8 @@
               <code>
                 <span class="dark no-select">create new token from a BitcoinDb</span>
                 <span class="no-select">&gt; </span>const token = new BitcoinToken(bitcoinDb)
-                
                 <span class="dark no-select">issue the token</span>
                 <span class="no-select">&gt; </span>await token.create({ balance: 1000 })
-
                 <span class="dark no-select">send 1 token to a friend</span>
                 <span class="no-select">&gt; </span>await token.send(1, &lt;friends public key&gt;)
               </code>
@@ -175,13 +144,8 @@
         </div>
         <div class="col-md-6 pl-md-5 my-4 mx-auto flex-md-self-center">
           <h3 class="h3-mktg text-normal mb-2">BitcoinToken - issue tokens and smart contracts</h3>
-          <p class="text-gray">
-            BitcoinToken allows you to build Bitcoin and smart contract enabled apps without prior knowledge of Bitcoin. For example, you can issue your own token in a few lines of Javascript.
-          </p>
-
-          <p class="text-gray">
-            We currently support ERC20-style fungible tokens. Support for non-fungible tokens will be added soon. Eventually, you will be able to program your own smart contracts using BitcoinToken.
-          </p>
+          <p class="text-gray">BitcoinToken allows you to build Bitcoin and smart contract enabled apps without prior knowledge of Bitcoin. For example, you can issue your own token in a few lines of Javascript.</p>
+          <p class="text-gray">We currently support ERC20-style fungible tokens. Support for non-fungible tokens will be added soon. Eventually, you will be able to program your own smart contracts using BitcoinToken.</p>
         </div>
       </div>
     </div>
@@ -192,17 +156,10 @@
       <div class="d-flex flex-wrap flex-md-nowrap px-6 gutter-lg">
         <div class="pr-0 pr-lg-2">
           <h3 class="f3 text-normal pb-2">Builders wanted</h3>
-          <p class="mb-3">Have an idea for a blockchain powered app that you want to build? Email clemens@bitcointoken.com and we'll give you access to the early preview of the software.
-          </p>
-            
-          <p>
-            If you want to receive email updates please use the form below.
-          </p>
-
-          <form class="pt-2" action="https://formspree.io/clemens@bitcointoken.com" method="POST">
-            <input class="mb-1 form-control" type="text" placeholder="Name" name="name">
-            <input class="mb-1 form-control" type="text" placeholder="Email" name="_replyto">
-            <input class="mb-1 btn" type="submit" value="Send">
+          <p class="mb-3">Have an idea for a blockchain powered app that you want to build? Email clemens@bitcointoken.com and we'll give you access to the early preview of the software.</p>
+          <p>If you want to receive email updates please use the form below.</p>
+          <form action="https://formspree.io/clemens@bitcointoken.com" class="pt-2" method="post">
+            <input class="mb-1 form-control" name="name" placeholder="Name" type="text"> <input class="mb-1 form-control" name="_replyto" placeholder="Email" type="text"> <input class="mb-1 btn" type="submit" value="Send">
           </form>
         </div>
       </div>
