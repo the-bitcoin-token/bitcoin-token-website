@@ -52,7 +52,7 @@
       <div class="content markdown-body">
         <p>There is some discussion in the Bitcoin Cash community as to whether a new op_code called <code>OP_CHECKDATASIG</code> should be added to the scripting language. <code>OP_CHECKDATASIG</code> makes it possible to check whether a message is cryptographically signed using the private key that belongs to a given public key. Currently, it is only possible to check the signature of one specific message&nbsp;-&nbsp; the transaction that is being broadcast.</p>
 
-        <p><code>OP_CHECKDATASIG</code> works as follows (see the spec for details). It expects three elements on the stack: a signature<code>&lt;sig&gt;</code> at the lowest position, a message <code>&lt;msg&gt;</code> in the middle, and a public key <code>&lt;pubKey&gt;</code> at the top of the stack. <code>OP_CHECKDATASIG</code> will pop all three elements from the stack and push true as a result onto the stack if <code>&lt;sig&gt;</code> is valid with respect to <code>&lt;msg&gt;</code> and <code>&lt;pubKey&gt;</code>.</p>
+        <p><code>OP_CHECKDATASIG</code> expects three elements on the stack: a signature<code>&lt;sig&gt;</code> at the lowest position, a message <code>&lt;msg&gt;</code> in the middle, and a public key <code>&lt;pubKey&gt;</code> at the top of the stack. <code>OP_CHECKDATASIG</code> will pop all three elements from the stack and push true as a result onto the stack if <code>&lt;sig&gt;</code> is valid with respect to <code>&lt;msg&gt;</code> and <code>&lt;pubKey&gt;</code> (see the <a href="https://github.com/bitcoincashorg/bitcoincash.org/blob/master/spec/op_checkdatasig.md">spec</a> for details).</p>
         
         <p><code>OP_CHECKDATASIG</code> has two non-trivial use cases:</p>
 
@@ -64,6 +64,8 @@
         <p>Both use cases are already supported by Bitcoin:</p>
 
         <p>In the first case, Alice wants to create a situation where Bob has to sign any message to claim a reward. To do this Alice produces a p2pkh output spendable by Bob with the reward. The only way for Bob to claim the reward is to spend the output. To do that he has to sign a message: the Bitcoin transaction spending the output.</p>
+        
+        <p class="bg-red-light p-2"><strong>Problem: This approach checks if Bob can produce a signature for a spending transaction. Maybe Bob can only sign a different message. In this case he could spend from the script using <code>OP_CHECKDATASIG</code> but not from the output that Alice created.</strong></p>
 
         <p>In the second case, Alice wants to create a situation where Bob can earn a reward only if he can sign <code>&lt;msg&gt;</code>? In this case, Alice creates a p2pkh output O1 that she can spend and that contains the reward. Then she creates a transaction with two inputs and two outputs.</p>
 
@@ -74,7 +76,10 @@
 
         <p>Alice does not broadcast this transaction, she signs the first input and sends it to Bob. If Bob wants to claim the reward he must sign the transaction containing <code>&lt;msg&gt;</code>.</p>
 
-        <p>I helped <a href="https://gist.github.com/ClemensLey/5fdec17f84142fe5b06e3171f907503b">draft the specification for <code>OP_CHECKDATASIG</code></a> and have supported it's inclusion into Bitcoin script. In the light of this result we should reconsider if we can find a strong use case that cannot be solved by this or a similar technique before we add <code>OP_CHECKDATASIG</code> to the scripting language.</p>
+        <p class="bg-yellow-light p-2"><strong>Potential problem: This approach checks if Bob can produce a signature for transaction containing <code>msg</code>, not <code>msg</code> itself. Maybe Bob can only sign <code>msg</code> and not the transaction containing it. Maybe this can be fixed if Bob uses hashtype <code>SIGHASH_SINGLE</code>.</strong></p>
+
+
+        <p>I helped <a href="https://gist.github.com/ClemensLey/5fdec17f84142fe5b06e3171f907503b">draft the specification for <code>OP_CHECKDATASIG</code></a> and have supported it's inclusion into Bitcoin script. In the light of this result I think we should try find a strong use case that cannot be solved by a similar technique before we add <code>OP_CHECKDATASIG</code> to Bitcoin Cash.</p>
       </div>
     </div>
   </section>
