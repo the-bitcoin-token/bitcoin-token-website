@@ -191,7 +191,7 @@
       </div>
 
       <h3 class="alt-h3 border-bottom border-gray-dark mb-2 mt-4">Storing data</h3>
-      <p class="f4-light">To store data in json format call <code>put()</code> with a json object. We currently support json data with string keys and values that need to be shorter than 350 charachters. </p>
+      <p class="f4-light">To store json data call <code>put()</code>. We currently support json data with string keys and values that need to be shorter than 350 charachters. </p>
       <div class="markdown-body mb-2">
         <pre class="box highlight">
               await db1.put({ a: 'aaa' })
@@ -199,13 +199,13 @@
       </div>
       <p class="f4-light">Data stored using BitcoinDb is stored on the blockchain and hence readable by anybody. If you want to restric read access we recommend you encrypt data before you store it in BitcoinDb.</p>
         
-      <p class="f4-light">While anyone can read the data that is stored in BitcoinDB, only a specified user (group) called "owners" can update the data. To specify that group of users, you can pass a second parameter to <code>put()</code> that contains the public keys of the owners. By default the current user is the only owner</p>
+      <p class="f4-light">While anyone can read the data that is stored in BitcoinDB, only a specified user (group) called "owners" can update the data. To specify that group of users, you can pass an optional second parameter to <code>put()</code> that contains the public keys of the owners. By default the current user is the only owner</p>
       <div class="markdown-body mb-2">
         <pre class="box highlight">
           await db1.put({ a: 'aaa' }, [db2.getPublicKey()])
         </pre>
       </div>
-      <p class="f4-light"><code>put()</code> takes a third argument that specifies an account of satoshis that will be stored in one atomic unit together with that data and the owners. When you call <code>put()</code> this amount of satoshis that will be transferred from the user calling the function to the new owners. This feature can be used to build a token exchange and has many other use cases.</p>
+      <p class="f4-light"><code>put()</code> takes a third optional argument that specifies an account of satoshis that will be stored in one atomic unit together with that data and the owners. When you call <code>put()</code> this amount of satoshis that will be transferred from the user calling the function to the new owners. This feature can be used to build a token exchange and has many other use cases.</p>
       <div class="markdown-body mb-2">
           <pre class="box highlight">
             await db1.put({ a: 'aaa' }, [db2.getPublicKey()], 100000)
@@ -221,11 +221,11 @@
           { txId: 'f9ed485e2a528cf1c0570b8f1c65b1521a68b1e63b50f3011e9e7d4d2eeecf04', outputNumber: 0 }
         </pre>
       </div>
-      <p class="f4-light">The id returned from <code>db.put</code> can be used to lookup the data stored on the blockchain. To do that pass that identifier into <code>db.get</code> to retrieve the json object.</p>
+      <p class="f4-light">The id returned from <code>db.put</code> can be used to lookup the data stored on the blockchain. BitcoinDb syncs across the globe in seconds, so data stored by one user is visible by everybody else within seconds. To read data, pass the identifier returned by <code>put()</code> into <code>db.get</code>.</p>
       <div class="markdown-body mb-2">
         <pre class="box highlight">
-              const id = await db.put({ a: 'aaa' })
-              await db.get(id) // returns { a: 'aaa' }
+              const id = await db1.put({ a: 'aaa' })
+              await db2.get(id)
             </pre>
       </div>
       <p class="f4-light">The value returned from <code>db.get</code> is a json object with three keys: <code>data</code> contains the initially stored data, <code>owners</code> is the list of the public keys of the owners, and <code>amount</code> contains the number of satoshi contained in the output that stores the data.</p>
