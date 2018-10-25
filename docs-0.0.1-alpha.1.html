@@ -125,7 +125,7 @@
       </div>
 
       <h3 class="alt-h3 border-bottom border-gray-dark mb-2 mt-4">Receiving Bitcoin Cash</h3>
-      <p class="f4-light">To fund your wallet call <code>getAddress()</code> to obtain a deposit address for the Bitcoin Cash testnet. To fund the wallet paste the address into a <a href="https://coinfaucet.eu/en/bch-testnet">testnet faucet</a>.</p>
+      <p class="f4-light">To fund your wallet call <code>getAddress()</code> to obtain a deposit address for the Bitcoin Cash testnet. Then, paste the address into a <a href="https://coinfaucet.eu/en/bch-testnet">testnet faucet</a>.</p>
       
       <p>The private and public key of a wallet can be accessed throught <code>getPublicKey()</code> and <code>getPrivateKey</code>.</p>
 
@@ -260,6 +260,9 @@
       <p class="f4-light">Internally, <code>db.update</code> builds and broadcasts the following Bitcoin Cash transaction: it spends the outputs specified by the first parameter and spends them into a new output that encodes the data from the second parameter. The output is an n-of-n multisig output, spendable by the owners from the third parameter. This output contains the number of Bitcoin specified by the last parameter.</p>
     </section>
   </div>
+
+  <!-- ########################################################## -->
+
   <div class="bg-blue-light py-10">
     <section class="main-content mx-auto p-responsive pt-3 pb-12" id='bitcoin-token'>
       <h2 class="alt-h2 border-bottom mb-2">BitcoinToken</h2>
@@ -267,7 +270,7 @@
       <div class="markdown-body mb-2">
         <pre class="box highlight">
                 const token = new BitcoinToken()
-                await token.create({ data: { balance: '10' }})
+                await token.create({ balance: '10' })
                 await token.getBalance()                  
                 await token.send(1, &lt;public key&gt;)
             </pre>
@@ -278,8 +281,8 @@
         <pre class="box highlight">
               const token1 = new BitcoinToken()
 
-              const masterPrivateKey = 'tprv8ZgxMBicQKsPefX1...'
-              const token2 = BitcoinToken.fromHdPrivateKey(masterPrivateKey)
+              const hdPrivateKey = BitcoinDb.getHdPrivateKey()
+              const token2 = BitcoinToken.fromHdPrivateKey(hdPrivateKey)
 
               const db = new BitcoinDb()
               const token3 = new BitcoinToken(db)
@@ -289,7 +292,7 @@
       <p class="f4-light">You can issue a token by calling <code>token.create</code>. To parameter must be the same kind of json object that is passed into <code>db.put</code>. You need to initialize the balance (the number of tokens existing at issuance) to some positive number</p>
       <div class="markdown-body mb-2">
         <pre class="box highlight">
-              await token.create({ data: { balance: '10' }})
+              await token.create({ balance: '10' })
             </pre>
       </div>
       <h3 class="alt-h3 border-bottom border-gray-dark mb-2 mt-4">Checking the token balance</h3>
