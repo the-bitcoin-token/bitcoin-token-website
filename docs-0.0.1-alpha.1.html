@@ -43,7 +43,7 @@
   </section>
 
   <section class="main-content mx-auto p-responsive pb-10 pt-6">
-    <p class="lead">BitcoinToken consists of three tools: a Bitcoin Cash wallet, a database for reading and writing to the blockchain, and a token solution. The tools are implemented in Javascript and run in the browser and in node. All tools can be used without prior blockchain knowledge.
+    <p class="lead">BitcoinToken is a toolkit for building blockchain enabled applications on top of Bitcoin Cash. It consists of three tools: a wallet, a database built on the blockchain, and a token solution. These are meant to be combined by the developer to adapt to the desired application. The code is written in Javascript and runs in the browser and in node.
       </p>
 
     <h2 class="alt-h2 border-bottom border-gray-dark mb-2">The Tech Stack</h2>
@@ -59,14 +59,14 @@
     <a class="card hover-card p-3 p-md-4 d-flex flex-items-center mb-2 mt-4 bg-blue-light" href="#bitcoin-token">
       <div>
         <h3 class="h3 mb-2 text-normal">BitcoinToken</h3>
-        <p class="text-gray-dark">Create tokens and smart contracts on Bitcoin Cash</p>
+        <p class="text-gray-dark">Create tokens and smart contracts</p>
       </div>
     </a>
 
     <a class="card hover-card p-3 p-md-4 d-flex flex-items-center mb-2 bg-green-light" href="#bitcoin-db">
       <div>
         <h3 class="h3 mb-2 text-normal">BitcoinDb</h3>
-        <p class="text-gray-dark">Store, update, and retrieve json data on the Bitcoin Cash blockchain.</p>
+        <p class="text-gray-dark">Store, update, and retrieve json data on the blockchain.</p>
       </div>
     </a>
 
@@ -80,11 +80,11 @@
     <a class="card hover-card p-3 p-md-4 d-flex flex-items-center mb-4 bg-red-light" href="https://github.com/BitcoinDB/BitcoinSource">
       <div>
         <h3 class="h3 mb-2 text-normal">BitcoinSource</h3>
-        <p class="text-gray-dark">A high quality Javascript implementation of Bitcoin Cash.</p>
+        <p class="text-gray-dark">A community driven initiative to produce a readable implementation of Bitcoin Cash in Javascript.</p>
       </div>
     </a>
 
-    <p class="f4-light mb-4">The BitcoinToken suite exposes the three classes at the root level.</p>
+    <p class="f4-light mb-4">The BitcoinToken package exposes the three classes at the root level.</p>
 
     <div class="markdown-body mb-2">
       <pre class="box highlight">
@@ -102,18 +102,19 @@
 
       <h2 class="alt-h2 border-bottom border-gray-dark mb-2">BitcoinWallet</h2>
 
-      <p class="f4-light">BitcoinWallet is a Javascript wallet. It can store, send and receive bitcoin. Both Bitcoin TokenDb and BitcoinToken use BitcoinWallet.</p>
+      <p class="f4-light">BitcoinWallet is a <a href="https://en.bitcoin.it/wiki/Deterministic_wallet">HD</a> Javascript Bitcoin Cash wallet. It can store, send and receive bitcoin, and generate private keys as uesr accounts. Every Bitcoin wallet can deterministically generate more secure BitcoinWallets, which makes it possible to build trees of wallets that can adapt to the use case.</p>
       <div class="markdown-body mb-2">
         <pre class="box highlight">
           const wallet = new BitcoinWallet()
           await wallet.getAddress()                  
           await wallet.getBalance()                  
           await wallet.send(1, &lt;public key&gt;)
+          const childWallet3 = wallet.derive(3)
         </pre>
       </div>
 
       <h3 class="alt-h3 border-bottom border-gray-dark mb-2 mt-4">Initialization</h3>
-      <p class="f4-light">There are two ways to initialize a BitcoinWallet. To create a wallet from random, call the constructor. To initialize the wallet from an existing private key call <code>fromHdPrivateKey</code> with a string encoding an extended private key as specified in <a href="https://github.com/bitcoin/bips/blob/master/bip-0032.mediawiki">BIP32</a>.</p>
+      <p class="f4-light">To create a wallet from random, call the constructor. To initialize the wallet from an existing private key call <code>fromHdPrivateKey</code> with a string encoding an extended private key as specified in <a href="https://github.com/bitcoin/bips/blob/master/bip-0032.mediawiki">BIP32</a>. BitcoinWallet can securely generate such a key for you.</p>
       <div class="markdown-body mb-2">
         <pre class="box highlight">
           const randomWallet = new BitcoinWallet()
@@ -124,11 +125,14 @@
       </div>
 
       <h3 class="alt-h3 border-bottom border-gray-dark mb-2 mt-4">Receiving Bitcoin Cash</h3>
-      <p class="f4-light">To receive a deposit address call <code>getAddress()</code>. You can fund the wallet through a <a href="https://coinfaucet.eu/en/bch-testnet">testnet faucet()</a>. The private and public key of a wallet can be accessed throught <code>getPublicKey()</code> and <code>getPrivateKey</code>.</p>
+      <p class="f4-light">To fund your wallet call <code>getAddress()</code> to obtain a deposit address for the Bitcoin Cash testnet. To fund the wallet paste the address into a <a href="https://coinfaucet.eu/en/bch-testnet">testnet faucet</a>.</p>
       
+      <p>The private and public key of a wallet can be accessed throught <code>getPublicKey()</code> and <code>getPrivateKey</code>.</p>
+
       <div class="markdown-body mb-2">
         <pre class="box highlight">
           const address = wallet.getAddress()
+
           const publicKey = wallet.getPublicKey()
           const privateKey = wallet.getPrivateKey()
         </pre>
@@ -143,7 +147,7 @@
       </div>
 
       <h3 class="alt-h3 border-bottom border-gray-dark mb-2 mt-4">Checking the balance</h3>
-      <p class="f4-light">You can check the balance of an account by calling <code>getBalance()</code>.</p>
+      <p class="f4-light">You can check the balance of the wallet by calling <code>getBalance()</code>.</p>
       <div class="markdown-body mb-2">
         <pre class="box highlight">
           const balance = await wallet.getBalance()
@@ -151,7 +155,7 @@
       </div>
 
       <h3 class="alt-h3 border-bottom border-gray-dark mb-2 mt-4">Deriving child wallets</h3>
-      <p class="f4-light">You can derive a large number of BitcoinWallets from a BitcoinWallet. These wallets can derive further child wallets. Under the hood a BitcoinWallet is a hardened deterministic hierarchical wallet as specified in <a href="https://github.com/bitcoin/bips/blob/master/bip-0032.mediawiki">BIP32</a>.</p>
+      <p class="f4-light">You can securely derive 2<sup>31</sup> child BitcoinWallets from a BitcoinWallet. These wallets can derive further child wallets ad infinitum. As the process is deterministic, only one root HD private key must be stored, all wallets can be computed from that key.</p>
       <div class="markdown-body mb-2">
         <pre class="box highlight">
           const childWallet = wallet.derive(3)
