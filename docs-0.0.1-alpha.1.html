@@ -248,10 +248,11 @@
 
       <div class="markdown-body mb-2">
         <pre class="box highlight">
-          const id1 = await db.put({ a: 'aaa' })
-          const id2 = await db.update(id1, { b: 'bbb' })
-          const id3 = await db.update(id2, { c: 'ccc' }, [db2.getPublicKey()])
-          const id4 = await db.update(id3, { d: 'ddd' }, [db.getPublicKey()], 100000)
+          const id1 = await db1.put({ a: 'aaa' })
+          const id2 = await db1.update(id1, { b: 'bbb' })
+          const id3 = await db1.update(id2, { c: 'ccc' }, [db2.getPublicKey()])
+          // the next line throws an error bc id3 is owned by db2
+          const id4 = await db1.update(id3, { d: 'ddd' }, [db.getPublicKey()], 100000)
         </pre>
       </div>
 
