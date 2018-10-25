@@ -38,222 +38,283 @@
   <section class="flex-row width-full bg-blue-light">
     <div class="flex-row main-content width-full pt-0 pb-2 pt-md-2 pb-md-4 mx-auto px-3 px-md-6 px-lg-3">
       <h1 class="f00-light mb-n3">BitcoinToken Docs</h1>
-      <h2 class="f2-light mb-4 text-gray"><code>VERSION 0.1</code></h2>
+      <h2 class="f2-light mb-4 text-gray"><code>VERSION v0.0.1-alpha.1</code></h2>
     </div>
   </section>
 
   <section class="main-content mx-auto p-responsive pb-10 pt-6">
-    <p class="lead">BitcoinToken consists of three tools: an easy to use client side wallet, a database for reading and writing to the blockchain, and a token solution.</p>
+    <p class="lead">BitcoinToken is a toolkit for building blockchain enabled applications on top of Bitcoin Cash. It consists of three tools: a wallet, a database built on the blockchain, and a token solution. These are meant to be combined by the developer to adapt to the desired application. The code is written in Javascript and runs in the browser and in node.
+      </p>
+
     <h2 class="alt-h2 border-bottom border-gray-dark mb-2">The Tech Stack</h2>
-    <p class="mt-4">BitcoinToken has a layered architecture, where lower levels provide functionality for the levels above. Integrating BitcoinToken into your app is as easy as requiring the npm package.</p>
-    <p><strong>Our software is not available on npm yet. Email clemens@bitcointoken.com to obtain an early preview of the library</strong></p><a class="card hover-card p-4 d-flex flex-items-center my-4" href="#bitcoin-token">
-    <div>
-      <h3 class="h3 mb-2 text-normal">Your app</h3>
-      <p class="text-gray-dark">Make use of the functionality provided by the layers below</p>
-    </div></a> <a class="card hover-card p-4 d-flex flex-items-center mb-2 mt-4 bg-blue-light" href="#bitcoin-token">
-    <div>
-      <h3 class="h3 mb-2 text-normal">BitcoinToken</h3>
-      <p class="text-gray-dark">Create tokens and smart contracts on Bitcoin Cash</p>
-    </div></a> <a class="card hover-card p-4 d-flex flex-items-center mb-2 bg-green-light" href="#bitcoin-db">
-    <div>
-      <h3 class="h3 mb-2 text-normal">BitcoinDb</h3>
-      <p class="text-gray-dark">Store, update, and retrieve json data on the Bitcoin Cash blockchain.</p>
-    </div></a> <a class="card hover-card p-4 d-flex flex-items-center mb-2 bg-yellow-light" href="#bitcoin-wallet">
-    <div>
-      <h3 class="h3 mb-2 text-normal">BitcoinWallet</h3>
-      <p class="text-gray-dark">Receive, hold, and send Bitcoin Cash.</p>
-    </div></a> <a class="card hover-card p-4 d-flex flex-items-center mb-4 bg-red-light" href="https://github.com/BitcoinDB/BitcoinSource">
-    <div>
-      <h3 class="h3 mb-2 text-normal">BitcoinSource</h3>
-      <p class="text-gray-dark">A high quality Javascript implementation of Bitcoin Cash. Click to see source code on Github.</p>
-    </div></a>
-    <p class="f4-light mb-4">The BitcoinToken suite consists of three classes, all of which are exposed at the root level.</p>
+    <p class="mt-4">BitcoinToken has a layered architecture, where lower levels provide functionality for the levels above.</p>
+
+    <a class="card hover-card p-3 p-md-4 d-flex flex-items-center my-4" href="#bitcoin-token">
+      <div>
+        <h3 class="h3 mb-2 text-normal">Your app</h3>
+        <p class="text-gray-dark">Your application can use of the functionality provided by the layers below</p>
+      </div>
+    </a> 
+
+    <a class="card hover-card p-3 p-md-4 d-flex flex-items-center mb-2 mt-4 bg-blue-light" href="#bitcoin-token">
+      <div>
+        <h3 class="h3 mb-2 text-normal">BitcoinToken</h3>
+        <p class="text-gray-dark">Create tokens and smart contracts</p>
+      </div>
+    </a>
+
+    <a class="card hover-card p-3 p-md-4 d-flex flex-items-center mb-2 bg-green-light" href="#bitcoin-db">
+      <div>
+        <h3 class="h3 mb-2 text-normal">BitcoinDb</h3>
+        <p class="text-gray-dark">Store, update, and retrieve json data on the blockchain.</p>
+      </div>
+    </a>
+
+    <a class="card hover-card p-3 p-md-4 d-flex flex-items-center mb-2 bg-yellow-light" href="#bitcoin-wallet">
+      <div>
+        <h3 class="h3 mb-2 text-normal">BitcoinWallet</h3>
+        <p class="text-gray-dark">Receive, hold, and send Bitcoin Cash.</p>
+      </div>
+    </a>
+
+    <a class="card hover-card p-3 p-md-4 d-flex flex-items-center mb-4 bg-red-light" href="https://github.com/BitcoinDB/BitcoinSource">
+      <div>
+        <h3 class="h3 mb-2 text-normal">BitcoinSource</h3>
+        <p class="text-gray-dark">A community driven initiative to produce a readable implementation of Bitcoin Cash in Javascript.</p>
+      </div>
+    </a>
+
+    <p class="f4-light mb-4">The BitcoinToken package exposes the three classes at the root level.</p>
+
     <div class="markdown-body mb-2">
       <pre class="box highlight">
-            const Bitcoin = require('./bitcoin-token')
+        const Bitcoin = require('./bitcoin-token')
 
-            const BitcoinWallet = Bitcoin.Wallet
-            const BitcoinDb = Bitcoin.BitcoinDb
-            const BitcoinToken = Bitcoin.Token
-          </pre>
+        const BitcoinWallet = Bitcoin.Wallet
+        const BitcoinDb = Bitcoin.Db
+        const BitcoinToken = Bitcoin.Token
+        </pre>
     </div>
   </section>
+
   <div class="bg-yellow-light py-10">
     <section class="main-content mx-auto p-responsive py-3" id='bitcoin-wallet'>
+
       <h2 class="alt-h2 border-bottom border-gray-dark mb-2">BitcoinWallet</h2>
-      <p class="f4-light">BitcoinWallet is a Bitcoin wallet that works out of the box. It allows users to store, send, and receive Bitcoin Cash. Basic usage is as follows.</p>
+
+      <p class="f4-light">BitcoinWallet is a <a href="https://en.bitcoin.it/wiki/Deterministic_wallet">HD</a> Javascript Bitcoin Cash wallet. It can store, send and receive bitcoin, and generate private keys as uesr accounts. Every Bitcoin wallet can deterministically generate more secure BitcoinWallets, which makes it possible to build trees of wallets that can adapt to the use case.</p>
       <div class="markdown-body mb-2">
         <pre class="box highlight">
-              const wallet = new BitcoinWallet()
-              await wallet.getAddress()                  
-              await wallet.getBalance()                  
-              await wallet.send(1, &lt;public key&gt;)
-            </pre>
+          const wallet = new BitcoinWallet()
+          await wallet.getAddress()                  
+          await wallet.getBalance()                  
+          await wallet.send(1, &lt;public key&gt;)
+          const childWallet3 = wallet.derive(3)
+        </pre>
       </div>
+
       <h3 class="alt-h3 border-bottom border-gray-dark mb-2 mt-4">Initialization</h3>
-      <p class="f4-light">There are two ways to initialize a BitcoinWallet. To create a wallet and initialize it with a fresh random master private key, just call the constructor.</p>
+      <p class="f4-light">To create a wallet from random, call the constructor. To initialize the wallet from an existing private key call <code>fromHdPrivateKey</code> with a string encoding an extended private key as specified in <a href="https://github.com/bitcoin/bips/blob/master/bip-0032.mediawiki">BIP32</a>. BitcoinWallet can securely generate such a key for you.</p>
       <div class="markdown-body mb-2">
         <pre class="box highlight">
-              const wallet = new BitcoinWallet()
-            </pre>
+          const randomWallet = new BitcoinWallet()
+
+          const hdPrivateKey = BitcoinWallet.getHdPrivateKey()
+          const walletFromKey = BitcoinWallet.fromHdPrivateKey(hdPrivateKey)
+        </pre>
       </div>
-      <p class="f4-light">To initialize the wallet from an existing private key call <code>fromHdPrivateKey</code></p>
-      <div class="markdown-body mb-2">
-        <pre class="box highlight">
-              const masterPrivateKey = 'tprv8ZgxMBicQKsPefX1...'
-              const wallet = BitcoinWallet.fromHdPrivateKey(masterPrivateKey)
-            </pre>
-      </div>
+
       <h3 class="alt-h3 border-bottom border-gray-dark mb-2 mt-4">Receiving Bitcoin Cash</h3>
-      <p class="f4-light">You wallet comes with over 2 billion accounts, numbered from 0 to 2.147.483.648. You can access these accounts by executing the following commands. The default account is 0.</p>
+      <p class="f4-light">To fund your wallet call <code>getAddress()</code> to obtain a deposit address for the Bitcoin Cash testnet. Then, paste the address into a <a href="https://coinfaucet.eu/en/bch-testnet">testnet faucet</a>.</p>
+      
+      <p>The private and public key of a wallet can be accessed throught <code>getPublicKey()</code> and <code>getPrivateKey</code>.</p>
+
       <div class="markdown-body mb-2">
         <pre class="box highlight">
-              const accountNumber = &lt;some number between 0 and 2.147.483.648&gt;
-              const privateKey = wallet.getPrivateKey(accountNumber)
-              const publicKey = wallet.getPublicKey(accountNumber)
-              const address = wallet.getAddress(accountNumber)
-            </pre>
+          const address = wallet.getAddress()
+
+          const publicKey = wallet.getPublicKey()
+          const privateKey = wallet.getPrivateKey()
+        </pre>
       </div>
-      <p class="f4-light">To fund the wallet get a deposit address and fund through a testnet faucet (eg <a>https://coinfaucet.eu/en/bch-testnet/</a>).</p>
+
       <h3 class="alt-h3 border-bottom border-gray-dark mb-2 mt-4">Sending Bitcoin Cash</h3>
-      <p class="f4-light">After you have funded your wallet, you can send Bitcoin Cash to another address as follows.</p>
+      <p class="f4-light">After you have funded your wallet, you can send Bitcoin Cash to another address by calling <code>send()</code>. The return value is the id of the transaction that was broadcast.</p>
       <div class="markdown-body mb-2">
         <pre class="box highlight">
-              const amount = &lt;number of satoshi to be sent&gt;
-              const address = &lt;some Bitcoin Cash address&gt;
-              const res = wallet.send(amount, address)
+              const txId = await wallet.send(amount, address)
             </pre>
       </div>
-      <p class="f4-light">By default, the wallet will send funds from account number 0. If you want to send from another account, plug in that accounts number as the third parameter</p>
-      <div class="markdown-body mb-2">
-        <pre class="box highlight">
-              const accountNumber = &lt;an account number between 0 and 2.147.483.648&gt;
-              const res = wallet.send(amount, address, accountNumber)
-            </pre>
-      </div>
+
       <h3 class="alt-h3 border-bottom border-gray-dark mb-2 mt-4">Checking the balance</h3>
-      <p class="f4-light">You can check the balance of an account by calling <code>getBalance</code> with the account number. Like everywhere else the account number can be ommited and defaults to 0.</p>
+      <p class="f4-light">You can check the balance of the wallet by calling <code>getBalance()</code>.</p>
       <div class="markdown-body mb-2">
         <pre class="box highlight">
-              const balance = wallet.getBalance(accountNumber)
-            </pre>
+          const balance = await wallet.getBalance()
+        </pre>
+      </div>
+
+      <h3 class="alt-h3 border-bottom border-gray-dark mb-2 mt-4">Deriving child wallets</h3>
+      <p class="f4-light">You can securely derive 2<sup>31</sup> child BitcoinWallets from a BitcoinWallet. These wallets can derive further child wallets ad infinitum. As the process is deterministic, only one root HD private key must be stored, all wallets can be computed from that key.</p>
+      <div class="markdown-body mb-2">
+        <pre class="box highlight">
+          const childWallet = wallet.derive(3)
+          const grandChildWallet = childWallet.derive(7)
+        </pre>
       </div>
     </section>
   </div>
+
+  <!-- ########################################################## -->
+  
   <div class="bg-green-light py-10">
     <section class="main-content mx-auto p-responsive py-3" id='bitcoin-db'>
       <h2 class="alt-h2 border-bottom border-gray-dark mb-2">BitcoinDb</h2>
-      <p class="f4-light">BitcoinBd lets you store, read, and update json files on the blockchain. Every json file stored on the blockchain has an owner and only the owner can update the json. We are currently only supporting json objects with string values of less than 350 charachters. In the future we will add support for arbitrary json data.</p>
-      <p>Basic usage is as follows.</p>
+      <p class="f4-light">BitcoinBd lets you store, read, and update json files on the blockchain. Reading from BitcoinDb is free and as fast as reading from any other database, but writing to the database is associated with a fee of about $100 per mb, payed in Bitcoin Cash. BitcoinDb syncs in seconds across the globe.</p>
       <div class="markdown-body mb-2">
         <pre class="box highlight">
-                const db = new BitcoinDb()
-                const id = await db.put({ data: { hello: 'Bitcoin' }})
-                const res = await db.get(id)    // res will be { data: { hello: 'Bitcoin' }}
-              </pre>
+          const db = new BitcoinDb()
+          const id1 = await db.put({ a: 'aaa' })
+          const data = await db.get(id1)
+          const id2 = await db.update(id1, { b: 'bbb' })
+        </pre>
       </div>
+
       <h3 class="alt-h3 border-bottom border-gray-dark mb-2 mt-4">Initialization</h3>
-      <p class="f4-light">There are three ways to initialize a BitcoinWallet: To create a wallet and initialize it with a fresh random master private key, just call the constructor. To initialize from an existing private key call <code>fromHdPrivateKey</code>. The third option is to pass in a BitcoinWallet object</p>
+      <p class="f4-light">To create a wallet from random, call the constructor. To initialize from an existing private key call <code>fromHdPrivateKey</code>. The third option is to pass in a BitcoinWallet object</p>
       <div class="markdown-body mb-2">
         <pre class="box highlight">
-              const db1 = new BitcoinDb()
+          const db1 = new BitcoinDb()
 
-              const masterPrivateKey = 'tprv8ZgxMBicQKsPefX1...'
-              const db2 = BitcoinDb.fromHdPrivateKey(masterPrivateKey)
+          const hdPrivateKey = BitcoinDb.getHdPrivateKey()
+          const db2 = BitcoinDb.fromHdPrivateKey(hdPrivateKey)
 
-              const bitcoinWallet = new BitcoinWallet()
-              const db3 = new BitcoinDb(bitcoinWallet)
-            </pre>
+          const bitcoinWallet = new BitcoinWallet()
+          const db3 = new BitcoinDb(bitcoinWallet)
+        </pre>
       </div>
+
       <h3 class="alt-h3 border-bottom border-gray-dark mb-2 mt-4">Storing data</h3>
-      <p class="f4-light">To store some data in json format create and object containing that data as a value under the key <code>data</code>.</p>
+      <p class="f4-light">The function <code>put()</code> takes a json object as input, encodes it in an output script of a Bitcoin Cash transaction, and braodcasts this transaction to the blockchain. We currently support json data with string keys and values that need to be shorter than 350 charachters. </p>
       <div class="markdown-body mb-2">
         <pre class="box highlight">
-              const data = { a: 'aaa', b: 'bbb' }
-              await db1.put({ data })
+              await db1.put({ a: 'aaa' })
             </pre>
       </div>
-      <p class="f4-light">Anyone can read the data that is stored in BitcoinDB, however only the owner can update the data. By default the current user will be the owner of newly created data. To designate another owner, pass in that users public key</p>
+      <p class="f4-light">Data stored using BitcoinDb is stored on the blockchain and readable by anybody. If you want to restric read access we recommend you encrypt data before you store it in BitcoinDb.</p>
+        
+      <p class="f4-light">While anyone can read the data that is stored in BitcoinDB, only a specified user (group) called "owners" can update the data. To specify that group of users, you can pass an optional second parameter to <code>put()</code> that contains the public keys of the owners. By default the current user is the only owner</p>
       <div class="markdown-body mb-2">
         <pre class="box highlight">
-              const data = { a: 'aaa', b: 'bbb' }
-              const owners = [ db2.getPublicKey() ]
-              await db1.put({ data, owners })
-            </pre>
+          await db1.put({ a: 'aaa' }, [db2.getPublicKey()])
+        </pre>
       </div>
-      <p class="f4-light">The return value of <code>db.put</code> is a json object that contains the transaction id as well as the output number of the output encoding the data.</p>
+      <p class="f4-light"><code>put()</code> takes a third optional argument that specifies an account of satoshis that will be stored in one atomic unit together with that data and the owners. When you call <code>put()</code> this amount of satoshis that will be transferred from the user calling the function to the new owners. This feature can be used to build a token exchange and has many other use cases.</p>
       <div class="markdown-body mb-2">
-        <pre class="box highlight">
-                {
-                &nbsp;&nbsp;txId: 'f9ed485e2a528cf1c0570b8f1c65b1521a68b1e63b50f3011e9e7d4d2eeecf04',
-                &nbsp;&nbsp;outputNumber: 0
-                }
-              </pre>
-      </div>
-      <p class="f4-light">Internally, the command <code>db.put</code> builds and broadcasts a Bitcoin Cash transaction with one output that contains a script encoding the data. The owner is the user that has the private key that can spend (and hence update) that data.</p>
+          <pre class="box highlight">
+            await db1.put({ a: 'aaa' }, [db2.getPublicKey()], 100000)
+          </pre>
+        </div>
+
+      <!-- <p class="f4-light">Internally, the command <code>db.put</code> builds and broadcasts a Bitcoin Cash transaction with one output that contains a script encoding the data. The owner is the user that has the private key that can spend (and hence update) that data.</p> -->
+
       <h3 class="alt-h3 border-bottom border-gray-dark mb-2 mt-4">Reading data</h3>
-      <p class="f4-light">The id returned from <code>db.put</code> can be used to lookup the json object stored on the blockchain. You can pass that identifier into <code>db.get</code> to retrieve the json object.</p>
+      <p class="f4-light">The return value of <code>put()</code> is a json object that encode the location on the blockchain where the data is stored. It consists of a  transaction id as well as the output number of the output encoding the data.</p>
       <div class="markdown-body mb-2">
         <pre class="box highlight">
-              const id = await db.put({ data: { c: 'ccc' } })
-              await db.get(id)
+          { txId: 'f9ed485e2a528cf1c0570b8f1c65b1521a68b1e63b50f3011e9e7d4d2eeecf04', outputNumber: 0 }
+        </pre>
+      </div>
+      <p class="f4-light">The id returned from <code>db.put</code> can be used to lookup the data stored on the blockchain. BitcoinDb syncs across the globe in seconds, so data stored by one user is visible by everybody else within seconds. To read data, pass the identifier returned by <code>put()</code> into <code>db.get</code>.</p>
+      <div class="markdown-body mb-2">
+        <pre class="box highlight">
+              const id = await db1.put({ a: 'aaa' })
+              await db2.get(id)
             </pre>
       </div>
       <p class="f4-light">The value returned from <code>db.get</code> is a json object with three keys: <code>data</code> contains the initially stored data, <code>owners</code> is the list of the public keys of the owners, and <code>amount</code> contains the number of satoshi contained in the output that stores the data.</p>
       <div class="markdown-body mb-2">
         <pre class="box highlight">
-              { 
-                &nbsp;&nbsp;data: { c: 'ccc' },
-                &nbsp;&nbsp;owners: [ &lt;PublicKey: 03fc00d6e3044a17b17ff443f14f2eb23181071c9140a71a7cdc26fcc5d6d597e8&gt; ],
-                &nbsp;&nbsp;amount: 5000
-              }
-            </pre>
+          { 
+            &nbsp;&nbsp;data: { a: 'aaa' },
+            &nbsp;&nbsp;owners: [ &lt;PublicKey: 03fc00d6e3044a17b17ff443f14f2eb23181071c9140a71a7cdc26fcc5d6d597e8&gt; ],
+            &nbsp;&nbsp;amount: 5000
+          }
+          </pre>
       </div>
+
       <h3 class="alt-h3 border-bottom border-gray-dark mb-2 mt-4">Updating data</h3>
-      <p class="f4-light">You can use <code>db.update</code> to update data stored with BitcoinDb. <code>db.update</code> expects two lists as arguments: a list of output ids (as returned from <code>db.put</code>) that indicates which data to update, and a list of the same length that specifies what to update the data to. This list contains entries that are json objects with two keys, <code>data</code> and <code>owners</code>, just like the objects passed to <code>db.put</code>.</p>
+      <p class="f4-light">You can use <code>db.update</code> to update data stored with BitcoinDb. The first parameter is the id of the output that contains the data that is to be updated. The second parameter is the new data. A third optional parameter can contain a list of owners like in <code>put()</code> that defaults to the current user. The fourth optional parameter is an amount of satoshis, also like in <code>put()</code>.
+
       <div class="markdown-body mb-2">
         <pre class="box highlight">
-              const id1 = await db.put({ data: { c: 'ccc' } })
-              const id2 = await db.update([id1], [{ data: { d: 'ddd' } }])
-            </pre>
+          const id1 = await db1.put({ a: 'aaa' })
+          const id2 = await db1.update(id1, { b: 'bbb' })
+          const id3 = await db1.update(id2, { c: 'ccc' }, [db2.getPublicKey()])
+          // the next line throws an error bc id3 is owned by db2
+          const id4 = await db1.update(id3, { d: 'ddd' }, [db1.getPublicKey()], 100000)
+        </pre>
       </div>
-      <p class="f4-light">Internally, <code>db.update</code> builds and broadcasts a Bitcoin Cash transaction that spends the output <code>id1</code> and spends them into a new output at <code>id2</code> containing the new data. It is important to note that <code>id1</code> and <code>id2</code> are different outputs. To read the updated data you need to call <code>db.get(id2)</code>.</p>
+
+      <h3 class="alt-h3 border-bottom border-gray-dark mb-2 mt-4">Under the hood</h3>
+
+      <p class="f4-light">Internally, <code>db.update</code> builds and broadcasts the following Bitcoin Cash transaction: it spends the outputs specified by the first parameter and spends them into a new output that encodes the data from the second parameter. The output is an n-of-n multisig output, spendable by the owners from the third parameter. This output contains the number of Bitcoin specified by the last parameter.</p>
     </section>
   </div>
+
+  <!-- ########################################################## -->
+
   <div class="bg-blue-light py-10">
     <section class="main-content mx-auto p-responsive pt-3 pb-12" id='bitcoin-token'>
       <h2 class="alt-h2 border-bottom mb-2">BitcoinToken</h2>
-      <p class="f4-light">Bitcoin token lets you create tokens and other smart contracts on top of Bitcoin Cash. The basic usage is as follows. We currently support fungible tokens, similar to Ethereums ERC20 contract. We will be adding support for more smart contracts soon.</p>
+      <p class="f4-light">Bitcoin token lets you create tokens and other smart contracts on top of Bitcoin Cash. We currently support fungible tokens, similar to Ethereums ERC20 contract. We will be adding support for more smart contracts soon.</p>
       <div class="markdown-body mb-2">
         <pre class="box highlight">
-                const token = new BitcoinToken()
-                await token.create({ data: { balance: '10' }})
-                await token.getBalance()                  
-                await token.send(1, &lt;public key&gt;)
-            </pre>
+          const token = new BitcoinToken()
+          await token.create({ balance: '10' })
+          await token.send(1, &lt;public key&gt;)
+          await token.getBalance() // returns 9
+        </pre>
       </div>
       <h3 class="alt-h3 border-bottom border-gray-dark mb-2 mt-4">Initialization</h3>
-      <p class="f4-light">Like BitcoinDb, BitcoinToken can be initialized in three different ways: To create a token from a random master private key, call the constructor. Or, initialize from an existing private key using <code>fromHdPrivateKey</code>. The third option is to pass in a <em>BitcoinDb</em> object</p>
+      <p class="f4-light">A BitcoinToken object can be created from random by calling the constructor. Or, it can be initialized from an existing private key using <code>fromHdPrivateKey()</code>. You can also pass an existing BitcoinDb object into the constructor.</p>
       <div class="markdown-body mb-2">
         <pre class="box highlight">
-              const token1 = new BitcoinToken()
+          const token1 = new BitcoinToken()
 
-              const masterPrivateKey = 'tprv8ZgxMBicQKsPefX1...'
-              const token2 = BitcoinToken.fromHdPrivateKey(masterPrivateKey)
+          const hdPrivateKey = BitcoinDb.getHdPrivateKey()
+          const token2 = BitcoinToken.fromHdPrivateKey(hdPrivateKey)
 
-              const db = new BitcoinDb()
-              const token3 = new BitcoinToken(db)
-            </pre>
+          const db = new BitcoinDb()
+          const token3 = new BitcoinToken(db)
+        </pre>
       </div>
-      <h3 class="alt-h3 border-bottom border-gray-dark mb-2 mt-4">Creating (issuing) a Token</h3>
-      <p class="f4-light">You can issue a token by calling <code>token.create</code>. To parameter must be the same kind of json object that is passed into <code>db.put</code>. You need to initialize the balance (the number of tokens existing at issuance) to some positive number</p>
+      <h3 class="alt-h3 border-bottom border-gray-dark mb-2 mt-4">Issuing a Token</h3>
+      <p class="f4-light">A token can be issued by calling <code>create()</code>. The parameter must be a json object with one key "balance" and a string value that encodes an integer. The balance encodes the numbers of tokens to be created. Initially all tokens are owned by the privatekey of the token object on which <code>create()</code> is called.</p>
       <div class="markdown-body mb-2">
         <pre class="box highlight">
-              await token.create({ data: { balance: '10' }})
-            </pre>
+            await token.create({ balance: '10' })
+          </pre>
       </div>
-      <h3 class="alt-h3 border-bottom border-gray-dark mb-2 mt-4">Checking the token balance</h3>
-      <p class="f4-light">You can check how many tokens you currently own by calling <code>token.getBalance</code>. The return value is a number.</p>
+
+      <p class="f4-light">Internally, <code>create()</code> calls the <code>put()</code> function of a BitcoinDb object that is a property of the token object. Then <code>put()</code> builds, signs and broadcasts a transaction using BitcoinWallet. That transaction stores the meta data of the token in the blockchain.</p>
+
+      <p class="f4-light">You can add your own meta data to the token creation transaction:</p>
+
+      <div class="markdown-body mb-2">
+        <pre class="box highlight">
+            await token.create({
+              &nbsp;&nbsp;balance: '10',
+              &nbsp;&nbsp;name: 'my-token',
+              &nbsp;&nbsp;url: 'www.mytoken.com',
+              &nbsp;&nbsp;...
+            })
+          </pre>
+      </div>
+
+
+      <h3 class="alt-h3 border-bottom border-gray-dark mt-4">Checking the token balance</h3>
+      <p class="f4-light">The function <code>getBalance()</code> returns the number of tokens owned by the object.</p>
       <div class="markdown-body mb-2">
         <pre class="box highlight">
               await token.getBalance()
@@ -261,6 +322,7 @@
       </div>
     </section>
   </div>
+
   <div class="py-10 bg-gray-dark">
     &nbsp;
     <p class="text-white text-center">Talk to us on <a class="text-inherit" href="https://twitter.com/thebitcointoken">Twitter</a> or <a class="text-inherit" href="https://t.me/joinchat/FMrjOUWRuUkNuIt7zJL8tg">Telegram</a></p>
