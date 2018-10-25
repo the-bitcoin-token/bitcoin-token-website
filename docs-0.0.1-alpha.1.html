@@ -88,6 +88,7 @@
 
     <div class="markdown-body mb-2">
       <pre class="box highlight">
+	// TODO "@the-bitcoin-token/bitcoin-token" in the official package, "token" if from private git.
         const Bitcoin = require('./bitcoin-token')
 
         const BitcoinWallet = Bitcoin.Wallet
@@ -105,11 +106,13 @@
       <p class="f4-light">BitcoinWallet is a <a href="https://en.bitcoin.it/wiki/Deterministic_wallet">HD</a> Javascript Bitcoin Cash wallet. It can store, send and receive bitcoin, and generate private keys as uesr accounts. Every Bitcoin wallet can deterministically generate more secure BitcoinWallets, which makes it possible to build trees of wallets that can adapt to the use case.</p>
       <div class="markdown-body mb-2">
         <pre class="box highlight">
-          const wallet = new BitcoinWallet()
-          await wallet.getAddress()                  
-          await wallet.getBalance()                  
-          await wallet.send(1, &lt;public key&gt;)
-          const childWallet3 = wallet.derive(3)
+          const wallet = new BitcoinWallet();
+          console.log(wallet.getAddress());
+          wallet.getBalance()
+            .then(res => console.log(res));
+          wallet.send(1, &lt;public key&gt;)
+            .then(res => console.log(res));
+          wallet.derive(3));  
         </pre>
       </div>
 
