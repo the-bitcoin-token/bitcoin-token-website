@@ -170,38 +170,38 @@
   <div class="bg-green-light py-10">
     <section class="main-content mx-auto p-responsive py-3" id='bitcoin-db'>
       <h2 class="alt-h2 border-bottom border-gray-dark mb-2">BitcoinDb</h2>
-      <p class="f4-light">BitcoinBd lets you store, read, and update json files on the blockchain. We are currently only supporting json objects with string values of less than 350 charachters. In the future we will add support for arbitrary json data.</p>
-      <p>Basic usage is as follows.</p>
+      <p class="f4-light">BitcoinBd lets you store, read, and update json files on the blockchain. Reading from BitcoinDb is free and as fast as reading from any other database, but writing to the database is associated with a fee of about $100 per mb, payed in Bitcoin Cash. BitcoinDb syncs in seconds across the globe.</p>
       <div class="markdown-body mb-2">
         <pre class="box highlight">
-                const db = new BitcoinDb()
-                const id = await db.put({ hello: 'Bitcoin' })
-                await db.get(id) // returns { hello: 'Bitcoin' }
-              </pre>
+          const db = new BitcoinDb()
+          const id1 = await db.put({ a: 'aaa' })
+          const data = await db.get(id1)
+          const id2 = await db.update(id1, { b: 'bbb' })
+        </pre>
       </div>
 
       <h3 class="alt-h3 border-bottom border-gray-dark mb-2 mt-4">Initialization</h3>
-      <p class="f4-light">There are three ways to initialize a BitcoinWallet: To create a wallet from random, call the constructor. To initialize from an existing private key call <code>fromHdPrivateKey</code>. The third option is to pass in a BitcoinWallet object</p>
+      <p class="f4-light">To create a wallet from random, call the constructor. To initialize from an existing private key call <code>fromHdPrivateKey</code>. The third option is to pass in a BitcoinWallet object</p>
       <div class="markdown-body mb-2">
         <pre class="box highlight">
-              const db1 = new BitcoinDb()
+          const db1 = new BitcoinDb()
 
-              const hdPrivateKey = BitcoinDb.getHdPrivateKey()
-              const db2 = BitcoinDb.fromHdPrivateKey(hdPrivateKey)
+          const hdPrivateKey = BitcoinDb.getHdPrivateKey()
+          const db2 = BitcoinDb.fromHdPrivateKey(hdPrivateKey)
 
-              const bitcoinWallet = new BitcoinWallet()
-              const db3 = new BitcoinDb(bitcoinWallet)
-            </pre>
+          const bitcoinWallet = new BitcoinWallet()
+          const db3 = new BitcoinDb(bitcoinWallet)
+        </pre>
       </div>
 
       <h3 class="alt-h3 border-bottom border-gray-dark mb-2 mt-4">Storing data</h3>
-      <p class="f4-light">To store json data call <code>put()</code>. We currently support json data with string keys and values that need to be shorter than 350 charachters. </p>
+      <p class="f4-light">The function <code>put()</code> takes a json object as input, encodes it in an output script of a Bitcoin Cash transaction, and braodcasts this transaction to the blockchain. We currently support json data with string keys and values that need to be shorter than 350 charachters. </p>
       <div class="markdown-body mb-2">
         <pre class="box highlight">
               await db1.put({ a: 'aaa' })
             </pre>
       </div>
-      <p class="f4-light">Data stored using BitcoinDb is stored on the blockchain and hence readable by anybody. If you want to restric read access we recommend you encrypt data before you store it in BitcoinDb.</p>
+      <p class="f4-light">Data stored using BitcoinDb is stored on the blockchain and readable by anybody. If you want to restric read access we recommend you encrypt data before you store it in BitcoinDb.</p>
         
       <p class="f4-light">While anyone can read the data that is stored in BitcoinDB, only a specified user (group) called "owners" can update the data. To specify that group of users, you can pass an optional second parameter to <code>put()</code> that contains the public keys of the owners. By default the current user is the only owner</p>
       <div class="markdown-body mb-2">
