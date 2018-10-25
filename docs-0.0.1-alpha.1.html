@@ -235,12 +235,12 @@
       <p class="f4-light">The value returned from <code>db.get</code> is a json object with three keys: <code>data</code> contains the initially stored data, <code>owners</code> is the list of the public keys of the owners, and <code>amount</code> contains the number of satoshi contained in the output that stores the data.</p>
       <div class="markdown-body mb-2">
         <pre class="box highlight">
-              { 
-                &nbsp;&nbsp;data: { a: 'aaa' },
-                &nbsp;&nbsp;owners: [ &lt;PublicKey: 03fc00d6e3044a17b17ff443f14f2eb23181071c9140a71a7cdc26fcc5d6d597e8&gt; ],
-                &nbsp;&nbsp;amount: 5000
-              }
-            </pre>
+          { 
+            &nbsp;&nbsp;data: { a: 'aaa' },
+            &nbsp;&nbsp;owners: [ &lt;PublicKey: 03fc00d6e3044a17b17ff443f14f2eb23181071c9140a71a7cdc26fcc5d6d597e8&gt; ],
+            &nbsp;&nbsp;amount: 5000
+          }
+          </pre>
       </div>
 
       <h3 class="alt-h3 border-bottom border-gray-dark mb-2 mt-4">Updating data</h3>
@@ -248,11 +248,11 @@
 
       <div class="markdown-body mb-2">
         <pre class="box highlight">
-              const id1 = await db.put({ a: 'aaa' })
-              const id2 = await db.update(id1, { b: 'bbb' })
-              const id3 = await db.update(id2, { c: 'ccc' }, [db2.getPublicKey()])
-              const id4 = await db.update(id3, { d: 'ddd' }, [db.getPublicKey()], 100000)
-            </pre>
+          const id1 = await db.put({ a: 'aaa' })
+          const id2 = await db.update(id1, { b: 'bbb' })
+          const id3 = await db.update(id2, { c: 'ccc' }, [db2.getPublicKey()])
+          const id4 = await db.update(id3, { d: 'ddd' }, [db.getPublicKey()], 100000)
+        </pre>
       </div>
 
       <h3 class="alt-h3 border-bottom border-gray-dark mb-2 mt-4">Under the hood</h3>
@@ -266,37 +266,54 @@
   <div class="bg-blue-light py-10">
     <section class="main-content mx-auto p-responsive pt-3 pb-12" id='bitcoin-token'>
       <h2 class="alt-h2 border-bottom mb-2">BitcoinToken</h2>
-      <p class="f4-light">Bitcoin token lets you create tokens and other smart contracts on top of Bitcoin Cash. The basic usage is as follows. We currently support fungible tokens, similar to Ethereums ERC20 contract. We will be adding support for more smart contracts soon.</p>
+      <p class="f4-light">Bitcoin token lets you create tokens and other smart contracts on top of Bitcoin Cash. We currently support fungible tokens, similar to Ethereums ERC20 contract. We will be adding support for more smart contracts soon.</p>
       <div class="markdown-body mb-2">
         <pre class="box highlight">
-                const token = new BitcoinToken()
-                await token.create({ balance: '10' })
-                await token.getBalance()                  
-                await token.send(1, &lt;public key&gt;)
-            </pre>
+          const token = new BitcoinToken()
+          await token.create({ balance: '10' })
+          await token.send(1, &lt;public key&gt;)
+          await token.getBalance() // returns 9
+        </pre>
       </div>
       <h3 class="alt-h3 border-bottom border-gray-dark mb-2 mt-4">Initialization</h3>
-      <p class="f4-light">Like BitcoinDb, BitcoinToken can be initialized in three different ways: To create a token from a random master private key, call the constructor. Or, initialize from an existing private key using <code>fromHdPrivateKey</code>. The third option is to pass in a <em>BitcoinDb</em> object</p>
+      <p class="f4-light">A BitcoinToken object can be created from random by calling the constructor. Or, it can be initialized from an existing private key using <code>fromHdPrivateKey()</code>. You can also pass an existing BitcoinDb object into the constructor.</p>
       <div class="markdown-body mb-2">
         <pre class="box highlight">
-              const token1 = new BitcoinToken()
+          const token1 = new BitcoinToken()
 
-              const hdPrivateKey = BitcoinDb.getHdPrivateKey()
-              const token2 = BitcoinToken.fromHdPrivateKey(hdPrivateKey)
+          const hdPrivateKey = BitcoinDb.getHdPrivateKey()
+          const token2 = BitcoinToken.fromHdPrivateKey(hdPrivateKey)
 
-              const db = new BitcoinDb()
-              const token3 = new BitcoinToken(db)
-            </pre>
+          const db = new BitcoinDb()
+          const token3 = new BitcoinToken(db)
+        </pre>
       </div>
-      <h3 class="alt-h3 border-bottom border-gray-dark mb-2 mt-4">Creating (issuing) a Token</h3>
-      <p class="f4-light">You can issue a token by calling <code>token.create</code>. To parameter must be the same kind of json object that is passed into <code>db.put</code>. You need to initialize the balance (the number of tokens existing at issuance) to some positive number</p>
+      <h3 class="alt-h3 border-bottom border-gray-dark mb-2 mt-4">Issuing a Token</h3>
+      <p class="f4-light">A token can be issued by calling <code>create()</code>. The parameter must be a json object with one key "balance" and a string value that encodes an integer. The balance encodes the numbers of tokens to be created. Initially all tokens are owned by the privatekey of the token object on which <code>create()</code> is called.</p>
       <div class="markdown-body mb-2">
         <pre class="box highlight">
-              await token.create({ balance: '10' })
-            </pre>
+            await token.create({ balance: '10' })
+          </pre>
       </div>
-      <h3 class="alt-h3 border-bottom border-gray-dark mb-2 mt-4">Checking the token balance</h3>
-      <p class="f4-light">You can check how many tokens you currently own by calling <code>token.getBalance</code>. The return value is a number.</p>
+
+      <p class="f4-light">Internally, <code>create()</code> calls the <code>put()</code> function of a BitcoinDb object that is a property of the token object. Then <code>put()</code> builds, signs and broadcasts a transaction using BitcoinWallet. That transaction stores the meta data of the token in the blockchain.</p>
+
+      <p class="f4-light">You can add your own meta data to the token creation transaction:</p>
+
+      <div class="markdown-body mb-2">
+        <pre class="box highlight">
+            await token.create({
+              &nbsp;&nbsp;balance: '10',
+              &nbsp;&nbsp;name: 'my-token',
+              &nbsp;&nbsp;url: 'www.mytoken.com',
+              &nbsp;&nbsp;...
+            })
+          </pre>
+      </div>
+
+
+      <h3 class="alt-h3 border-bottom border-gray-dark mt-4">Checking the token balance</h3>
+      <p class="f4-light">The function <code>getBalance()</code> returns the number of tokens owned by the object.</p>
       <div class="markdown-body mb-2">
         <pre class="box highlight">
               await token.getBalance()
@@ -304,6 +321,7 @@
       </div>
     </section>
   </div>
+
   <div class="py-10 bg-gray-dark">
     &nbsp;
     <p class="text-white text-center">Talk to us on <a class="text-inherit" href="https://twitter.com/thebitcointoken">Twitter</a> or <a class="text-inherit" href="https://t.me/joinchat/FMrjOUWRuUkNuIt7zJL8tg">Telegram</a></p>
