@@ -1,6 +1,11 @@
 html, 
 body {
     height: 100%;
+    /* font-size: 18px; */
+}
+
+code {
+    /* font-size: 18px; */
 }
 
 ul {
