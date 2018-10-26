@@ -106,8 +106,10 @@
               <code>
                 <span class="dark no-select">create new bitcoinDb from your wallet</span>
                 <span class="no-select">&gt; </span>const db = new BitcoinDb(wallet)
+
                 <span class="dark no-select">store json data on the blockchain</span>
                 <span class="no-select">&gt; </span>const id = db.put({ hello: 'world' })
+
                 <span class="dark no-select">retrive data stored on the blockchain</span>
                 <span class="no-select">&gt; </span>const data = db.get(id)
               </code>
@@ -134,8 +136,10 @@
               <code>
                 <span class="dark no-select">create new token from a BitcoinDb</span>
                 <span class="no-select">&gt; </span>const token = new BitcoinToken(bitcoinDb)
+
                 <span class="dark no-select">issue the token</span>
                 <span class="no-select">&gt; </span>await token.create({ balance: 1000 })
+
                 <span class="dark no-select">send 1 token to a friend</span>
                 <span class="no-select">&gt; </span>await token.send(1, &lt;friends public key&gt;)
               </code>
