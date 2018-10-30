@@ -60,11 +60,9 @@
   </section>
 
   <section class="main-content mx-auto p-responsive my-8">
-    <p class="lead text-center mx-auto p-responsive text-gray mb-4">BitcoinToken is a suite of tools to integrate payments and smart contracts into your web app. We currently offer three products: a client-side wallet, a database system for storing data on the blockchain, and a token solution. Our smart contracts are compiled into Bitcoin Cash, which makes it possible to operate them at a cost that is orders of magnitude below the competition. The tools are easy to use, no prior blockchain knowledge is required.</p>
-    <!-- <p class="lead text-center mx-auto p-responsive text-gray mb-4">
-      BitcoinToken is a suite of tools to create tokens and smart contracts on top of Bitcoin Cash. If you have experience as a web developer you can use BitcoinToken to create a smart contract based application. You can use a pre-defined library and launch a token in a few lines of Javascript. Or you can code your own smart contracts in Javascript.
-      </p> -->
-    <p class="lead text-center mx-auto p-responsive text-gray">We are in prototype stage and plan to launch towards the end of the year.</p>
+    <p class="lead text-center mx-auto p-responsive text-gray mb-4">BitcoinToken is a Javascript library for adding payments and smart contracts to web apps.</p>
+      
+    <p class="lead text-center mx-auto p-responsive text-gray mb-4">The npm package contains three tools: a wallet, a database that stores data on the blockchain, and a token solution. BitcoinToken compiles smart contracts into Bitcoin Cash which makes it possible to evaluate them at a extremely low cost. We are in prototype stage and plan to launch towards the end of the year.</p>
   </section>
 
   <section class="mx-auto p-responsive my-6">
@@ -88,9 +86,8 @@
         </div>
 
         <div class="col-md-6 pl-md-5 my-4 mx-auto flex-md-self-center">
-          <h3 class="h3-mktg text-normal mb-2">BitcoinWallet - a wallet for your money and your data</h3>
-          <p class="text-gray">BitcoinWallet is a Bitcoin Cash wallet that works out of the box. Just install the npm package and you are ready to store, send, and receive Bitcoin Cash. It works in the browser and in node which makes it possible to write non-custodial applications.</p>
-          <p class="text-gray">BitcoinWallet not only stores the keys to hold your Bitcoin Cash, it also stores keys that allow you to store your data on the blockchain.</p>
+          <h3 class="h3-mktg text-normal mb-2">BitcoinWallet - a zero config wallet</h3>
+          <p class="text-gray">BitcoinWallet is a HD Bitcoin Cash wallet that can store, send, and receive Bitcoin Cash. It works in the browser and in node.</p>
         </div>
       </div>
     </div>
@@ -118,9 +115,8 @@
         </div>
 
         <div class="col-md-6 pl-md-5 my-4 mx-auto flex-md-self-center">
-          <h3 class="h3-mktg text-normal mb-2">BitcoinDb - store data forever at a one-time cost</h3>
-          <p class="text-gray">BitcoinDb allows you to store, read, and update JSON objects on the Bitcoin Cash blockchain. It is always online, available worldwide, and extremely censorship resistant. It syncs across the globe within seconds making it possible to write real-time applications on top of it.</p>
-          <p class="text-gray">BitcoinDb stores every JSON object in an atomic unit with an amount of Bitcoin Cash. All data stored in BitcoinDb is globally visible, however, updates can be restricted using the same security apparatus that protects your Bitcoin.</p>
+          <h3 class="h3-mktg text-normal mb-2">BitcoinDb - store data at a one-time cost</h3>
+          <p class="text-gray">BitcoinDb is a easy to use database system. No need to rent a server, BitcoinDb is already up and running. It is always online, available worldwide, and censorship resistant. It syncs across the globe within seconds making it possible to write real-time applications on top of it. Reading from BitcoinDb is free and as fast as reading from any other db. Writing costs about $100 per mb. Data will be stored indefinitely without recurring cost.</p>
         </div>
       </div>
     </div>
@@ -148,26 +144,78 @@
         </div>
         <div class="col-md-6 pl-md-5 my-4 mx-auto flex-md-self-center">
           <h3 class="h3-mktg text-normal mb-2">BitcoinToken - issue tokens and smart contracts</h3>
-          <p class="text-gray">BitcoinToken allows you to build Bitcoin and smart contract enabled apps without prior knowledge of Bitcoin. For example, you can issue your own token in a few lines of Javascript.</p>
+          <p class="text-gray">BitcoinToken makes it easy to add tokens to web applications. You can issue a token in a few lines of Javascript, no prior blockchain knowledge required.</p>
           <p class="text-gray">We currently support ERC20-style fungible tokens. Support for non-fungible tokens will be added soon. Eventually, you will be able to program your own smart contracts using BitcoinToken.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="mx-auto p-responsive mt-8 mb-12 main-content">
-    <div class="Box bg-gray box-shadow-large py-6">
-      <div class="d-flex flex-wrap flex-md-nowrap px-6 gutter-lg">
-        <div class="pr-0 pr-lg-2">
-          <h3 class="f3 text-normal pb-2">Builders wanted</h3>
-          <p class="mb-3">Have an idea for a blockchain powered app that you want to build? Email clemens@bitcointoken.com and we'll give you access to the early preview of the software.</p>
-          <p>If you want to receive email updates please use the form below.</p>
-          <form action="https://formspree.io/clemens@bitcointoken.com" class="pt-2" method="post">
-            <input class="mb-1 form-control" name="name" placeholder="Name" type="text"> <input class="mb-1 form-control" name="_replyto" placeholder="Email" type="text"> <input class="mb-1 btn" type="submit" value="Send">
-          </form>
+  <!-- example form -->
+
+  <section class="mx-auto p-responsive mt-8 mb-12 main-content clearfix ">
+    <div class="col-4 float-left pr-2 text-center">
+      <form action="./docs.html">
+        <div class="Box Box--spacious Box-body">
+          <h3 class="f1-light">
+            Read the docs
+          </h3>
+            <p class="text-gray my-4">to learn how it works</p>
+          <button class="btn btn-block">
+            Read
+          </button>
         </div>
-      </div>
+      </form>
     </div>
+
+    <div class="col-4 px-2 float-left text-center">
+      <form action="https://npmjs.com/package/bitcointoken">
+        <div class="Box Box--spacious Box-body bg-blue-light">
+          <h3 class="f1-light">
+            Get the code
+          </h3>
+          <p class="text-gray my-4">and build a blockchain app</p>
+          <button class="btn btn-blue btn-block">
+            Download
+          </button>
+        </div>
+      </form>
+    </div>
+
+      <div class="col-4 pl-2 float-left text-center">
+        <form action="https://formspree.io/clemens@bitcointoken.com" method="post">
+          <div class="Box Box--spacious Box-body">
+            <h3 class="f1-light">
+              Get updates
+            </h3>
+            <p class="text-gray my-4">about product development</p>
+
+            <details class="details-reset details-overlay details-overlay-dark">
+              <summary class="btn btn-block" aria-haspopup="dialog">Sign up</summary>
+              <details-dialog class="Box Box--overlay d-flex flex-column anim-fade-in fast text-left">
+                <div class="Box-header">
+                  <h3 class="Box-title">Sign up</h3>
+                </div>
+                <div class="overflow-auto">
+                  <div class="Box-body overflow-auto">
+                    <p>
+                      Sign up to receive emails about product updates.
+                    </p>                        
+                    <div class="mb-1"><label for="example-select">Name</label></div>
+                    <input class="mb-2 form-control input-block" name="name" placeholder="" type="text">
+                    <div class="mb-1"><label for="example-select">Email</label></div>
+                    <input class="mb-2 form-control input-block" name="_replyto" placeholder="" type="text">
+                    <hr>
+                    <input class="mb-1 mt-2 btn btn-block" type="submit" value="Send">
+
+                  </div>
+                </div>
+              </details-dialog>
+            </details>
+
+          </div>
+        </form>
+      </div>
   </section>
 
   <div class="py-10 bg-gray-dark">

@@ -111,3 +111,25 @@ pre, code, code span {
     width: 30px;
     height: auto;
 }
+
+details-dialog {
+    position: fixed;
+    margin: 10vh auto;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 999;
+    max-height: 80vh;
+    width: 448px;
+}
+
+.btn-octicon {
+    display: inline-block;
+    padding: 5px;
+    margin-left: 5px;
+    line-height: 1;
+    color: #586069;
+    vertical-align: middle;
+    background: transparent;
+    border: 0;
+}
