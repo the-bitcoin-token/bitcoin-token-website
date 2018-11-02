@@ -126,3 +126,22 @@ details-dialog {
     width: 100%;
     height: 100%;
 }
+
+
+@media (min-width: 544px) {
+    .offset-sm-0 {
+        margin-left: 0 !important;
+    }
+}
+
+@media (min-width: 768px) {
+    .offset-md-0 {
+        margin-left: 0 !important;
+    }
+}
+
+@media (min-width: 1004px) {
+    .offset-lg-0 {
+        margin-left: 0 !important;
+    }
+}
