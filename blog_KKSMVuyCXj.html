@@ -50,11 +50,11 @@
       <p class="mb-4"><b>CELEMENS LEY</b>&nbsp;&nbsp;<span class="text-gray-light">12/11/2018</span></p>
 
       <div class="content markdown-body">
-        <p>On November 15th, Bitcoin Cash will go though a scheduled hard fork. There are two competing proposals called <a href="https://bitcoinsv.io/">BitcoinSV</a> and <a href="https://www.bitcoinabc.org/">BitcoinABC</a> that both change the consensus rules of Bitcoin Cash. One of the changes that BitcoinABC proposes is to change how transactions are ordered within a block. Today, every block to date has been ordered topologically, which means that a transaction must come after all transactions in that block that is spends from. The BitcoinABC proposal seeks to change that ordering into a lexicographical ordering, where transactions are ordered lexicographically according to their transaction id.</p>
+        <p>On November 15th, Bitcoin Cash will go though a scheduled hard fork. There are two competing proposals called <a href="https://bitcoinsv.io/">BitcoinSV</a> and <a href="https://www.bitcoinabc.org/">BitcoinABC</a> that both change the consensus rules of Bitcoin Cash. One of the changes proposed by BitcoinABC is to change how transactions are ordered in a block. Currently every block is ordered topologically, which means that a transaction must come after all transactions that it spends from. The BitcoinABC proposal seeks to change that ordering into a lexicographical ordering, where transactions are ordered lexicographically according to their transaction id.</p>
 
-        <p>In this post I want to discuss tradeoffs between lexicographical transaction ordering (LTOR) and topological transaction ordering (TTOR) with respect to security and scalability. Let's start with scaling</p>
+        <p>In this post I want to discuss tradeoffs between lexicographical and topological transaction ordering (LTOR and TTOR) with respect to scaling. I don't so much look at limitations of the current implementation, but rather at the long term effects that a change could have.</p>
 
-        <p>Miners fundamentally face three tasks:</p>
+        <p>In order to scale Bitcoin, we need to make the miners job more efficient. Miners fundamentally face three tasks:</p>
 
         <ol>
           <li>Creating a new valid block</li>
@@ -62,7 +62,7 @@
           <li>Validating a block another miner has sent</li>
         </ol>
 
-        <p>By far the biggest problem is item 2. Time spend for block propagation is at least an order of magnitude bigger than time spent on items 1. and 3. If we want to scale bitcoin, we need to fix this problem.</p>
+        <p>The biggest hurdle to scaling bitcoin is sending the block over the network (see for example <a href="https://fc16.ifca.ai/bitcoin/papers/CDE+16.pdf">here</a>), so lets look at that first..</p>
 
         <h2>Sending a block over the network</h2>
 
@@ -119,9 +119,9 @@
 
         <h2>Validating a block</h2>
       
-        <p>It has been said on several occasions that CTOR will make block validation "embarrassingly parallel". This is not a scientific term, but it means something like "A computation that can be divided into a number of completely independent parts, each of which can be executed by a separate processor". For example mapping the function "multiply-by-2" over an array of integers could be called "embarrassingly parallel".</p>
+        <p>It has been said that CTOR will make block validation embarrassingly parallel. A computation is embarrassingly parallel if it "can be divided into a number of completely independent parts, each of which can be executed by a separate processor". For example mapping the function "multiply-by-2" over an array of integers is embarrassingly parallel.</p>
         
-        <p>Block validation under LTOR and TTOR are not a "embarrassingly parallel", a more accurate description would be "embarrassingly sequential". Consider a block that contains only transaction with one input and one output. The first transaction spends from the second, the second spends from the third, and so on. It does not matter how many processes you have, you will need to validate the transactions in sequence.</p>
+        <p>Block validation is not parallelizable under either LTOR or TTOR, a more accurate description would be embarrassingly sequential. Consider a block that contains only transaction with one input and one output. The first transaction spends from the second, the second spends from the third, and so on. It does not matter how many processes you have, you will need to validate the transactions in sequence.</p>
 
         <p>To me it is unclear at this point which block ordering is more efficient with respect to block validation. However, we already have 10 years of blockchain that is ordered according to TTOR. In order to validate the blockchain, all nodes must forever contain code to validate under TTOR. If we switch to LTOR right now, code for validation under LTOR must be added. Maintaining more code is more work and leaves more room for errors and attack vectors.</p>
 
@@ -135,7 +135,7 @@
 
         <p>There is another point I would like to make. There is something magical about Bitcoin. Invented by an annonymous genius that was decades ahead of it's peers. Misunderstood by both academia and industry for years. Despite all odds Bitcoin survived long enough to make it until this day. It's a story that no alt-coin can ever match.</p> 
 
-        <p>Satoshi left, and we are in charge now. We can either try to prove that Satoshi was wrong, and that we need to fix Bitcoin to make it survive. Fame and fortune awaits the team that push through the change. However, by doing so that team will take away the magic of Bitcoin and the mythology around it's creator. Or we can take a more conservative approach and try to understand why Satoshi made the choices they made. I am a Bitcoin conservative.</p>
+        <p>Satoshi left, and we are in charge now. We can either try to prove that Satoshi was wrong, and that we had to fix Bitcoin to make it work. Fame and fortune awaits the team that push through the change. However, by doing so that team will take away the magic of Bitcoin and the mythology around it's creator. If we change Bitcoin in fundamental ways it will not be Bitcoin, no matter how heavy the chain. Or we can take a more conservative approach and try to understand why Satoshi made the choices he made, thereby understanding his genius. I am a Bitcoin conservative.</p>
       </div>
     </div>
   </section>
