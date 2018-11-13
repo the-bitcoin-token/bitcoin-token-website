@@ -52,7 +52,7 @@
       <div class="content markdown-body">
         <p>On November 15th, Bitcoin Cash will go though a scheduled hard fork. There are two competing proposals called BitcoinSV and BitcoinABC that both change the current consensus rules of Bitcoin Cash. One of the changes that BitcoinABC proposes is to change how transactions are ordered within a block. Every block to date has been ordered topologically, which means that transactions must be to the right of all transactions in that block that is spends from. The BitcoinABC proposal seeks to change that ordering into a lexicographical ordering, where transactions are ordered lexicographically according to their transaction id.</p>
 
-        <p>In this post I want to discuss tradeoffs between lexicographical transaction ordering (LTOR) and toppological transaction ordering (TTOR) and possible implications for the security and scalability of Bitcoin. Let's start with scaling</p>
+        <p>In this post I want to discuss tradeoffs between lexicographical transaction ordering (LTOR) and topological transaction ordering (TTOR) and possible implications for the security and scalability of Bitcoin. Let's start with scaling</p>
 
         <p>Miners fundamentally face three tasks:</p>
 
@@ -68,11 +68,11 @@
 
         <p>The best known solution to reducing block transfer times is a block protocol called Graphene. Graphene can work without a canonical block ordering, however it almost an order of magnitude more efficient in the presence of a canonical ordering. The reason is that we can (probabilistically) encode a set with way fewer bytes than we would need to encode a list. If all miners agree on <it>some</it> canonical ordering then they can send a (efficiently encoded) set over the network and the receiving miner can locally order the set using the globally agreed upon ordering. <strong>It is important to understand that Graphene does not care which ordering we choose, as long as we all agree on the same ordering.</strong></p>
 
-        <p>At this point we should talk about an important difference between TTOR and LTOR. TTOR is a rather weak requirement as to how a block is ordered. All that is required is that a transaction comes after all transactions it spends from in that block. There are many differen TTOR orderings of the same block. It is easy to pick one canonical ordering out of this set of possible orderings. For example, Gavin Andreesen proposed the following canonical ordering that is also topological back in 2014.</p>
+        <p>At this point we should talk about an important difference between TTOR and LTOR. TTOR is a rather weak requirement as to how a block is ordered. All that is required is that a transaction comes after all transactions it spends from in that block. There are many different TTOR orderings of the same block. It is easy to pick one canonical ordering out of this set of possible orderings. For example, Gavin Andresen proposed the following canonical ordering that is also topological back in 2014.</p>
 
         <img src="https://i.imgur.com/8MEdqBx.png" />
 
-        <p class="text-small">Source: <a href="https://gist.github.com/gavinandresen/e20c3b5a1d4b97f79ac2">O(1) Block Propagation</a> by Gavin Andreesen</p>
+        <p class="text-small">Source: <a href="https://gist.github.com/gavinandresen/e20c3b5a1d4b97f79ac2">O(1) Block Propagation</a> by Gavin Andresen</p>
 
 
         <p>LTOR on the other hand is a very strict ordering requirement. There is only one lexicographical for every given block. Unfortunately, LTOR is incompatible with TTOR for most blocks. This is why the introduction of LTOR is a consensus breaking chnage. </p>
@@ -83,25 +83,25 @@
 
         <p>So maybe the reason is that graphene is much harder to implement in the presence TTOR. While this might be true, it is important to note that <a href="https://github.com/BitcoinUnlimited/BitcoinUnlimited/pull/973">we already have an implementation of Graphene on top of TTOR</a> built by the team of Professor <a href="https://people.cs.umass.edu/~brian/">Brian Levine</a>. While I hear that that implementation currently only has about <a href="https://youtu.be/9VVb-tiSXfs?t=3600">40% "success rate"</a> I'm thinking that it might a good idea to get the Graphene implementation we have working, before we change Bitcoin forever.</p>
 
-        <p><strong>Bottom line:</strong> Graphene is amazing tech that will make Bitcoin scale much much better. However, LTOR is not required for Graphene to work efficiently. We already have a alpha impementation of Graphene on top of TTOR.</p>
+        <p><strong>Bottom line:</strong> Graphene is amazing tech that will make Bitcoin scale much much better. However, LTOR is not required for Graphene to work efficiently. We already have a alpha implementation of Graphene on top of TTOR.</p>
 
         <h2>Creating a new valid block</h2>
 
-        <p>In order to find a new valid block, a miner updates a 32 bit field in the block header called "the nounce" until she finds a block whose hash is smaller than the current difficulty target. Besides the nounce, the block header also contains the root of a Merkle tree of all transactions in the block. When a miner receives a new transaction, she wants to include that transaction in her block candidate as quickly as possible in order to claim the fees should she find the next block. To do so she needs to compute the root of a new Merkle tree that includes the new transaction.</p>
+        <p>In order to find a new valid block, a miner updates a 32 bit field in the block header called "the nonce" until she finds a block whose hash is smaller than the current difficulty target. Besides the nonce, the block header also contains the root of a Merkle tree of all transactions in the block. When a miner receives a new transaction, she wants to include that transaction in her block candidate as quickly as possible in order to claim the fees should she find the next block. To do so she needs to compute the root of a new Merkle tree that includes the new transaction.</p>
 
-        <p>In computer science, this is a problem know as <a href="https://scholar.google.com/scholar?hl=en&as_sdt=0,5&q=incremental+maintenance">incremental maintainance</a> or <a href="https://en.m.wikipedia.org/wiki/Incremental_computing">incremental computing</a>. Given a query (compute the Merkle root) and a data structure that changes (the candidate block), compute the new answer to the query every time the data structure changes. The naive approach is to recompute the entire query every time. However, in many cases it is possible to avoid redoing all the previous work and only recompute a small part of the query.</p>
+        <p>In computer science, this is a problem know as <a href="https://scholar.google.com/scholar?hl=en&as_sdt=0,5&q=incremental+maintenance">incremental maintenance</a> or <a href="https://en.m.wikipedia.org/wiki/Incremental_computing">incremental computing</a>. Given a query (compute the Merkle root) and a data structure that changes (the candidate block), compute the new answer to the query every time the data structure changes. The naive approach is to recompute the entire query every time. However, in many cases it is possible to avoid redoing all the previous work and only recompute a small part of the query.</p>
 
-        <p>To see this in action, let's look at how merkle trees can be incrementally maintained under TTOR. <strong>TTOR has the beautiful property that a miner can <em>always</em> append a new transaction he receives to the end of the block</strong>. This property makes it possible to maintain Merkle trees in logarithmic time: In every step, we only need to compute hash functions for the right most branch of the tree, all other hashes have been compiuted previously and can be looked if memoized.</p>.
+        <p>To see this in action, let's look at how Merkle trees can be incrementally maintained under TTOR. <strong>TTOR has the beautiful property that a miner can <em>always</em> append a new transaction he receives to the end of the block</strong>. This property makes it possible to maintain Merkle trees in logarithmic time: In every step, we only need to compute hash functions for the right most branch of the tree, all other hashes have been computed previously and can be looked if memoized.</p>.
 
         <img src="https://i.imgur.com/3inWBxV.png" />
 
-        <p>So what happend if we switch from TTOR to LTOR? We loose the important property that a miner is able to append the transaction to the end of the block. <strong>Even worse, under LTOR the user (or an attacker) can force the miner to include at a specific position</strong>. An attacker could analyse the Merkle tree that a miner is currently storing and broadcast a transaction to force the miner to recalculate the entire Merkle tree. In the situation above, the attacker would pick a transaction <em>x</em> that is lexicographically smaller than all other transactions.</p>
+        <p>So what happens if we switch from TTOR to LTOR? We loose the important property that a miner is able to append the transaction to the end of the block. <strong>Even worse, under LTOR the user (or an attacker) can force the miner to include at a specific position</strong>. An attacker could analyse the Merkle tree that a miner is currently storing and broadcast a transaction to force the miner to recalculate the entire Merkle tree. In the situation above, the attacker would pick a transaction <em>x</em> that is lexicographically smaller than all other transactions.</p>
 
         <img src="https://i.imgur.com/i4d6SZ2.png" />
 
-        <p>So we just showed that worst case complexity for maintaining Merkle trees goes from <em>(O(log<sub>2</sub>(n))</em> to <em>O(n)</em>. Maybe that's not a big deal. Espechially as current Bitcoin implementations do not maintain merkle incrementally anyways (I think currently the entire merkle tree is recalculated every few seconds).</p>
+        <p>So we just showed that worst case complexity for maintaining Merkle trees goes from <em>O(log<sub>2</sub>(n))</em> to <em>O(n)</em>. Maybe that's not a big deal. Especially as current Bitcoin implementations do not maintain Merkle incrementally anyways (I think currently the entire Merkle tree is recalculated every few seconds).</p>
 
-        <p>While recalculating the entire merkle tree might be the right thing to do as long as blocks are small, this does not mean that this will be true when we scale to large blocks. There is a big difference between logarithmic time and linear time, espechially for large <em>n</em>. For example, a 100 mb block will fit about 200k txs. Computing the Merkle tree from scratch will take about 200k hashing operations, incrementally maintaining it will require about 18.</p>
+        <p>While recalculating the entire Merkle tree might be the right thing to do as long as blocks are small, this does not mean that this will be true when we scale to large blocks. There is a big difference between logarithmic time and linear time, especially for large <em>n</em>. For example, a 100 mb block will fit about 200k txs. Computing the Merkle tree from scratch will take about 200k hashing operations, incrementally maintaining it will require about 18.</p>
 
         <img src="https://i.imgur.com/VNPwanL.png" />
 
@@ -109,13 +109,13 @@
 
         <img src="https://i.imgur.com/u0udXO1.png" />
 
-        <p>The first line should read "... in time proportional to the height of the tree". The height of a binary tree is logarithmic in the number of leaves, but only if the tree is balanced. However, Merkleix trees are not balanced. This is correctly acknowleged in the post</p>
+        <p>The first line should read "... in time proportional to the height of the tree". The height of a binary tree is logarithmic in the number of leaves, but only if the tree is balanced. However, Merkleix trees are not balanced. This is correctly acknowledged in the post</p>
 
         <img src="https://i.imgur.com/Uidfpmz.png" />
 
         <p>The problem is that the attacker can broadcast transactions that produce a maximally inbalanced tree. Such a tree has linear height and hence insertions take linear time.</p>
 
-        <p><strong>Bottom line</strong>: We can maintain Merkle trees on logarithmic time using TTOR bu we need linear time (much longer) using LTOR. For a 100 mb block the difference could be between performing 200k operations using LTOR vs 18 using TTOR. In addition it changes the security model: Under TTOR miners are guarantied that they can add a new transaction to the end of the block, under LTOR a possible attacker can pick the point of insertion.</p>
+        <p><strong>Bottom line</strong>: We can maintain Merkle trees on logarithmic time using TTOR bu we need linear time (much longer) using LTOR. For a 100 mb block the difference could be between performing 200k operations using LTOR vs 18 using TTOR. In addition it changes the security model: Under TTOR miners are guarantied that they can add a new transaction to the end of the block, under LTOR a possible attacker can pick the point of insertion, thereby forcing the miner to recompute the Merkle tree from scratch.</p>
       </div>
     </div>
   </section>
