@@ -47,7 +47,7 @@
     <div class="">
       <h1 class="lh-condensed mt-6 mb-4">Concerns with CTOR</h1>
       
-      <p class="mb-4"><b>CELEMENS LEY</b>&nbsp;&nbsp;<span class="text-gray-light">29/10/2018</span></p>
+      <p class="mb-4"><b>CELEMENS LEY</b>&nbsp;&nbsp;<span class="text-gray-light">12/11/2018</span></p>
 
       <div class="content markdown-body">
         <p>On November 15th, Bitcoin Cash will go though a scheduled hard fork. There are two competing proposals called BitcoinSV and BitcoinABC that both change the current consensus rules of Bitcoin Cash. One of the changes that BitcoinABC proposes is to change how transactions are ordered within a block. Every block to date has been ordered topologically, which means that transactions must be to the right of all transactions in that block that is spends from. The BitcoinABC proposal seeks to change that ordering into a lexicographical ordering, where transactions are ordered lexicographically according to their transaction id.</p>
@@ -85,6 +85,8 @@
 
         <p><strong>Bottom line:</strong> Graphene is amazing tech that will make Bitcoin scale much much better. However, LTOR is not required for Graphene to work efficiently. We already have a alpha implementation of Graphene on top of TTOR.</p>
 
+
+
         <h2>Creating a new valid block</h2>
 
         <p>In order to find a new valid block, a miner updates a 32 bit field in the block header called "the nonce" until she finds a block whose hash is smaller than the current difficulty target. Besides the nonce, the block header also contains the root of a Merkle tree of all transactions in the block. When a miner receives a new transaction, she wants to include that transaction in her block candidate as quickly as possible in order to claim the fees should she find the next block. To do so she needs to compute the root of a new Merkle tree that includes the new transaction.</p>
@@ -116,6 +118,10 @@
         <p>The problem is that the attacker can broadcast transactions that produce a maximally inbalanced tree. Such a tree has linear height and hence insertions take linear time.</p>
 
         <p><strong>Bottom line</strong>: We can maintain Merkle trees on logarithmic time using TTOR bu we need linear time (much longer) using LTOR. For a 100 mb block the difference could be between performing 200k operations using LTOR vs 18 using TTOR. In addition it changes the security model: Under TTOR miners are guarantied that they can add a new transaction to the end of the block, under LTOR a possible attacker can pick the point of insertion, thereby forcing the miner to recompute the Merkle tree from scratch.</p>
+
+
+        <h2>Validating a block</h2>
+
       </div>
     </div>
   </section>
