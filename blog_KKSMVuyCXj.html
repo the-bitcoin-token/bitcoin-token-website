@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta content="Clemens Ley" name="author">
+  <meta content="UNLICENCED" name="copyright">
+  <meta content="index, follow" name="robots">
+  <meta content="Create your own token on top of Bitcoin" name="description">
+  <meta content="UNLICENCED" name="copyright">
+  <meta content="" name="keywords">
+  <meta content="width=device-width, initial-scale=1" name="viewport">
+  <title>BitcoinToken</title>
+  <link href="favicon.ico" rel="Shortcut Icon" type="image/x-icon">
+  <link href="https://unpkg.com/primer/build/build.css" rel="stylesheet">
+  <link href="styles.css" rel="stylesheet">
+</head>
+
+<body>
+    <header class="Header js-details-container Details f5 bg-yellow-light" role="banner">
+        <div class="main-nav d-flex flex-justify-between px-3 pl-md-4 pr-md-4 py-3 bg-yellow-light Details js-details-container container-lg">
+          <div class="my-2">
+            <a aria-label="Homepage" class="header-logo-invertocat d-flex flex-items-center text-bold no-underline" data-ga-click="Header, go to dashboard, icon:logo" data-hotkey="g d" href="http://www.bitcointoken.com"><img id="logo" src="https://i.imgur.com/R94kr0V.png">
+            <div class="mx-2">
+              BitcoinToken
+            </div></a>
+          </div>
+          <div class="d-lg-flex flex-justify-between my-2">
+            <div class="d-lg-flex">
+              <ul class="d-lg-flex pl-lg-2 flex-items-center text-bold list-style-none mb-0" role="navigation">
+                <li class="position-relative">
+                  <a class="js-selected-navigation-item HeaderNavlink px-lg-2 py-2 py-lg-0 no-underline" data-ga-click="Header, click, Nav menu - item:docs" data-octo-click="docs" data-octo-dimensions="location:nav_bar" data-selected-links=" /docs" href="docs.html">Docs</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </header>
+    
+      <section class="flex-row width-full bg-yellow-light">
+        <div class="flex-row main-content width-full pt-0 pb-2 pt-md-2 pb-md-4 mx-auto px-3 px-md-6 px-lg-3">
+          <h1 class="f00-light pb-6">BitcoinToken Blog</h1>
+        </div>
+      </section>
+
+  <section class="main-content mx-auto p-responsive pb-12 pt-6">
+    <div class="">
+      <h1 class="lh-condensed mt-6 mb-4">Concerns with CTOR</h1>
+      
+      <p class="mb-4"><b>CELEMENS LEY</b>&nbsp;&nbsp;<span class="text-gray-light">29/10/2018</span></p>
+
+      <div class="content markdown-body">
+        <p>On November 15th, Bitcoin Cash will go though a scheduled hard fork. There are two competing proposals called BitcoinSV and BitcoinABC that both change the current consensus rules of Bitcoin Cash. One of the changes that BitcoinABC proposes is to change how transactions are ordered within a block. Every block to date has been ordered topologically, which means that transactions must be to the right of all transactions in that block that is spends from. The BitcoinABC proposal seeks to change that ordering into a lexicographical ordering, where transactions are ordered lexicographically according to their transaction id.</p>
+
+        <p>In this post I want to discuss tradeoffs between lexicographical transaction ordering (LTOR) and toppological transaction ordering (TTOR) and possible implications for the security and scalability of Bitcoin. Let's start with scaling</p>
+
+        <p>Miners fundamentally face three tasks:</p>
+
+        <ol>
+          <li>Creating a new valid block</li>
+          <li>Sending that block over the network</li>
+          <li>Validating a block another miner has sent</li>
+        </ol>
+
+        <p>By far the biggest problem is item 2. Time spend for block propagation is at least an order of magnitude bigger than time spent on items 1. and 3. If we want to scale bitcoin, we need to fix this problem.</p>
+
+        <h2>Sending a block over the network</h2>
+
+        <p>The best known solution to reducing block transfer times is a block protocol called Graphene. Graphene can work without a canonical block ordering, however it almost an order of magnitude more efficient in the presence of a canonical ordering. The reason is that we can (probabilistically) encode a set with way fewer bytes than we would need to encode a list. If all miners agree on <it>some</it> canonical ordering then they can send a (efficiently encoded) set over the network and the receiving miner can locally order the set using the globally agreed upon ordering. <strong>It is important to understand that Graphene does not care which ordering we choose, as long as we all agree on the same ordering.</strong></p>
+
+        <p>At this point we should talk about an important difference between TTOR and LTOR. TTOR is a rather weak requirement as to how a block is ordered. All that is required is that a transaction comes after all transactions it spends from in that block. There are many differen TTOR orderings of the same block. It is easy to pick one canonical ordering out of this set of possible orderings. For example, Gavin Andreesen proposed the following canonical ordering that is also topological back in 2014.</p>
+
+        <img src="https://i.imgur.com/8MEdqBx.png" />
+
+        <p class="text-small">Source: <a href="https://gist.github.com/gavinandresen/e20c3b5a1d4b97f79ac2">O(1) Block Propagation</a> by Gavin Andreesen</p>
+
+
+        <p>LTOR on the other hand is a very strict ordering requirement. There is only one lexicographical for every given block. Unfortunately, LTOR is incompatible with TTOR for most blocks. This is why the introduction of LTOR is a consensus breaking chnage. </p>
+
+        <img src="https://i.imgur.com/YBj4eK9.png" />
+
+        <p>It is true that Graphene gets much more efficient with a canonical ordering. However, <em>it does not matter which canonical ordering we choose</em>. There are many canonical orderings compatible with Bitcoin as it is. However, the BitcoinABC proposes to use a canonical ordering that is incompatible with Bitcoin.</p>
+
+        <p>So maybe the reason is that graphene is much harder to implement in the presence TTOR. While this might be true, it is important to note that <a href="https://github.com/BitcoinUnlimited/BitcoinUnlimited/pull/973">we already have an implementation of Graphene on top of TTOR</a> built by the team of Professor <a href="https://people.cs.umass.edu/~brian/">Brian Levine</a>. While I hear that that implementation currently only has about <a href="https://youtu.be/9VVb-tiSXfs?t=3600">40% "success rate"</a> I'm thinking that it might a good idea to get the Graphene implementation we have working, before we change Bitcoin forever.</p>
+
+        <p><strong>Bottom line:</strong> Graphene is amazing tech that will make Bitcoin scale much much better. However, LTOR is not required for Graphene to work efficiently. We already have a alpha impementation of Graphene on top of TTOR.</p>
+
+        <h2>Creating a new valid block</h2>
+
+        <p>In order to find a new valid block, a miner updates a 32 bit field in the block header called "the nounce" until she finds a block whose hash is smaller than the current difficulty target. Besides the nounce, the block header also contains the root of a Merkle tree of all transactions in the block. When a miner receives a new transaction, she wants to include that transaction in her block candidate as quickly as possible in order to claim the fees should she find the next block. To do so she needs to compute the root of a new Merkle tree that includes the new transaction.</p>
+
+        <p>In computer science, this is a problem know as <a href="https://scholar.google.com/scholar?hl=en&as_sdt=0,5&q=incremental+maintenance">incremental maintainance</a> or <a href="https://en.m.wikipedia.org/wiki/Incremental_computing">incremental computing</a>. Given a query (compute the Merkle root) and a data structure that changes (the candidate block), compute the new answer to the query every time the data structure changes. The naive approach is to recompute the entire query every time. However, in many cases it is possible to avoid redoing all the previous work and only recompute a small part of the query.</p>
+
+        <p>To see this in action, let's look at how merkle trees can be incrementally maintained under TTOR. <strong>TTOR has the beautiful property that a miner can <em>always</em> append a new transaction he receives to the end of the block</strong>. This property makes it possible to maintain Merkle trees in logarithmic time: In every step, we only need to compute hash functions for the right most branch of the tree, all other hashes have been compiuted previously and can be looked if memoized.</p>.
+
+        <img src="https://i.imgur.com/3inWBxV.png" />
+
+        <p>So what happend if we switch from TTOR to LTOR? We loose the important property that a miner is able to append the transaction to the end of the block. <strong>Even worse, under LTOR the user (or an attacker) can force the miner to include at a specific position</strong>. An attacker could analyse the Merkle tree that a miner is currently storing and broadcast a transaction to force the miner to recalculate the entire Merkle tree. In the situation above, the attacker would pick a transaction <em>x</em> that is lexicographically smaller than all other transactions.</p>
+
+        <img src="https://i.imgur.com/i4d6SZ2.png" />
+
+        <p>So we just showed that worst case complexity for maintaining Merkle trees goes from <em>(O(log<sub>2</sub>(n))</em> to <em>O(n)</em>. Maybe that's not a big deal. Espechially as current Bitcoin implementations do not maintain merkle incrementally anyways (I think currently the entire merkle tree is recalculated every few seconds).</p>
+
+        <p>While recalculating the entire merkle tree might be the right thing to do as long as blocks are small, this does not mean that this will be true when we scale to large blocks. There is a big difference between logarithmic time and linear time, espechially for large <em>n</em>. For example, a 100 mb block will fit about 200k txs. Computing the Merkle tree from scratch will take about 200k hashing operations, incrementally maintaining it will require about 18.</p>
+
+        <img src="https://i.imgur.com/VNPwanL.png" />
+
+        <p><a href="https://www.deadalnix.me/2016/09/24/introducing-merklix-tree-as-an-unordered-merkle-tree-on-steroid/">Merkleix trees</a> are advertised as the answer. However, there is a mistake in the writeup where it is stated that</p>
+
+        <img src="https://i.imgur.com/u0udXO1.png" />
+
+        <p>The first line should read "... in time proportional to the height of the tree". The height of a binary tree is logarithmic in the number of leaves, but only if the tree is balanced. However, Merkleix trees are not balanced. This is correctly acknowleged in the post</p>
+
+        <img src="https://i.imgur.com/Uidfpmz.png" />
+
+        <p>The problem is that the attacker can broadcast transactions that produce a maximally inbalanced tree. Such a tree has linear height and hence insertions take linear time.</p>
+
+        <p><strong>Bottom line</strong>: We can maintain Merkle trees on logarithmic time using TTOR bu we need linear time (much longer) using LTOR. For a 100 mb block the difference could be between performing 200k operations using LTOR vs 18 using TTOR. In addition it changes the security model: Under TTOR miners are guarantied that they can add a new transaction to the end of the block, under LTOR a possible attacker can pick the point of insertion.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="py-10 bg-gray-dark">
+    &nbsp;
+    <p class="text-white text-center">Talk to us on <a class="text-inherit" href="https://twitter.com/thebitcointoken">Twitter</a> or <a class="text-inherit" href="https://t.me/joinchat/FMrjOUWRuUkNuIt7zJL8tg">Telegram</a></p>
+  </div>
+</body>
+</html>
