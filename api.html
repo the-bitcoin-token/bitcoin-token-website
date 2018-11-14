@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta content="Clemens Ley" name="author">
+  <meta content="UNLICENCED" name="copyright">
+  <meta content="index, follow" name="robots">
+  <meta content="Create your own token on top of Bitcoin" name="description">
+  <meta content="UNLICENCED" name="copyright">
+  <meta content="" name="keywords">
+  <meta content="width=device-width, initial-scale=1" name="viewport">
+  <title>BitcoinToken</title>
+  <link href="favicon.ico" rel="Shortcut Icon" type="image/x-icon">
+  <link href="https://unpkg.com/primer/build/build.css" rel="stylesheet">
+  <link href="styles.css" rel="stylesheet">
+</head>
+<body>
+  <header class="Header js-details-container Details f5" role="banner">
+    <div class="main-nav d-flex flex-justify-between px-3 pl-md-4 pr-md-4 py-3 Details js-details-container container-lg">
+      <div class="my-2">
+        <a aria-label="Homepage" class="header-logo-invertocat d-flex flex-items-center text-bold no-underline" data-ga-click="Header, go to dashboard, icon:logo" data-hotkey="g d" href="http://www.bitcointoken.com"><img id="logo" src="https://i.imgur.com/R94kr0V.png">
+        <div class="mx-2">
+          BitcoinToken
+        </div></a>
+      </div>
+      <div class="d-lg-flex flex-justify-between my-2">
+        <div class="d-lg-flex">
+          <ul class="d-lg-flex pl-lg-2 flex-items-center text-bold list-style-none mb-0" role="navigation">
+            <li class="position-relative">
+              <a class="js-selected-navigation-item HeaderNavlink px-lg-2 py-2 py-lg-0 no-underline" data-ga-click="Header, click, Nav menu - item:docs" data-octo-click="docs" data-octo-dimensions="location:nav_bar" data-selected-links=" /docs" href="docs.html">Docs</a>
+              <a class="js-selected-navigation-item HeaderNavlink px-md-2 py-2 py-lg-0 no-underline" data-ga-click="Header, click, Nav menu - item:api" data-octo-click="api" data-octo-dimensions="location:nav_bar" data-selected-links=" /api" href="api.html">Api</a>
+              <a class="js-selected-navigation-item HeaderNavlink px-md-2 py-2 py-lg-0 no-underline" data-ga-click="Header, click, Nav menu - item:api" data-octo-click="blog" data-octo-dimensions="location:nav_bar" data-selected-links=" /blog-concerns-with-ltor" href="blog-concerns-with-ltor.html">Blog</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section class="flex-row width-full">
+    <div class="flex-row main-content width-full pt-0 pb-2 pt-md-2 pb-md-4 mx-auto px-3 px-md-6 px-lg-3">
+      <h1 class="f00-light mb-n3">BitcoinToken Api</h1>
+      <h2 class="f2-light mb-4 text-gray"><code>VERSION v0.0.1-alpha.5</code></h2>
+    </div>
+  </section>
+
+  <div class="pb-10 pt-4 bg-yellow-light">
+    <section class="main-content markdown-body mx-auto p-responsive py-3" id='bitcoin-wallet'>
+
+      <p class="lead">The BitcoinToken library consists of three classes: BitcoinWallet, BitcoinDb, and BitcoinToken. Below we describe each class and the functions it exposes.
+          </p>
+
+      <h2 class="alt-h2 border-bottom border-gray-dark mb-2">BitcoinWallet</h2>
+
+      <p><code>BitcoinWallet</code> is an easy to use wallet that allows you to receive, store, and send Bitcoin Cash.</p>
+      
+      <p></p></code>A <code>BitcoinWallet</code> object stores a <a href="https://github.com/bitcoin/bips/blob/master/bip-0032.mediawiki">BIP32</a> extended private key. This key can be used to generate a private public key pair and a Bitcoin Cash address. Users can send Bitcoin Cash to the address to fund the wallet. The wallet object can compute the balance of the address as well as send bitcoin from it.</p>
+        
+        
+        <p>In addition, a <code>BitcoinWallet</code> can generate 2<sup>32</sup> (>4 billion) child <code>BitcoinWallet</code> objects. The child derivation process is recursive and can generate an infinite number of identities. As the process is deterministic, all identities can be recomputed from a single <code>HdPrivateKey</code>.</p>
+
+      <p>The functions of a <code>BitcoinWallet</code> object are listed below.</p>
+
+
+      <h3 class="alt-h3 border-bottom border-gray-dark mt-6 mb-3">constructor</h3>
+      <p>Returns a new BitcoinWallet object with a randomly generated extended private key.</p>
+      <div class="markdown-body my-3">
+        <pre class="box highlight">
+            const Bitcoin = require('bitcointoken')
+            const BitcoinWallet = Bitcoin.Wallet
+            const randomWallet = new BitcoinWallet()
+        </pre>
+      </div>
+
+
+      <h3 class="alt-h3 border-bottom border-gray-dark mt-6 mb-3">getHdPrivateKey</h3>
+
+      <p>Generates a string encoding of a hd private key securely from random.</p>
+
+      <div class="markdown-body my-3">
+        <pre class="box highlight">
+          const hdPrivateKey = wallet.getHdPrivateKey()
+        </pre>
+      </div>      
+
+      <p>Type: <code>getHdPrivateKey(): string</code></p>
+
+      <h3 class="alt-h3 border-bottom border-gray-dark mt-6 mb-3">fromHdPrivateKey</h3>
+
+      <p>Generates a new wallet from a string encoded hd private key. Note that <code>fromHdPrivateKey</code> is static.</p>
+
+      <div class="markdown-body my-3">
+        <pre class="box highlight">
+          const wallet = BitcoinWallet.fromHdPrivateKey(hdPrivateKey)
+        </pre>
+      </div>
+
+      <p>Type: <code>static fromHdPrivateKey(hdPrivateKey: string): BitcoinWallet</code></p>
+
+      <h3 class="alt-h3 border-bottom border-gray-dark mt-6 mb-3">getPrivateKey</h3>
+
+      <p>Returns the private key.</p>
+
+      <div class="markdown-body my-3">
+        <pre class="box highlight">
+          const privateKey = wallet.getPrivateKey()
+        </pre>
+      </div>
+
+      <p>Type: <code>getPrivateKey(): string</code></p>
+    
+      <h3 class="alt-h3 border-bottom border-gray-dark mt-6 mb-3">getPublicKey</h3>
+
+      <p>Returns the public key.</p>
+
+      <div class="markdown-body my-3">
+        <pre class="box highlight">
+          const publicKey = wallet.getPublicKey()
+        </pre>
+      </div>
+
+      <p>Type: <code>getPublicKey(): string</code></p>
+
+      <h3 class="alt-h3 border-bottom border-gray-dark mt-6 mb-3">getAddress</h3>
+
+      <p>Returns the address in <code>cashaddr</code> format. The parameter is optional. If provided, it must be either <code>legacy</code>, <code>bitpay</code>, or <code>cashaddr</code> to indicate the address type.</p>
+
+      <div class="markdown-body my-3">
+        <pre class="box highlight">
+          const address = wallet.getAddress()
+        </pre>
+      </div>
+
+      <p>Type: <code>getAddress(format: ?('legacy' | 'bitpay' | 'cashaddr')): string</code></p>
+
+
+      <h3 class="alt-h3 border-bottom border-gray-dark mt-6 mb-3">getBalance</h3>
+
+      <p>Returns the current balance in satoshi.</p>
+
+      <div class="markdown-body my-3">
+        <pre class="box highlight">
+          const balance = wallet.getBalance()
+          console.log(`Current balance: ${balance/1e8} bitcoin)
+        </pre>
+      </div>
+      
+      <p>Type: <code>getBalance(): number</code></p>
+
+      <h3 class="alt-h3 border-bottom border-gray-dark mt-6 mb-3">send</h3>
+      <p>Sends bitcoin. The first parameter is the amount to send in satoshi, the second is the recipients address, and the third paramater (which is optional) is the change address. If no change address is provided, the address of the wallet is used.</p>
+
+      <div class="markdown-body my-3">
+        <pre class="box highlight">
+          const address = randomWallet.getAddress()
+          const id = await wallet.send(15000, address)
+        </pre>
+      </div>
+
+      <p>Type: <code>async send(amount: number, toAddress: string, changeAddress: ?string): OutputId</code> where <code>outputId</code> is the type <code>{| txId: string, outputNumber: number |}</code></p>
+
+      <h3 class="alt-h3 border-bottom border-gray-dark mt-6 mb-3">derive</h3>
+      <p>Deterministically derives a new wallet given an index. The second optional parameter determines if the wallet if hardened or not. Read more about hardened wallets <a href="https://github.com/bitcoin/bips/blob/master/bip-0032.mediawiki">here</a>.</p>
+
+      <div class="markdown-body my-3">
+        <pre class="box highlight">
+          const derivedWallet = wallet.derive(4)
+        </pre>
+      </div>
+
+      <p>Type: <code>derive(index: ?number = 0, hardened: ?boolean = true): BitcoinWallet</code></p>
+
+    </section>
+  </div>
+
+  <!-- ########################################################## -->
+  
+  <div class="bg-green-light py-10">
+    <section class="main-content markdown-body mx-auto p-responsive py-3" id='bitcoin-db'>
+
+      <h2 class="alt-h2 border-bottom border-gray-dark mb-2">BitcoinDb</h2>
+
+      <p><code>BitcoinDb</code> objects can store data in json format on the Bitcoin Cash blockchain, as well as read and update then.</p>
+
+      <p>The storage model of BitcoinDb is designed to work as similar to Bitcoin as possible. In Bitcoin, the current state is stored in the unspent transaction output (utxo) set. The state is updated when a Bitcoin transaction is broadcast. The outputs representing the old state are removed from the utxo set and replaced by the outputs of the transaction that represent the new state.</p>
+
+      <p>Similarly, BitcoinDb stores data is unspent transaction outputs. When data is updated, the outputs representing the old state are spent and outputs representing the new state are created. The convention is that the i-th output represents the new state of the i-th input being spent. This leads to a natural notion of data ownership where the data is owned by the users(s) that can spend and thereby update the output that contains the data.</p>
+
+      <p>The location on the blockchain where data is stored is captured by an <code>OutputId</code> object, which contains two keys <code>txId</code> and <code>outputNumber</code> (that is an <code>OutputId</code> object has type <code>{| txId: string, outputNumber: number |})</code> in <a href="https://flow.org/">flow type</a> notation).</p>
+
+      <h3 class="alt-h3 border-bottom border-gray-dark mt-6 mb-3">constructor</h3>
+        <p>Returns a new <code>BitcoinDb</code> object that stores a randomly generated <code>BitcoinWallet</code> object. The wallet is used to pay for fees when storing data on the blockchain.</p>
+        <div class="markdown-body my-3">
+          <pre class="box highlight">
+            const Bitcoin = require('bitcointoken')
+            const BitcoinDb = Bitcoin.Db
+            const randomDb = new BitcoinDb()
+          </pre>
+        </div>
+
+      <h3 class="alt-h3 border-bottom border-gray-dark mt-6 mb-3">fromHdPrivateKey</h3>
+        <p>Generates a new <code>BitcoinDb</code> object from a string encoded hd private key. This essentially calls <code>fromHdPrivateKey</code> on the associated <code>BitcoinWallet</code>.</p>
+  
+        <div class="markdown-body my-3">
+          <pre class="box highlight">
+            const db = BitcoinDb.fromHdPrivateKey(hdPrivateKey)
+          </pre>
+        </div>
+  
+        <p>Type: <code>static fromHdPrivateKey(hdPrivateKey: string): BitcoinDb</code></p>
+
+      <h3 class="alt-h3 border-bottom border-gray-dark mt-6 mb-3">put</h3>
+        <p>Stores a json object on the Bitcoin Cash blockchain. The simplest way to use it is to pass in a json object:</p>
+  
+        <div class="markdown-body my-3">
+          <pre class="box highlight">
+            const id = await db.put({ key: 'string value'})
+          </pre>
+        </div>
+
+        <p>The data is encoded and stored in a data output script. The user(s) that can spend the output is the only person that can update that data. We call those user(s) the owner(s) of the data. By default the user to issue the command is the owner, to designate a different owner, pass in that users public key as the second argument.</p>
+       
+        <div class="markdown-body my-3">
+          <pre class="box highlight">
+            const publicKey = randomWallet.getPublicKey()
+            const id = await db.put({ key: 'string value'}, [publicKey])
+          </pre>
+        </div>
+
+        <p>The third argument is an amount of satoshi that will be stored in the output containing the data. For example, to store 1 Bitcoin with the data you could use</p>
+      
+        <div class="markdown-body my-3">
+          <pre class="box highlight">
+            const publicKey = randomWallet.getPublicKey()
+            const id = await db.put({ key: 'string value'}, [publicKey], 1 * 1e8)
+          </pre>
+        </div>
+
+        <p>The return value is a promise that resolves to an <code>OutputId</code> of flow type {| txId: string, outputNumber: number |}. For example, the return value <code>id</code> will be structured like this:</p>
+
+        <div class="markdown-body my-3">
+          <pre class="box highlight">
+            {
+            &nbsp;&nbsp;txId: '00000000c686665a0976be01c4ebebbc1043be27edcaed014c6ba123c49e1c73',
+            &nbsp;&nbsp;outputNumber: 0
+          }
+          </pre>
+        </div>
+  
+        <p>Type: <code>async put(data: object, owners?: Array&lt;string&gt;, amount?: number = DEFAULT_FEE): Promise&lt;OutputId&gt;</code></p>
+
+        <p>Note: We currently only support storing objects that have string keys and string values of flow type <code>{ [string]: string }</code>. Also the strings much be relatively short (around 300 characters). Please let us know if your application needs to store bigger documents and we will add support for that.</p>
+      
+      <h3 class="alt-h3 border-bottom border-gray-dark mt-6 mb-3">get</h3>
+
+      <p>Retrieves a json object from the Bitcoin Cash blockchain given an <code>OutputId</code> object that specifies a location on the blockchain.</p>
+  
+      <div class="markdown-body my-3">
+        <pre class="box highlight">
+          const id = BitcoinDb.put({ key: 'value' })
+          const data = BitcoinDb.get(id)
+        </pre>
+      </div>
+
+      <p>The return value is of type <code>OutputData</code> which is an object with three keys: <code>data</code> containing the data stored at the provided <code>OutputId</code>, <code>data</code> containing a list of string encoded public keys that correspond to the owners, and <code>amount</code> which is the number of satoshis stored in that output.</p>
+
+      <p>Type: <code>async get(outputId: OutputId): Promise&lt;OutputData&gt;</code> where <code>OutputData</code> is of type <code>{| data: object, owners: Array&lt;string&gt;, amount: number |}</code></p>
+
+      <h3 class="alt-h3 border-bottom border-gray-dark mt-6 mb-3">update</h3>
+
+      <p>Updates an object stored on the blockchain. To do so it spends the output containing the data into a new output containing the updated data. The first parameter is the <code>OutputId</code> of the output containing the data that is to be updates, the second parameter is the new data. The return value resolves to the <code>OutputId</code> of the new output being created.</p>
+
+      <div class="markdown-body my-3">
+        <pre class="box highlight">
+          const id1 = BitcoinDb.put({ old: 'value' })
+          const id2 = await BitcoinDb.update(id1, { new: 'value'})
+        </pre>
+      </div>
+
+      <p>There are two optional parameters "owners" and "amount" that act just like the optional parameters of <code>db.put</code>.</p> 
+
+      <div class="markdown-body my-3">
+          <pre class="box highlight">
+            const publicKey = randomWallet.getPublicKey()
+            const id1 = BitcoinDb.put({ old: 'value' })
+            const id2 = await BitcoinDb.update(id, { new: 'value'}, [publicKey], 1 * 1e8)
+          </pre>
+        </div>
+
+      <p>Type: <code>async update(outputId: OutputId, data: object, owners: Array&lt;string&gt;, amount?: number = DEFAULT_FEE): Promise&lt;OutputId&gt;</code></p>
+
+
+    </section>
+  </div>
+
+  <!-- ########################################################## -->
+
+  <div class="bg-blue-light py-10">
+    <section class="main-content markdown-body mx-auto p-responsive py-3" id='bitcoin-token'>
+
+        <h2 class="alt-h2 border-bottom border-gray-dark mb-2">BitcoinToken</h2>
+
+        <p><code>BitcoinToken</code> objects can issue a token and send them to another user. It can also return the current balance in tokens.</p>
+
+        <p>(api docs coming soon)</p>
+
+    </section>
+  </div>
+
+  <div class="py-10 bg-gray-dark">
+    &nbsp;
+    <p class="text-white text-center">Talk to us on <a class="text-inherit" href="https://twitter.com/thebitcointoken">Twitter</a> or <a class="text-inherit" href="https://t.me/joinchat/FMrjOUWRuUkNuIt7zJL8tg">Telegram</a></p>
+  </div>
+</body>
+</html>
