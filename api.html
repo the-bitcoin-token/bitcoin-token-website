@@ -397,10 +397,11 @@
 
         <div class="markdown-body my-3">
           <pre class="box highlight">
-            const tokenAlice = new Token()
-            const walletBob = new Wallet()
-            const dbBob = new Db(walletBob)
-            const tokenBob = new Token(dbBob)
+            const Bitcoin = require('bitcointoken') 
+            const tokenAlice = new Bitcoin.Token()
+            const walletBob = new Bitcoin.Wallet()
+            const dbBob = new Bitcoin.Db(walletBob)
+            const tokenBob = new Bitcoin.Token(dbBob)
             const publicKeyBob = walletBob.getPublicKey()
             const tokenId = await tokenAlice.create({ balance: '10' })
             tokenBob.join(tokenId)
