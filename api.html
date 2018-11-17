@@ -198,6 +198,16 @@
           </pre>
         </div>
 
+        You can also generate a new <code>BitcoinDb</code> object from an existing <code>BitcoinWallet</code> object.
+
+        <div class="markdown-body my-3">
+          <pre class="box highlight">
+            const Bitcoin = require('bitcointoken')
+            const wallet = new Bitcoin.Wallet()
+            const db = new Bitcoin.Db(wallet)
+          </pre>
+        </div>
+
       <h3 class="alt-h3 border-bottom border-gray-dark mt-6 mb-3">fromHdPrivateKey</h3>
         <p>Generates a new <code>BitcoinDb</code> object from a string encoded hd private key. This essentially calls <code>fromHdPrivateKey</code> on the associated <code>BitcoinWallet</code>.</p>
   
@@ -280,12 +290,12 @@
       <p>There are two optional parameters "owners" and "amount" that act just like the optional parameters of <code>db.put</code>.</p> 
 
       <div class="markdown-body my-3">
-          <pre class="box highlight">
-            const publicKey = randomWallet.getPublicKey()
-            const id1 = BitcoinDb.put({ old: 'value' })
-            const id2 = await BitcoinDb.update(id, { new: 'value'}, [publicKey], 1 * 1e8)
-          </pre>
-        </div>
+        <pre class="box highlight">
+          const publicKey = randomWallet.getPublicKey()
+          const id1 = BitcoinDb.put({ old: 'value' })
+          const id2 = await BitcoinDb.update(id, { new: 'value'}, [publicKey], 1 * 1e8)
+        </pre>
+      </div>
 
       <p>Type: <code>async update(outputId: OutputId, data: object, owners: Array&lt;string&gt;, amount?: number = DEFAULT_FEE): Promise&lt;OutputId&gt;</code></p>
 
@@ -302,7 +312,103 @@
 
         <p><code>BitcoinToken</code> objects can issue a token and send them to another user. It can also return the current balance in tokens.</p>
 
-        <p>(api docs coming soon)</p>
+        <h3 class="alt-h3 border-bottom border-gray-dark mt-6 mb-3">constructor</h3>
+        <p>Returns a new <code>BitcoinToken</code> object that stores a randomly generated <code>BitcoinDb</code> object. The wallet is used to pay for fees when storing data on the blockchain.</p>
+        <div class="markdown-body my-3">
+          <pre class="box highlight">
+            const Bitcoin = require('bitcointoken')
+            const BitcoinDb = Bitcoin.Db
+            const randomDb = new BitcoinDb()
+          </pre>
+        </div>
+
+        You can also generate a new <code>BitcoinToken</code> object from an existing <code>BitcoinDb</code> object.
+
+        <div class="markdown-body my-3">
+          <pre class="box highlight">
+            const Bitcoin = require('bitcointoken')
+            const BitcoinDb = Bitcoin.Db.fromHdPrivateKey(hdPrivateKey)
+            const randomDb = new BitcoinDb()
+            const token = new BitcoinToken(db)
+          </pre>
+        </div>
+
+      <h3 class="alt-h3 border-bottom border-gray-dark mt-6 mb-3">fromHdPrivateKey</h3>
+        <p>Generates a new <code>BitcoinToken</code> object from a string encoded hd private key. This essentially calls <code>fromHdPrivateKey</code> on the associated <code>BitcoinDb</code>.</p>
+  
+        <div class="markdown-body my-3">
+          <pre class="box highlight">
+            const token = BitcoinToken.fromHdPrivateKey(hdPrivateKey)
+          </pre>
+        </div>
+  
+        <p>Type: <code>static fromHdPrivateKey(hdPrivateKey: string): BitcoinToken</code></p>
+
+      <h3 class="alt-h3 border-bottom border-gray-dark mt-6 mb-3">create</h3>
+
+        <p>Issues a new fungible token, similar to ERC20 tokens on Ethereum. The parameter must be an object that can be passes into <code>BitcoinDb.put</code>. That is a json object with string keys and string values. It must have one key <code>balance</code> whose value indicates the initial number of tokens.</p>
+
+        <div class="markdown-body my-3">
+          <pre class="box highlight">
+            const tokenId = await token.create({
+            &nbsp;&nbsp;balance: '10',
+            &nbsp;&nbsp;name: 'my-token',
+            &nbsp;&nbsp;url: 'www.mytoken.com',
+            })
+          </pre>
+        </div>
+
+        <p>Type: <code>async create(data: { [string]: string }): Promise&lt;OutputId&gt;</code></p>
+
+        <h3 class="alt-h3 border-bottom border-gray-dark mt-6 mb-3">send</h3>
+
+        <p>Issues a new fungible token, similar to ERC20 tokens on Ethereum. The parameter must be an object that can be passes into <code>BitcoinDb.put</code>. That is a json object with string keys and string values. It must have one key <code>balance</code> whose value indicates the initial number of tokens.</p>
+
+        <div class="markdown-body my-3">
+          <pre class="box highlight">
+            const tokenId = await token.create({
+            &nbsp;&nbsp;balance: '10',
+            &nbsp;&nbsp;name: 'my-token',
+            &nbsp;&nbsp;url: 'www.mytoken.com',
+            })
+          </pre>
+        </div>
+
+        <p>Type: <code>async create(data: { [string]: string }): Promise&lt;OutputId&gt;</code></p>
+
+        <h3 class="alt-h3 border-bottom border-gray-dark mt-6 mb-3">join</h3>
+
+        <p>Joins an existing token. This means that the balance will be calculated with respect to the token being joined.</p>
+
+        <div class="markdown-body my-3">
+          <pre class="box highlight">
+            const tokenAlice = new Token()
+            const tokenBob = new Token()
+            const tokenId = await tokenAlice.create({ balance: '10' })
+            tokenBob.join(id)
+          </pre>
+        </div>
+
+        <p>Type: <code>join(id: OutputId): void</code></p>
+
+        <h3 class="alt-h3 border-bottom border-gray-dark mt-6 mb-3">send</h3>
+
+        <p>Sends tokens to another user. The first parameter is the number of tokens to send and the second is the public key of the receipient</p>
+
+        <div class="markdown-body my-3">
+          <pre class="box highlight">
+            const tokenAlice = new Token()
+            const walletBob = new Wallet()
+            const dbBob = new Db(walletBob)
+            const tokenBob = new Token(dbBob)
+            const publicKeyBob = walletBob.getPublicKey()
+            const tokenId = await tokenAlice.create({ balance: '10' })
+            tokenBob.join(tokenId)
+            tokenAlice.send(1, publicKeyBob)
+          </pre>
+        </div>
+
+        <p>Type: <code>send(amount: number, publicKey: string): Promise&lt;Array&lt;OutputId&gt;&gt;</code></p>
 
     </section>
   </div>
