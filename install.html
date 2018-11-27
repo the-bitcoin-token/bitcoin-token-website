@@ -39,7 +39,7 @@
 
   <section class="flex-row width-full">
     <div class="flex-row main-content width-full pt-0 pb-2 pt-md-2 pb-md-4 mx-auto px-3 px-md-6 px-lg-3">
-      <h1 class="f00-light mb-n3 border-0">BitcoinToken Api</h1>
+      <h1 class="f00-light mb-n3 border-0">BitcoinToken Install Guide</h1>
       <h2 class="f2-light mb-4 text-gray text-small border-0"><code>VERSION v0.0.1-alpha.5</code></h2>
     </div>
   </section>
@@ -81,7 +81,7 @@
 
       <h3 class="alt-h3 border-bottom border-gray-dark mb-2">Browser</h3>
 
-      <p>Install <a href="https://parceljs.org">Parcel</a> using npm.</p>
+      <p>You need <a href="https://docs.npmjs.com/downloading-and-installing-node-js-and-npm">node.js and npm</a> installed. We recommend to use <a href="https://parceljs.org">Parcel</a> to bundle the files for the browser.</p>
 
       <div class="markdown-body my-3">
         <pre class="box highlight">
@@ -133,15 +133,35 @@
         </pre>
       </div>
 
-      <p>You can see the rendered website at <code><a href="http://localhost:1234/">http://localhost:1234/</a></code></p>
+      <p>To see the rendered website open <code><a href="http://localhost:1234/">http://localhost:1234/</a></code> in a browser. You can use Parcel to <a href="https://parceljs.org/production.html">bundle your files for production.</a></p>
+
+    </section>
+  </div>
+
+  <div class="py-10 pt-4 bg-green-light">
+    <section class="main-content markdown-body mx-auto p-responsive py-3" id='bitcoin-wallet'>  
 
       <h2 class="alt-h3 border-bottom border-gray-dark mb-2">BitcoinDb</h2>
 
-      <p>Docs coming soon.</p>
+      <p>BitcoinDb stores data in specialized (non-standard) transactions. As non-standard transactions are not propagated by all Bitcoin nodes, we use a technique called <a href="https://en.bitcoin.it/wiki/Pay_to_script_hash">P2SH</a> to make sure that transactions are propagated immediately. However, to make things work you need to run an additional server called the Bitcoin Non-Standard Server.</p>
 
-      <h2 class="alt-h3 border-bottom border-gray-dark mb-2">BitcoinToken</h2>
+      <p>In this section we explain how to build and run a non-standard server. Once the non-standard server is running, you can use BitcoinDb in the same way you can use BitcoinWallet.</p>
 
-      <p>Docs coming soon.</p>
+      <h3 class="alt-h3 border-bottom border-gray-dark mb-2">Build and run a non-standard server</h3>
+
+
+      <p>We recommend installing <a href="https://www.docker.com/">Docker</a> and <a href="https://docs.docker.com/compose/">Docker Compose</a>. (Instruction for how to build and run the non-standard server without Docker are in the <a href="https://github.com/the-bitcoin-token/bitcoin-non-standard-server">Github repo</a>). If you have Docker installed, you can build and run the non-standard server by typing the following into a terminal window:</p>
+
+      <div class="markdown-body my-3">
+        <pre class="box highlight">
+          git clone https://github.com/BitcoinDB/bitcoin-non-standard-server.git
+          cd bitcoin-non-standard-server/
+          docker-compose up
+        </pre>
+      </div>
+    
+      <p>The non-standard server is now running on localhost:3000. <em>Make sure that the non-standard server is running when using BitcoinDb</em>. BitcoinDb will connect to the server automatically. 
+      </p>
 
     </section>
   </div>
