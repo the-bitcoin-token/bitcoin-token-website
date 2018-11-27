@@ -360,22 +360,6 @@
 
         <p>Type: <code>async create(data: { [string]: string }): Promise&lt;OutputId&gt;</code></p>
 
-        <h3 class="alt-h3 border-bottom border-gray-dark mt-6 mb-3">send</h3>
-
-        <p>Issues a new fungible token, similar to ERC20 tokens on Ethereum. The parameter must be an object that can be passes into <code>BitcoinDb.put</code>. That is a json object with string keys and string values. It must have one key <code>balance</code> whose value indicates the initial number of tokens.</p>
-
-        <div class="markdown-body my-3">
-          <pre class="box highlight">
-            const tokenId = await token.create({
-            &nbsp;&nbsp;balance: '10',
-            &nbsp;&nbsp;name: 'my-token',
-            &nbsp;&nbsp;url: 'www.mytoken.com',
-            })
-          </pre>
-        </div>
-
-        <p>Type: <code>async create(data: { [string]: string }): Promise&lt;OutputId&gt;</code></p>
-
         <h3 class="alt-h3 border-bottom border-gray-dark mt-6 mb-3">join</h3>
 
         <p>Joins an existing token. This means that the balance will be calculated with respect to the token being joined.</p>
