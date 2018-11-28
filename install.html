@@ -47,7 +47,7 @@
   <div class="pb-10 pt-4 bg-yellow-light">
     <section class="main-content markdown-body mx-auto p-responsive py-3" id='bitcoin-wallet'>
 
-      <p class="lead">This page contains instructions for how to install BitcoinWallet, BitcoinDb, and BitcoinToken in a browser and in node. If you have any problems during installation, check out the troubleshooting guide below and ask for help in the <a href="https://t.me/joinchat/FMrjOUWRuUkNuIt7zJL8tg">Telegram group</a>.</p>
+      <p class="lead py-4">This page contains instructions for how to install BitcoinToken in a browser and in node. If you have problems during installation, check out the <a href="#troubleshooting">troubleshooting</a> guide below and ask for help in the <a href="https://t.me/joinchat/FMrjOUWRuUkNuIt7zJL8tg">Telegram group</a>.</p>
 
       <h2 class="alt-h2 border-bottom border-gray-dark mb-2">Install BitcoinToken</h2>
 
@@ -60,9 +60,11 @@
         </pre>
       </div>
 
-      <p>If your project only uses BitcoinWallet you are done with the installation. If you want to use BitcoinDb or BitcoinToken you need to build and run a non-standard server as described in the next section.</p>
+      <p>If your project only uses BitcoinWallet you are done with the installation and can move to the <a href="#run-in-node">next chapter</a>.</p>
+      
+      <p>If you want to use BitcoinDb or BitcoinToken you need to build and run a non-standard server as described next.</p>
 
-      <h3 class="alt-h3 border-bottom border-gray-dark mb-2">Install the non-standard server.</h3>
+      <h3 id="non-standard-server-install" class="alt-h3 border-bottom border-gray-dark mb-2">Build and run the non-standard server.</h3>
 
       <p>If you have <a href="https://www.docker.com/">Docker</a> and <a href="https://docs.docker.com/compose/">Docker Compose</a>, you can build and run the non-standard server by typing the following into a terminal window:</p>
 
@@ -81,9 +83,9 @@
   <div class="py-10 pt-4 bg-green-light">
       <section class="main-content markdown-body mx-auto p-responsive py-3" id='bitcoin-wallet'>
 
-      <h2 class="alt-h2 border-bottom border-gray-dark mb-2">Run in Node</h2>
+      <h2 id="run-in-node" class="alt-h2 border-bottom border-gray-dark mb-2">Run in Node</h2>
 
-      <p>After installing BitcoinToken as described above, create a file <code>index.js</code></p>
+      <p>After installing BitcoinToken and a empty project as described above, create a file <code>index.js</code></p>
 
       <div class="markdown-body my-3">
         <pre class="box highlight">
@@ -91,17 +93,25 @@
           const wallet = new Bitcoin.Wallet()
           
           console.log(`
-          \tprivateKey: ${wallet.getPrivateKey()}
-          \taddress: ${wallet.getAddress()}
+          &nbsp;&nbsp;privateKey: ${wallet.getPrivateKey()}
+          &nbsp;&nbsp;address: ${wallet.getAddress()}
           `)
         </pre>
       </div>
 
-      <p>Run <code>node --experimental-repl-await index.js</code>. If everything worked, you should see output similar to this:</p>
+      <p>Run the code using</p>
 
       <div class="markdown-body my-3">
         <pre class="box highlight">
-          privateKey: da31ca9a791c6214069b5e87f8080ba69d94336dee54f0421c4019d9e41ddca8
+            node --experimental-repl-await index.js
+        </pre>
+      </div>
+
+      <p>You should see output similar to this:</p>
+
+      <div class="markdown-body my-3">
+        <pre class="box highlight no-wrap">
+          privateKey: da31ca9a791c6214069b5e87f8080ba69d94336dee54f0421c4019d9e41ddca8<br>
           address: mwZd1bgRYhxY4JLyx1sdEGBYFZnXVDvgmp
         </pre>
       </div>
@@ -109,7 +119,7 @@
   </div>
 
   <div class="py-10 pt-4 bg-blue-light">
-      <section class="main-content markdown-body mx-auto p-responsive py-3" id='bitcoin-wallet'>
+    <section class="main-content markdown-body mx-auto p-responsive py-3" id='bitcoin-wallet'>
       <h2 class="alt-h2 border-bottom border-gray-dark mb-2">Run in the Browser</h2>
 
       <p>We recommend using <a href="https://parceljs.org">Parcel</a> to bundle the files for the browser.</p>
@@ -120,35 +130,24 @@
         </pre>
       </div>
 
-      <p>Initialize an empty project</p>
-
-      <div class="markdown-body my-3">
-        <pre class="box highlight">
-          npm init -y
-        </pre>
-      </div>
-
-      <p>Create a file called <code>index.js</code> with the following content</p>
+      <p>Create a file <code>index.js</code></p>
   
       <div class="markdown-body my-3">
         <pre class="box highlight">
           const Bitcoin = require('bitcointoken')
           const wallet = new Bitcoin.Wallet()
 
-          document.body.innerHTML = 
-          &nbsp;`&lt;h1&gt;Your Wallet&lt;/h1&gt;
+          document.body.innerHTML = `
           &nbsp;&nbsp;privateKey: ${wallet.getPrivateKey()}&lt;br&gt;
           &nbsp;&nbsp;address: ${wallet.getAddress()}`
         </pre>
       </div>
 
-      <p>Then create a file called <code>index.html</code></p>
+      <p>and a file <code>index.html</code></p>
 
       <div class="markdown-body my-3">
         <pre class="box highlight">
-          &lt;!doctype html&gt;
-
-          &lt;html lang='en'&gt;
+          &lt;html&gt;
           &nbsp;&nbsp;&lt;body&gt;
           &nbsp;&nbsp;&nbsp;&nbsp;&lt;script src="./index.js"&gt;&lt;/script&gt;
           &nbsp;&nbsp;&lt;/body&gt;
@@ -156,7 +155,7 @@
         </pre>
       </div>
 
-      <p>Start a development server using</p>
+      <p>Start a development server</p>
 
       <div class="markdown-body my-3">
         <pre class="box highlight">
@@ -164,23 +163,87 @@
         </pre>
       </div>
 
-      <p>To see the rendered website open <code><a href="http://localhost:1234/">http://localhost:1234/</a></code> in a browser. You can use Parcel to <a href="https://parceljs.org/production.html">bundle your files for production.</a></p>
+      <p>Then open <code><a href="http://localhost:1234/">http://localhost:1234/</a></code> in a browser to see the output.</p>
 
 
     </section>
   </div>
 
-  <!-- <div class="py-10 pt-4 bg-purple-light">
-    <section class="main-content markdown-body mx-auto p-responsive py-3" id='bitcoin-wallet'>  
+  <div class="py-10 pt-4 bg-purple-light">
+    <section class="main-content markdown-body mx-auto p-responsive py-3" id='bitcoin-wallet'>
 
 
+      <h2 id="troubleshooting" class="alt-h2 border-bottom border-gray-dark mb-2">Troubleshooting Guide</h2>
 
-      <h2 class="alt-h2 border-bottom border-gray-dark mb-2">Troubleshooting</h2>
+      <p>If you have a problem that is not discussed here, please let us know in the <a href="https://t.me/joinchat/FMrjOUWRuUkNuIt7zJL8tg">Telegram group</a>.</p>
 
-      <h3 class="alt-h3 border-bottom border-gray-dark mb-2">The wallet is not funded</h3>
+      <h3 class="alt-h3 border-bottom border-gray-dark mb-2">"Error: await is only valid in async function"</h3>
+
+      <p>You need to wrap your code into a <a href="http://2ality.com/2016/10/async-function-tips.html#immediately-invoked-async-function-expressions">immediately invoked async function</a> if you are using <code>await</code>, for example by defining and <code>async</code> function like this:</p>
+
+      <div class="markdown-body my-3">
+        <pre class="box highlight">
+            async function main () {
+            &nbsp;&nbsp;const Bitcoin = require('bitcointoken')
+            &nbsp;&nbsp;const db = new Bitcoin.Db()
+            &nbsp;&nbsp;await db.put({ a: 'a' })
+            }
+            
+            main()
+        </pre>
+      </div>
+
+      <h3 class="alt-h3 border-bottom border-gray-dark mb-2">"Error: Insufficient balance in address ..."</h3>
+
+      <p>You are most likely calling a function like <code>wallet.send</code> or <code>db.put</code> that broadcasts a transaction behind the scenes. There is a cost associated with broadcasting a transaction, and the error indicates that the balance of your wallet is too low to cover the cost.</p>
+
+      <p>To fix the problem you have to fund your wallet. When you do that you need to make sure that the same wallet is generated every time you run your code. You can check that by running your code multiple times and checking if the error message contains the same address every time.</p>
+
+      <p>If the same address gets logged every time you can fund that address using a <a href="https://coinfaucet.eu/en/bch-testnet/">testnet faucet</a> to fix the problem.</p>
+
+      <p>Otherwise the source of the error is likely that you are creating a BitcoinWallet/Db/Token object from a constructor. When this happens a new object is created from a random private key every time you run the code. If you were to fund the address that is logged, that would not help because a different wallet with a different (unfunded) address would be generated next time you run your code.</p>
+        
+      <p>To make sure that the same object gets generated every time, you need to generate a fixed hd private key and initialize your object from it. To generate the key run 
+      <code>node --experimental-repl-await &lt;file-name&gt;</code> on a file</p>
+  
+      <div class="markdown-body my-3">
+        <pre class="box highlight">
+          const Bitcoin = require('bitcointoken')
+          console.log(Bitcoin.Wallet.getHdPrivateKey())
+        </pre>
+      </div>
+
+      <p>The output will be a hd private key similar to this</p>
+ 
+      <div class="markdown-body my-3">
+        <pre class="box highlight no-wrap">
+          tprv8ZgxMBicQKsPdyfL88tUskirPMQSQvAhYcit7UgSkeSb4pjMxfipjsykwb2TZ8r3vGRhXgHuS6QFmSLxcg4u5xZphAbNzQQq77EeZrvkZgN
+        </pre>
+      </div>
+
+      <p>You can generate the same object every time the code runs by calling the static method <code>fromHdPrivateKey</code> of <code>BitcoinDb</code>, <code>BitcoinWallet</code>, or <code>BitcoinToken</code>, for example like this:</p>
+
+      <div class="markdown-body my-3">
+        <pre class="box highlight no-wrap">
+          async function main () {<br>
+            &nbsp;&nbsp;const Bitcoin = require('bitcointoken')<br>
+            &nbsp;&nbsp;const wallet = Bitcoin.Wallet.fromHdPrivateKey('tprv8ZgxMBicQKsPdstbuTnsMm1tpr7btJpNwAfBQTZ1edFWd86Wb4TXveoGSp8ktTwwQ27EeQ46JEQtwYjbP7VSPfkXoEnUDWZ81Z1VQFJ5zZc')<br>
+            &nbsp;&nbsp;console.log(wallet.getAddress())<br>
+          }<br>
+          <br>
+          main()
+        </pre>
+      </div>
+
+      <p>If you run the code multiple times, you will see that the same address is generated every time. You can now fund that address using the <a href="https://coinfaucet.eu/en/bch-testnet/">testnet faucet</a> to fix the problem.</p>
+ 
+      
+      <h3 class="alt-h3 border-bottom border-gray-dark mb-2">"Communication error: Service unavailable"</h3>
+
+      <p>The problem is most likely that you are not running the non-standard server. To fix the problem build and run a non-standard server as described <a href="#non-standard-server-install">above.</a></p>
 
     </section>
-  </div> -->
+  </div>
 
   <div class="py-10 bg-gray-dark">
     &nbsp;
