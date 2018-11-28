@@ -92,11 +92,7 @@
         <pre class="box highlight">
           const Bitcoin = require('bitcointoken')
           const wallet = new Bitcoin.Wallet()
-          
-          console.log(`
-          &nbsp;&nbsp;privateKey: ${wallet.getPrivateKey()}
-          &nbsp;&nbsp;address: ${wallet.getAddress()}
-          `)
+          console.log(`address: ${wallet.getAddress()}`)
         </pre>
       </div>
 
@@ -112,7 +108,6 @@
 
       <div class="markdown-body my-3">
         <pre class="box highlight no-wrap">
-          privateKey: da31ca9a791c6214069b5e87f8080ba69d94336dee54f0421c4019d9e41ddca8<br>
           address: mwZd1bgRYhxY4JLyx1sdEGBYFZnXVDvgmp
         </pre>
       </div>
@@ -137,10 +132,7 @@
         <pre class="box highlight">
           const Bitcoin = require('bitcointoken')
           const wallet = new Bitcoin.Wallet()
-
-          document.body.innerHTML = `
-          &nbsp;&nbsp;privateKey: ${wallet.getPrivateKey()}&lt;br&gt;
-          &nbsp;&nbsp;address: ${wallet.getAddress()}`
+          document.body.innerHTML = `address: ${wallet.getAddress()}`
         </pre>
       </div>
 
