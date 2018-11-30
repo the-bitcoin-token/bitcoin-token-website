@@ -61,13 +61,9 @@
         </pre>
       </div>
 
-      <p>If your project only uses BitcoinWallet you are done with the installation and can move to the <a href="#run-in-node">next chapter</a>.</p>
+      <p>If you want to use BitcoinWallet you are done with the installation and can move to the <a href="#run-in-node">next chapter</a>.</p>
       
-      <p>If you want to use BitcoinDb or BitcoinToken you need to build and run a non-standard server as described next.</p>
-
-      <h3 id="non-standard-server-install" class="alt-h3 border-bottom border-gray-dark mb-2">Build and run the non-standard server.</h3>
-
-      <p>If you have <a href="https://www.docker.com/">Docker</a> and <a href="https://docs.docker.com/compose/">Docker Compose</a>, you can build and run the non-standard server by typing the following into a terminal window:</p>
+      <p>If you want to use BitcoinDb or BitcoinToken you need to build and run a non-standard server. We recommend to use <a href="https://www.docker.com/">Docker</a> and <a href="https://docs.docker.com/compose/">Docker Compose</a>. If you have these installed, you can build and run the non-standard server by typing the following into a terminal window:</p>
 
       <div class="markdown-body my-3">
         <pre class="box highlight">
@@ -236,6 +232,24 @@
       <h3 class="alt-h3 border-bottom border-gray-dark mb-2">"Communication error: Service unavailable"</h3>
 
       <p>The problem is most likely that you are not running the non-standard server. To fix the problem build and run a non-standard server as described <a href="#non-standard-server-install">above.</a></p>
+
+      <h3 class="alt-h3 border-bottom border-gray-dark mb-2">ReferenceError: regeneratorRuntime is not defined</h3>
+
+      <p>This error will happen if you use <code>await</code> in the browser. In this case create a file called <code>.babelrc</code> with the content</p>
+
+      <div class="markdown-body my-3">
+        <pre class="box highlight no-wrap">
+          {<br />
+          &nbsp;&nbsp;"presets": [<br />
+          &nbsp;&nbsp;&nbsp;&nbsp;["env", {<br />
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"targets": {<br />
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"browsers": ["last 2 Chrome versions"]<br />
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+          &nbsp;&nbsp;&nbsp;&nbsp;}]<br />
+          &nbsp;&nbsp;]<br />
+          }
+        </pre>
+      </div>
 
     </section>
   </div>
