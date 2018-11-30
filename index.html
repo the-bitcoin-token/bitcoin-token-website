@@ -16,20 +16,7 @@
   <link href="https://unpkg.com/primer/build/build.css" rel="stylesheet">
   <link href="styles.css" rel="stylesheet">
   <script type="text/javascript">
-         window.heap = window.heap || [], heap.load = function(e, t) {
-             window.heap.appid = e, window.heap.config = t = t || {};
-             var r = t.forceSSL || "https:" === document.location.protocol,
-                 a = document.createElement("script");
-             a.type = "text/javascript", a.async = !0, a.src = (r ? "https:" : "http:") + "//cdn.heapanalytics.com/js/heap-" + e + ".js";
-             var n = document.getElementsByTagName("script")[0];
-             n.parentNode.insertBefore(a, n);
-             for (var o = function(e) {
-                     return function() {
-                         heap.push([e].concat(Array.prototype.slice.call(arguments, 0)))
-                     }
-                 }, p = ["addEventProperties", "addUserProperties", "clearEventProperties", "identify", "resetIdentity", "removeEventProperty", "setEventProperties", "track", "unsetEventProperty"], c = 0; c < p.length; c++) heap[p[c]] = o(p[c])
-         };
-         heap.load("1968150498");
+    window.heap=window.heap||[],heap.load=function(b,d){window.heap.appid=b,window.heap.config=d=d||{};var f=d.forceSSL||"https:"===document.location.protocol,g=document.createElement("script");g.type="text/javascript",g.async=!0,g.src=(f?"https:":"http:")+"//cdn.heapanalytics.com/js/heap-"+b+".js";var h=document.getElementsByTagName("script")[0];h.parentNode.insertBefore(g,h);for(var i=function(l){return function(){heap.push([l].concat(Array.prototype.slice.call(arguments,0)))}},j=["addEventProperties","addUserProperties","clearEventProperties","identify","resetIdentity","removeEventProperty","setEventProperties","track","unsetEventProperty"],k=0;k<j.length;k++)heap[j[k]]=i(j[k])},heap.load("1968150498");
   </script>
 </head>
 
@@ -46,6 +33,7 @@
         <div class="d-lg-flex">
           <ul class="d-lg-flex pl-lg-2 flex-items-center text-bold list-style-none mb-0" role="navigation">
             <li class="position-relative">
+              <a class="js-selected-navigation-item HeaderNavlink px-md-2 py-2 py-lg-0 text-white no-underline" data-ga-click="Header, click, Nav menu - item:docs" data-octo-click="docs" data-octo-dimensions="location:nav_bar" data-selected-links="/install" href="install.html">Install</a>
               <a class="js-selected-navigation-item HeaderNavlink px-lg-2 py-2 py-lg-0 text-white no-underline" data-ga-click="Header, click, Nav menu - item:docs" data-octo-click="docs" data-octo-dimensions="location:nav_bar" data-selected-links=" /docs" href="docs.html">Docs</a>
               <a class="js-selected-navigation-item HeaderNavlink px-md-2 py-2 py-lg-0 text-white no-underline" data-ga-click="Header, click, Nav menu - item:api" data-octo-click="api" data-octo-dimensions="location:nav_bar" data-selected-links=" /api" href="api.html">Api</a>
               <a class="js-selected-navigation-item HeaderNavlink px-md-2 py-2 py-lg-0 text-white no-underline" data-ga-click="Header, click, Nav menu - item:api" data-octo-click="blog" data-octo-dimensions="location:nav_bar" data-selected-links=" /blog-concerns-with-ltor" href="blog-concerns-with-ltor.html">Blog</a>
@@ -61,7 +49,7 @@
     <h2 class="f2-light">It's easier than you think</h2>
   </section>
 
-  <section class="main-content mx-auto p-responsive my-8">
+  <section class="main-content markdown-body mx-auto p-responsive my-8">
     <p class="lead text-center mx-auto p-responsive text-gray mb-4">BitcoinToken is a Javascript library for adding payments and smart contracts to web applications.</p>
       
     <p class="lead text-center mx-auto p-responsive text-gray mb-4">It is available as an npm package containing three tools: a wallet, a database that stores data on the blockchain, and a token solution. BitcoinToken compiles smart contracts into Bitcoin Cash which makes it possible to evaluate them at a extremely low cost. We are in prototype stage and plan to launch towards the end of the year.</p>
@@ -87,7 +75,7 @@
           </figure>
         </div>
 
-        <div class="col-md-6 px-md-5 my-4 mx-auto flex-md-self-center">
+        <div class="markdown-body col-md-6 px-md-5 my-4 mx-auto flex-md-self-center">
           <h3 class="h3-mktg text-normal mb-2">BitcoinWallet - a zero config wallet</h3>
           <p class="text-gray">BitcoinWallet is a HD Bitcoin Cash wallet that can store, send, and receive Bitcoin Cash. It works in the browser and in node.</p>
         </div>
@@ -116,7 +104,7 @@
           </figure>
         </div>
 
-        <div class="col-md-6 px-md-5 my-4 mx-auto flex-md-self-center">
+        <div class="markdown-body col-md-6 px-md-5 my-4 mx-auto flex-md-self-center">
           <h3 class="h3-mktg text-normal mb-2">BitcoinDb - store data at a one-time cost</h3>
           <p class="text-gray">BitcoinDb is a easy to use database system. No need to rent a server, BitcoinDb is already up and running. It is always online, available worldwide, and censorship resistant. It syncs across the globe within seconds making it possible to write real-time applications on top of it. Reading from BitcoinDb is free and as fast as reading from any other db. Writing costs about $5 per mb. Data will be stored indefinitely without recurring cost.</p>
         </div>
@@ -144,7 +132,7 @@
             </pre>
           </figure>
         </div>
-        <div class="col-md-6 px-md-5 my-4 mx-auto flex-md-self-center">
+        <div class="markdown-body col-md-6 px-md-5 my-4 mx-auto flex-md-self-center">
           <h3 class="h3-mktg text-normal mb-2">BitcoinToken - issue tokens and smart contracts</h3>
           <p class="text-gray">BitcoinToken makes it easy to add tokens to web applications. You can issue a token in a few lines of Javascript, no prior blockchain knowledge required.</p>
           <p class="text-gray">We currently support ERC20-style fungible tokens. Support for non-fungible tokens will be added soon. Eventually, you will be able to program your own smart contracts using BitcoinToken.</p>
@@ -155,7 +143,7 @@
 
   <!-- videos -->
 
-  <section class="mx-auto p-responsive mt-10 mb-12 main-content clearfix ">
+  <section class="markdown-body mx-auto p-responsive mt-10 mb-12 main-content clearfix ">
       <div class="col-10 offset-1 col-sm-8 offset-sm-2 col-lg-6 pr-lg-2 offset-lg-0 float-left">
           <div class='embed-container'>
             <iframe src='https://www.youtube.com/embed/M6j-11H2O7c' frameborder='0' allowfullscreen>
@@ -172,7 +160,7 @@
 
   <!-- call to action -->
 
-  <section class="mx-auto p-responsive mt-8 mb-12 main-content clearfix ">
+  <section class="markdown-body mx-auto p-responsive mt-8 mb-12 main-content clearfix ">
     <div class="col-10 offset-1 col-sm-8 offset-sm-2 col-lg-4 pr-lg-2 offset-lg-0 float-left text-center">
       <form action="./docs.html">
         <div class="Box Box--spacious Box-body">
