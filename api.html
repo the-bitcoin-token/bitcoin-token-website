@@ -48,8 +48,7 @@
   <div class="pb-10 pt-4 bg-yellow-light">
     <section class="main-content markdown-body mx-auto p-responsive py-3" id='bitcoin-wallet'>
 
-      <p class="lead">The BitcoinToken library consists of three classes: BitcoinWallet, BitcoinDb, and BitcoinToken. Below we describe each class and the functions it exposes.
-          </p>
+      <p class="lead">The BitcoinToken library consists of three classes: BitcoinWallet, BitcoinDb, and BitcoinToken. Below we describe each class and the functions it exposes.</p>
 
       <h2 class="alt-h2 border-bottom border-gray-dark mb-2">BitcoinWallet</h2>
 
@@ -58,7 +57,7 @@
       <p></p></code>A <code>BitcoinWallet</code> object stores a <a href="https://github.com/bitcoin/bips/blob/master/bip-0032.mediawiki">BIP32</a> extended private key. This key can be used to generate a private public key pair and a Bitcoin Cash address. Users can send Bitcoin Cash to the address to fund the wallet. The wallet object can compute the balance of the address as well as send bitcoin from it.</p>
         
         
-        <p>In addition, a <code>BitcoinWallet</code> can generate 2<sup>32</sup> (>4 billion) child <code>BitcoinWallet</code> objects. The child derivation process is recursive and can generate an infinite number of identities. As the process is deterministic, all identities can be recomputed from a single <code>HdPrivateKey</code>.</p>
+      <p>In addition, a <code>BitcoinWallet</code> can generate 2<sup>32</sup> (>4 billion) child <code>BitcoinWallet</code> objects. The child derivation process is recursive and can generate an infinite number of identities. As the process is deterministic, all identities can be recomputed from a single <code>HdPrivateKey</code>.</p>
 
       <p>The functions of a <code>BitcoinWallet</code> object are listed below.</p>
 
