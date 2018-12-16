@@ -1,5 +1,3 @@
-import crypto from 'crypto';
-
 function _defineProperty(obj, key, value) {
   if (key in obj) {
     Object.defineProperty(obj, key, {
@@ -22479,6 +22477,8 @@ function getJSF(k1, k2) {
 utils.getJSF = getJSF;
 });
 
+var require$$0 = {};
+
 var r;
 
 var brorand = function rand(len) {
@@ -22534,12 +22534,11 @@ if (typeof self === 'object') {
 } else {
   // Node.js or Web worker with no crypto support
   try {
-    var crypto$1 = crypto;
-    if (typeof crypto$1.randomBytes !== 'function')
-      throw new Error('Not supported');
+    var crypto = require$$0;
+    throw new Error('Not supported');
 
     Rand.prototype._rand = function _rand(n) {
-      return crypto$1.randomBytes(n);
+      return crypto.randomBytes(n);
     };
   } catch (e) {
   }
@@ -26962,13 +26961,13 @@ EC.prototype.verify = function verify(msg, signature$$1, key$$1, enc) {
   return p.getX().mod(this.n).cmp(r) === 0;
 };
 
-var require$$0 = getCjsExportFromNamespace(_package$3);
+var require$$0$1 = getCjsExportFromNamespace(_package$3);
 
 var elliptic_1 = createCommonjsModule(function (module, exports) {
 
 var elliptic = exports;
 
-elliptic.version = require$$0.version;
+elliptic.version = require$$0$1.version;
 elliptic.utils = utils_1;
 elliptic.rand = brorand;
 elliptic.hmacDRBG = hmacDrbg;
@@ -28814,19 +28813,21 @@ Signature$1.SIGHASH_ANYONECANPAY = 0x80;
 
 var signature$1 = Signature$1;
 
+var crypto$1 = {};
+
 var hash = createCommonjsModule(function (module) {
 const Hash = module.exports;
 
 Hash.sha1 = function (buf) {
   preconditions.checkArgument(buffer_1$1.isBuffer(buf));
-  return crypto.createHash('sha1').update(buf).digest();
+  return crypto$1.createHash('sha1').update(buf).digest();
 };
 
 Hash.sha1.blocksize = 512;
 
 Hash.sha256 = function (buf) {
   preconditions.checkArgument(buffer_1$1.isBuffer(buf));
-  return crypto.createHash('sha256').update(buf).digest();
+  return crypto$1.createHash('sha256').update(buf).digest();
 };
 
 Hash.sha256.blocksize = 512;
@@ -28838,7 +28839,7 @@ Hash.sha256sha256 = function (buf) {
 
 Hash.ripemd160 = function (buf) {
   preconditions.checkArgument(buffer_1$1.isBuffer(buf));
-  return crypto.createHash('ripemd160').update(buf).digest();
+  return crypto$1.createHash('ripemd160').update(buf).digest();
 };
 
 Hash.sha256ripemd160 = function (buf) {
@@ -28848,7 +28849,7 @@ Hash.sha256ripemd160 = function (buf) {
 
 Hash.sha512 = function (buf) {
   preconditions.checkArgument(buffer_1$1.isBuffer(buf));
-  return crypto.createHash('sha512').update(buf).digest();
+  return crypto$1.createHash('sha512').update(buf).digest();
 };
 
 Hash.sha512.blocksize = 1024;
@@ -37520,7 +37521,7 @@ Random.getRandomBuffer = function (size) {
 };
 
 Random.getRandomBufferNode = function (size) {
-  return crypto.randomBytes(size);
+  return crypto$1.randomBytes(size);
 };
 
 Random.getRandomBufferBrowser = function (size) {
@@ -41343,12 +41344,12 @@ function pbkdf2(key, salt, iterations, dkLen) {
     block1[salt.length + 2] = ((i >> 8) & 0xff);
     block1[salt.length + 3] = ((i >> 0) & 0xff);
 
-    U = crypto.createHmac('sha512', key).update(block1).digest();
+    U = crypto$1.createHmac('sha512', key).update(block1).digest();
 
     U.copy(T, 0, 0, hLen);
 
     for (let j = 1; j < iterations; j += 1) {
-      U = crypto.createHmac('sha512', key).update(U).digest();
+      U = crypto$1.createHmac('sha512', key).update(U).digest();
 
       for (let k = 0; k < hLen; k += 1) {
         T[k] ^= U[k];
