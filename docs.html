@@ -1,337 +1,1086 @@
-<!DOCTYPE html>
+
+<!doctype html>
 <html>
-<head>
-  <meta charset="UTF-8">
-  <meta content="Clemens Ley" name="author">
-  <meta content="UNLICENCED" name="copyright">
-  <meta content="index, follow" name="robots">
-  <meta content="Create your own token on top of Bitcoin" name="description">
-  <meta content="UNLICENCED" name="copyright">
-  <meta content="" name="keywords">
-  <meta content="width=device-width, initial-scale=1" name="viewport">
-  <title>BitcoinToken</title>
-  <link href="favicon.ico" rel="Shortcut Icon" type="image/x-icon">
-  <link href="https://unpkg.com/primer/build/build.css" rel="stylesheet">
-  <link href="styles.css" rel="stylesheet">
-</head>
-<body class="markdown-body">
-  <header class="Header js-details-container Details f5 bg-blue-light" role="banner">
-    <div class="main-nav d-flex flex-justify-between px-3 pl-md-4 pr-md-4 py-3 bg-blue-light Details js-details-container container-lg">
-      <div class="my-2">
-        <a aria-label="Homepage" class="header-logo-invertocat d-flex flex-items-center text-bold no-underline" data-ga-click="Header, go to dashboard, icon:logo" data-hotkey="g d" href="http://www.bitcointoken.com"><img id="logo" src="https://i.imgur.com/R94kr0V.png">
-        <div class="mx-2">
-          BitcoinToken
-        </div></a>
-      </div>
-      <div class="d-lg-flex flex-justify-between my-2">
-        <div class="d-lg-flex">
-          <ul class="d-lg-flex pl-lg-2 flex-items-center text-bold list-style-none mb-0" role="navigation">
-            <li class="position-relative">
-              <a class="js-selected-navigation-item HeaderNavlink px-md-2 py-2 py-lg-0 no-underline" data-ga-click="Header, click, Nav menu - item:docs" data-octo-click="docs" data-octo-dimensions="location:nav_bar" data-selected-links="/install" href="install.html">Install</a>
-              <a class="js-selected-navigation-item HeaderNavlink px-md-2 py-2 py-lg-0 no-underline" data-ga-click="Header, click, Nav menu - item:docs" data-octo-click="docs" data-octo-dimensions="location:nav_bar" data-selected-links=" /docs" href="docs.html">Docs</a>
-              <a class="js-selected-navigation-item HeaderNavlink px-md-2 py-2 py-lg-0 no-underline" data-ga-click="Header, click, Nav menu - item:api" data-octo-click="api" data-octo-dimensions="location:nav_bar" data-selected-links=" /api" href="api.html">Api</a>
-              <a class="js-selected-navigation-item HeaderNavlink px-md-2 py-2 py-lg-0 no-underline" data-ga-click="Header, click, Nav menu - item:api" data-octo-click="blog" data-octo-dimensions="location:nav_bar" data-selected-links=" /blog-concerns-with-ltor" href="blog-concerns-with-ltor.html">Blog</a>
-            </li>
-          </ul>
+  <head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>API Reference</title>
+
+    <style>
+      .highlight table td { padding: 5px; }
+.highlight table pre { margin: 0; }
+.highlight .gh {
+  color: #999999;
+}
+.highlight .sr {
+  color: #f6aa11;
+}
+.highlight .go {
+  color: #888888;
+}
+.highlight .gp {
+  color: #555555;
+}
+.highlight .gs {
+}
+.highlight .gu {
+  color: #aaaaaa;
+}
+.highlight .nb {
+  color: #f6aa11;
+}
+.highlight .cm {
+  color: #75715e;
+}
+.highlight .cp {
+  color: #75715e;
+}
+.highlight .c1 {
+  color: #75715e;
+}
+.highlight .cs {
+  color: #75715e;
+}
+.highlight .c, .highlight .cd {
+  color: #75715e;
+}
+.highlight .err {
+  color: #960050;
+}
+.highlight .gr {
+  color: #960050;
+}
+.highlight .gt {
+  color: #960050;
+}
+.highlight .gd {
+  color: #49483e;
+}
+.highlight .gi {
+  color: #49483e;
+}
+.highlight .ge {
+  color: #49483e;
+}
+.highlight .kc {
+  color: #66d9ef;
+}
+.highlight .kd {
+  color: #66d9ef;
+}
+.highlight .kr {
+  color: #66d9ef;
+}
+.highlight .no {
+  color: #66d9ef;
+}
+.highlight .kt {
+  color: #66d9ef;
+}
+.highlight .mf {
+  color: #ae81ff;
+}
+.highlight .mh {
+  color: #ae81ff;
+}
+.highlight .il {
+  color: #ae81ff;
+}
+.highlight .mi {
+  color: #ae81ff;
+}
+.highlight .mo {
+  color: #ae81ff;
+}
+.highlight .m, .highlight .mb, .highlight .mx {
+  color: #ae81ff;
+}
+.highlight .sc {
+  color: #ae81ff;
+}
+.highlight .se {
+  color: #ae81ff;
+}
+.highlight .ss {
+  color: #ae81ff;
+}
+.highlight .sd {
+  color: #e6db74;
+}
+.highlight .s2 {
+  color: #e6db74;
+}
+.highlight .sb {
+  color: #e6db74;
+}
+.highlight .sh {
+  color: #e6db74;
+}
+.highlight .si {
+  color: #e6db74;
+}
+.highlight .sx {
+  color: #e6db74;
+}
+.highlight .s1 {
+  color: #e6db74;
+}
+.highlight .s {
+  color: #e6db74;
+}
+.highlight .na {
+  color: #a6e22e;
+}
+.highlight .nc {
+  color: #a6e22e;
+}
+.highlight .nd {
+  color: #a6e22e;
+}
+.highlight .ne {
+  color: #a6e22e;
+}
+.highlight .nf {
+  color: #a6e22e;
+}
+.highlight .vc {
+  color: #ffffff;
+}
+.highlight .nn {
+  color: #ffffff;
+}
+.highlight .nl {
+  color: #ffffff;
+}
+.highlight .ni {
+  color: #ffffff;
+}
+.highlight .bp {
+  color: #ffffff;
+}
+.highlight .vg {
+  color: #ffffff;
+}
+.highlight .vi {
+  color: #ffffff;
+}
+.highlight .nv {
+  color: #ffffff;
+}
+.highlight .w {
+  color: #ffffff;
+}
+.highlight {
+  color: #ffffff;
+}
+.highlight .n, .highlight .py, .highlight .nx {
+  color: #ffffff;
+}
+.highlight .ow {
+  color: #f92672;
+}
+.highlight .nt {
+  color: #f92672;
+}
+.highlight .k, .highlight .kv {
+  color: #f92672;
+}
+.highlight .kn {
+  color: #f92672;
+}
+.highlight .kp {
+  color: #f92672;
+}
+.highlight .o {
+  color: #f92672;
+}
+    </style>
+    <link href="stylesheets/screen.css" rel="stylesheet" media="screen" />
+    <link href="stylesheets/print.css" rel="stylesheet" media="print" />
+      <script src="javascripts/all.js"></script>
+  </head>
+
+  <body class="index" data-languages="[]">
+    <a href="#" id="nav-button">
+      <span>
+        NAV
+        <img src="images/navbar.png" alt="Navbar" />
+      </span>
+    </a>
+    <div class="toc-wrapper">
+      <img src="images/logo.png" class="logo" alt="Logo" />
+        <div class="search">
+          <input type="text" class="search" id="input-search" placeholder="Search">
         </div>
-      </div>
+        <ul class="search-results"></ul>
+      <ul id="toc" class="toc-list-h1">
+          <li>
+            <a href="#introduction" class="toc-h1 toc-link" data-title="Introduction">Introduction</a>
+          </li>
+          <li>
+            <a href="#install-and-run" class="toc-h1 toc-link" data-title="Install and run">Install and run</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#install" class="toc-h2 toc-link" data-title="Install">Install</a>
+                  </li>
+                  <li>
+                    <a href="#run-in-node" class="toc-h2 toc-link" data-title="Run in Node">Run in Node</a>
+                  </li>
+                  <li>
+                    <a href="#run-in-the-browser" class="toc-h2 toc-link" data-title="Run in the browser">Run in the browser</a>
+                  </li>
+                  <li>
+                    <a href="#troubleshooting" class="toc-h2 toc-link" data-title="Troubleshooting">Troubleshooting</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#bitcoinwallet" class="toc-h1 toc-link" data-title="BitcoinWallet">BitcoinWallet</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#constructor" class="toc-h2 toc-link" data-title="constructor">constructor</a>
+                  </li>
+                  <li>
+                    <a href="#getrandommnemonic" class="toc-h2 toc-link" data-title="getRandomMnemonic">getRandomMnemonic</a>
+                  </li>
+                  <li>
+                    <a href="#frommnemonic" class="toc-h2 toc-link" data-title="fromMnemonic">fromMnemonic</a>
+                  </li>
+                  <li>
+                    <a href="#getmnemonic" class="toc-h2 toc-link" data-title="getMnemonic">getMnemonic</a>
+                  </li>
+                  <li>
+                    <a href="#getprivatekey" class="toc-h2 toc-link" data-title="getPrivateKey">getPrivateKey</a>
+                  </li>
+                  <li>
+                    <a href="#getpublickey" class="toc-h2 toc-link" data-title="getPublicKey">getPublicKey</a>
+                  </li>
+                  <li>
+                    <a href="#getaddress" class="toc-h2 toc-link" data-title="getAddress">getAddress</a>
+                  </li>
+                  <li>
+                    <a href="#getbalance" class="toc-h2 toc-link" data-title="getBalance">getBalance</a>
+                  </li>
+                  <li>
+                    <a href="#send" class="toc-h2 toc-link" data-title="send">send</a>
+                  </li>
+                  <li>
+                    <a href="#transaction" class="toc-h2 toc-link" data-title="transaction">transaction</a>
+                  </li>
+                  <li>
+                    <a href="#derive" class="toc-h2 toc-link" data-title="derive">derive</a>
+                  </li>
+                  <li>
+                    <a href="#getpath" class="toc-h2 toc-link" data-title="getPath">getPath</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#bitcoindb" class="toc-h1 toc-link" data-title="BitcoinDb">BitcoinDb</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#constructor" class="toc-h2 toc-link" data-title="constructor">constructor</a>
+                  </li>
+                  <li>
+                    <a href="#frommnemonic" class="toc-h2 toc-link" data-title="fromMnemonic">fromMnemonic</a>
+                  </li>
+                  <li>
+                    <a href="#getwallet" class="toc-h2 toc-link" data-title="getWallet">getWallet</a>
+                  </li>
+                  <li>
+                    <a href="#putreturn" class="toc-h2 toc-link" data-title="putReturn">putReturn</a>
+                  </li>
+                  <li>
+                    <a href="#put" class="toc-h2 toc-link" data-title="put">put</a>
+                  </li>
+                  <li>
+                    <a href="#get" class="toc-h2 toc-link" data-title="get">get</a>
+                  </li>
+                  <li>
+                    <a href="#update" class="toc-h2 toc-link" data-title="update">update</a>
+                  </li>
+                  <li>
+                    <a href="#transaction" class="toc-h2 toc-link" data-title="transaction">transaction</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#bitcointoken" class="toc-h1 toc-link" data-title="BitcoinToken">BitcoinToken</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#constructor" class="toc-h2 toc-link" data-title="constructor">constructor</a>
+                  </li>
+                  <li>
+                    <a href="#frommnemonic" class="toc-h2 toc-link" data-title="fromMnemonic">fromMnemonic</a>
+                  </li>
+                  <li>
+                    <a href="#getwallet" class="toc-h2 toc-link" data-title="getWallet">getWallet</a>
+                  </li>
+                  <li>
+                    <a href="#getdb" class="toc-h2 toc-link" data-title="getDb">getDb</a>
+                  </li>
+                  <li>
+                    <a href="#create" class="toc-h2 toc-link" data-title="create">create</a>
+                  </li>
+                  <li>
+                    <a href="#join" class="toc-h2 toc-link" data-title="join">join</a>
+                  </li>
+                  <li>
+                    <a href="#send" class="toc-h2 toc-link" data-title="send">send</a>
+                  </li>
+                  <li>
+                    <a href="#getbalance" class="toc-h2 toc-link" data-title="getBalance">getBalance</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#bitcoinsource" class="toc-h1 toc-link" data-title="BitcoinSource">BitcoinSource</a>
+          </li>
+      </ul>
+        <ul class="toc-footer">
+            <li><a href='https://t.me/joinchat/FMrjOUWRuUkNuIt7zJL8tg'>Ask a question on Telegram</a></li>
+        </ul>
     </div>
-  </header>
+    <div class="page-wrapper">
+      <div class="dark-box"></div>
+      <div class="content">
+        <h1 id='introduction'>Introduction</h1><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="p">{</span> <span class="nx">Token</span><span class="p">,</span> <span class="nx">Db</span><span class="p">,</span> <span class="nx">Wallet</span><span class="p">,</span> <span class="nx">Source</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'bitcointoken'</span><span class="p">)</span>
+</code></pre>
+<p>The BitcoinToken library is a collection of tools that make it easy to integrate Bitcoin into web applications.</p>
 
-  <section class="flex-row width-full bg-blue-light">
-    <div class="flex-row main-content width-full py-2 pt-md-2 pb-md-4 mx-auto px-3 px-md-6 px-lg-3">
-      <h1 class="f00-light mb-n3 border-0">Docs</h1>
-      <h2 class="f2-light mb-4 text-gray text-small border-0"><code>VERSION v0.0.1-alpha.5</code></h2>
-    </div>
-  </section>
+<ul>
+<li><strong>BitcoinSource</strong> a readable JS implementation of Bitcoin</li>
+<li><strong>BitcoinWallet</strong> send, store, and receive Bitcoin</li>
+<li><strong>BitcoinDb</strong> store data on the blockchain</li>
+<li><strong>BitcoinToken</strong> issue tokens</li>
+</ul>
 
-  <section class="main-content mx-auto p-responsive pb-10 pt-6">
-    <p class="lead">BitcoinToken is a toolkit for building blockchain enabled web applications on top of Bitcoin Cash. It consists of three tools: a wallet, a database built on the blockchain, and a token solution. These tools can be combined in many different way to adapt to the desired application. The code is written in Javascript and runs in the browser and in node.
-      </p>
+<p>We will be supporting Bitcoin Cash and Bitcoin SV at launch.</p>
+<h1 id='install-and-run'>Install and run</h1>
+<p>You need <a href="https://docs.npmjs.com/downloading-and-installing-node-js-and-npm">node.js and npm</a> installed.</p>
+<h2 id='install'>Install</h2>
+<blockquote>
+<p>Install BitcoinToken</p>
+</blockquote>
+<pre class="highlight shell_session"><code>npm i bitcointoken
+</code></pre>
+<p><code>npm i bitcointoken</code></p>
 
-    <h2 class="alt-h2 border-bottom border-gray-dark mb-2">The Tech Stack</h2>
-    <p class="mt-4">BitcoinToken has a layered architecture, where lower levels provide functionality for the levels above.</p>
+<p>If you only want to use BitcoinWallet you are done. If you want to use BitcoinDb or BitcoinToken you need to install and run a non-standard server in a second terminal window.</p>
+<h3 id='install-and-run-the-non-standard-server'>Install and run the non-standard server</h3>
+<blockquote>
+<p>Install and run the non-standard server</p>
+</blockquote>
+<pre class="highlight shell_session tab-shell_session"><code>git clone https://github.com/BitcoinDB/bitcoin-non-standard-server.git
+cd bitcoin-non-standard-server
+docker-compose up
+</code></pre>
+<p>We recommend to use <a href="https://www.docker.com/">Docker</a> and <a href="https://docs.docker.com/compose/">Docker Compose</a> to build and run the server using the commands on the right. If you do not use docker you can find instructions in the <a href="https://github.com/the-bitcoin-token/bitcoin-non-standard-server">Github repo</a>.</p>
+<h2 id='run-in-node'>Run in Node</h2>
+<blockquote>
+<p>File index.js</p>
+</blockquote>
+<pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="p">{</span> <span class="nx">Wallet</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'bitcointoken'</span><span class="p">)</span>
 
-    <a class="card hover-card p-3 p-md-4 d-flex flex-items-center my-4" href="#bitcoin-token">
-      <div>
-        <h3 class="h3 mb-2 text-normal">Your app</h3>
-        <p class="text-gray-dark">Your application can use of the functionality provided by the layers below</p>
-      </div>
-    </a> 
+<span class="kr">const</span> <span class="nx">wallet</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Wallet</span><span class="p">()</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`address: </span><span class="p">${</span><span class="nx">wallet</span><span class="p">.</span><span class="nx">getAddress</span><span class="p">()}</span><span class="s2">`</span><span class="p">)</span>
+</code></pre>
+<p>After installing BitcoinToken, create a file <code>index.js</code> with the content shown on the right. Run the code using</p>
 
-    <a class="card hover-card p-3 p-md-4 d-flex flex-items-center mb-2 mt-4 bg-blue-light" href="#bitcoin-token">
-      <div>
-        <h3 class="h3 mb-2 text-normal">BitcoinToken</h3>
-        <p class="text-gray-dark">Create tokens and smart contracts</p>
-      </div>
-    </a>
+<p><code>node index.js</code></p>
 
-    <a class="card hover-card p-3 p-md-4 d-flex flex-items-center mb-2 bg-green-light" href="#bitcoin-db">
-      <div>
-        <h3 class="h3 mb-2 text-normal">BitcoinDb</h3>
-        <p class="text-gray-dark">Store, update, and retrieve json data on the blockchain.</p>
-      </div>
-    </a>
+<p>The output should be similar to</p>
 
-    <a class="card hover-card p-3 p-md-4 d-flex flex-items-center mb-2 bg-yellow-light" href="#bitcoin-wallet">
-      <div>
-        <h3 class="h3 mb-2 text-normal">BitcoinWallet</h3>
-        <p class="text-gray-dark">Receive, hold, and send Bitcoin Cash.</p>
-      </div>
-    </a>
+<p><code>address: mwZd1bgRYhxY4JLyx1sdEGBYFZnXVDvgmp</code></p>
 
-    <a class="card hover-card p-3 p-md-4 d-flex flex-items-center mb-4 bg-red-light" href="https://github.com/BitcoinDB/BitcoinSource">
-      <div>
-        <h3 class="h3 mb-2 text-normal">BitcoinSource</h3>
-        <p class="text-gray-dark">A community driven initiative to produce a readable implementation of Bitcoin Cash in Javascript.</p>
-      </div>
-    </a>
+<!--
+## Run in the browser
 
-    <h2 class="alt-h2 border-bottom border-gray-dark mb-2">Obtaining the code</h2>
+> File index.js
 
+````javascript
+const Bitcoin = require('bitcointoken')
 
-    <p class="f4-light">Our source code is not publically available yet. If would like to obtain an early version to test, email clemens@bitcointoken.com. 
-      
-    <p class="f4-light">The BitcoinToken package exposes the three classes at the root level.</p>
+const wallet = new Bitcoin.Wallet()
+document.body.innerHTML = `address: ${wallet.getAddress()}`
+````
 
-    <div class="markdown-body mb-2">
-      <pre class="box highlight">
-        const Bitcoin = require('./bitcoin-token')
+> File index.html
 
-        const BitcoinWallet = Bitcoin.Wallet
-        const BitcoinDb = Bitcoin.Db
-        const BitcoinToken = Bitcoin.Token
-        </pre>
-    </div>
-  </section>
+````html
+<html>
+  <body>
+    <script src="./index.js"></script>
+  </body>
+</html>
+````
 
-  <div class="bg-yellow-light py-10">
-    <section class="main-content mx-auto p-responsive py-3" id='bitcoin-wallet'>
+Install <a href="https://parceljs.org">Parcel</a> using `npm install -g parcel-bundler`.
 
-      <h2 class="alt-h2 border-bottom border-gray-dark mb-2">BitcoinWallet</h2>
+Create a files `index.js` and `index.html` in an empty folder.
 
-      <p class="f4-light">BitcoinWallet is a <a href="https://en.bitcoin.it/wiki/Deterministic_wallet">HD</a> Javascript Bitcoin Cash wallet. It can store, send and receive bitcoin, and generate private keys as user accounts. Every Bitcoin wallet can deterministically generate more secure BitcoinWallets, which makes it possible to build trees of wallets that can adapt to the use case.</p>
-      <div class="markdown-body mb-2">
-        <pre class="box highlight">
-          const wallet = new BitcoinWallet()
-          await wallet.getAddress()                  
-          await wallet.getBalance()                  
-          await wallet.send(1, &lt;public key&gt;)
-          const childWallet3 = wallet.derive(3)
-        </pre>
-      </div>
+Start the server using `parcel index.html`. The website will be rendered at <a href="http://localhost:1234/">http://localhost:1234/</a>.
+-->
+<h2 id='run-in-the-browser'>Run in the browser</h2>
+<blockquote>
+<p>File index.js</p>
+</blockquote>
+<pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">Bitcoin</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'bitcointoken'</span><span class="p">)</span>
 
-      <h3 class="alt-h3 border-bottom border-gray-dark mb-2 mt-4">Initialization</h3>
-      <p class="f4-light">To create a wallet from random, call the constructor. To initialize the wallet from an existing private key call <code>BitcoinWallet.fromHdPrivateKey()</code> with a string encoding an extended private key as specified in <a href="https://github.com/bitcoin/bips/blob/master/bip-0032.mediawiki">BIP32</a>. BitcoinWallet can securely generate such a key for you when you call <code>BitcoinWallet.getHdPrivateKey()</code>.</p>
-      <div class="markdown-body mb-2">
-        <pre class="box highlight">
-          const randomWallet = new BitcoinWallet()
+<span class="kr">const</span> <span class="nx">wallet</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Bitcoin</span><span class="p">.</span><span class="nx">Wallet</span><span class="p">()</span>
+<span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="s2">`address: </span><span class="p">${</span><span class="nx">wallet</span><span class="p">.</span><span class="nx">getAddress</span><span class="p">()}</span><span class="s2">`</span>
+</code></pre>
+<blockquote>
+<p>File index.html</p>
+</blockquote>
+<pre class="highlight html tab-html"><code><span class="nt">&lt;html&gt;</span>
+  <span class="nt">&lt;body&gt;</span>
+    <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"./bundle.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+  <span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre>
+<p>After installing BitcoinToken, create files <code>index.js</code> and <code>index.html</code> as shown.</p>
 
-          const hdPrivateKey = BitcoinWallet.getHdPrivateKey()
-          const walletFromKey = BitcoinWallet.fromHdPrivateKey(hdPrivateKey)
-        </pre>
-      </div>
+<p>Install and run browserify</p>
 
-      <h3 class="alt-h3 border-bottom border-gray-dark mb-2 mt-4">Receiving Bitcoin Cash</h3>
-      <p class="f4-light">To fund your wallet call <code>wallet.getAddress()</code> to obtain a Bitcoin Cash testnet deposit address. Then, paste that address into a <a href="https://coinfaucet.eu/en/bch-testnet">testnet faucet</a> to obtain free testnet coins.</p>
-      
-      <p>The private and public key of a wallet are exposed via <code>wallet.getPublicKey()</code> and <code>wallet.getPrivateKey()</code>.</p>
+<p><code>
+npm install -g browserify<br />
+browserify index.js &gt; bundle.js
+</code></p>
 
-      <div class="markdown-body mb-2">
-        <pre class="box highlight">
-          const address = wallet.getAddress()
+<p>Open <code>index.html</code> in a web browser</p>
+<h2 id='troubleshooting'>Troubleshooting</h2>
+<p>If you have a problem that is not discussed here, please let us know in the <a href="https://t.me/joinchat/FMrjOUWRuUkNuIt7zJL8tg">Telegram group</a>.</p>
+<h3 id='quot-communication-error-service-unavailable-quot'>&quot;Communication error: Service unavailable&quot;</h3>
+<p>The problem is most likely that you are not running the non-standard server.</p>
+<h3 id='quot-error-insufficient-balance-in-address-quot'>&quot;Error: Insufficient balance in address ...&quot;</h3>
+<blockquote>
+<p>File generate-mnemonic.js</p>
+</blockquote>
+<pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="p">{</span> <span class="nx">Wallet</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'bitcointoken'</span><span class="p">)</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">Wallet</span><span class="p">.</span><span class="nx">getRandomMnemonic</span><span class="p">())</span>
+</code></pre>
+<p>You have to fund your wallet. First check that the same wallet is generated every time you run your code: Run it multiple times and check if the  same address is logged every time.</p>
 
-          const publicKey = wallet.getPublicKey()
-          const privateKey = wallet.getPrivateKey()
-        </pre>
-      </div>
+<p>If so you can fund that address using a <a href="https://coinfaucet.eu/en/bch-testnet/">testnet faucet</a>.</p>
 
-      <h3 class="alt-h3 border-bottom border-gray-dark mb-2 mt-4">Sending Bitcoin Cash</h3>
-      <p class="f4-light">After you have funded your wallet, you can send Bitcoin Cash to another address by calling <code>wallet.send()</code>. The return value is the id of the transaction that was broadcast.</p>
-      <div class="markdown-body mb-2">
-        <pre class="box highlight">
-              const txId = await wallet.send(amount, address)
-            </pre>
-      </div>
+<p>Otherwise you need to initialize your object from a mnemonic. To generate a mnemonic, create the file <code>generate-mnemonic.js</code> and run it using <code> node --experimental-repl-await generate-mnemonic.js</code>. Now you can generate your object using the logged mnemonic using <code>Wallet.fromMnemonic()</code> and fund it using the <a href="https://coinfaucet.eu/en/bch-testnet/">testnet faucet</a></p>
+<h1 id='bitcoinwallet'>BitcoinWallet</h1>
+<p><code>BitcoinWallet</code> allows you to receive, store, and send Bitcoin Cash.</p>
+<pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="p">{</span> <span class="nx">Wallet</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'bitcointoken'</span><span class="p">)</span>
+</code></pre>
+<p>A BitcoinWallet stores a secrete passphrase called menmonic. The mnemonic represents an identity, for example every user in an application would have their own mnemonic. The mnemonic can be used to send Bitcoin to another user, or to generate public addresses that can receive Bitcoin.</p>
+<h2 id='constructor'>constructor</h2>
+<blockquote>
+<p>Generate a random BitcoinWallet</p>
+</blockquote>
+<pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">randomWallet</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Wallet</span><span class="p">()</span>
+</code></pre>
+<p>Generates a new <code>BitcoinWallet</code> with a random mnemonic.</p>
 
-      <h3 class="alt-h3 border-bottom border-gray-dark mb-2 mt-4">Checking the balance</h3>
-      <p class="f4-light">You can check the balance of the wallet by calling <code>wallet.getBalance()</code>.</p>
-      <div class="markdown-body mb-2">
-        <pre class="box highlight">
-          const balance = await wallet.getBalance()
-        </pre>
-      </div>
-
-      <h3 class="alt-h3 border-bottom border-gray-dark mb-2 mt-4">Deriving child wallets</h3>
-      <p class="f4-light">You can securely derive 2<sup>31</sup> child BitcoinWallets from a BitcoinWallet. These wallets can derive further child wallets ad infinitum. As the process is deterministic, only one root HD private key must be stored, all wallets can be computed from that key.</p>
-      <div class="markdown-body mb-2">
-        <pre class="box highlight">
-          const childWallet = wallet.derive(3)
-          const grandChildWallet = childWallet.derive(7)
-        </pre>
-      </div>
-    </section>
-  </div>
-
-  <!-- ########################################################## -->
+<!-- A <code>BitcoinWallet</code> object stores a <a href="https://github.com/bitcoin/bips/blob/master/bip-0032.mediawiki">BIP32</a> extended private key. This key can be used to generate a private public key pair and a Bitcoin Cash address. Users can send Bitcoin Cash to the address to fund the wallet. The wallet object can compute the balance of the address as well as send bitcoin from it.
   
-  <div class="bg-green-light py-10">
-    <section class="main-content mx-auto p-responsive py-3" id='bitcoin-db'>
-      <h2 class="alt-h2 border-bottom border-gray-dark mb-2">BitcoinDb</h2>
-      <p class="f4-light">BitcoinBd lets you store, read, and update json files on the blockchain. Reading from BitcoinDb is free and as fast as reading from any other database. Writing to BitcoinDb is associated with a one-time fee of about $5 per mb, payed in Bitcoin Cash. All data is stored in the Bitcoin Cash blockchain and is thus available globally 100% of the time. The data will be stored indefinitely at no recurring cost. In addition, BitcoinDb syncs in seconds across the globe.</p>
-      <div class="markdown-body mb-2">
-        <pre class="box highlight">
-          const db = new BitcoinDb()
-          const id1 = await db.put({ a: 'aaa' })
-          const data = await db.get(id1)
-          const id2 = await db.update(id1, { b: 'bbb' })
-        </pre>
+  
+In addition, a <code>BitcoinWallet</code> can generate 2<sup>32</sup> (>4 billion) child <code>BitcoinWallet</code> objects. The child derivation process is recursive and can generate an infinite number of identities. As the process is deterministic, all identities can be recomputed from a single <code>HdPrivateKey</code>.
+
+The functions of a <code>BitcoinWallet</code> object are listed below. -->
+<h2 id='getrandommnemonic'>getRandomMnemonic</h2>
+<blockquote>
+<p>Generate a mnemonic</p>
+</blockquote>
+<pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">mnemonic</span> <span class="o">=</span> <span class="nx">Wallet</span><span class="p">.</span><span class="nx">getRandomMnemonic</span><span class="p">()</span>
+
+<span class="c1">// mnemonic === 'rail install size scorpion orchard kingdom vacuum collect pencil element fall enhance media island medal'</span>
+</code></pre>
+<p>Generates a new mnemonic from a secure random source.</p>
+<h3 id='type'>Type</h3>
+<p><code>static getHdPrivateKey(): string</code></p>
+<h2 id='frommnemonic'>fromMnemonic</h2>
+<blockquote>
+<p>Generate a BitcoinWallet from a mnemonic</p>
+</blockquote>
+<pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">mnemonic</span> <span class="o">=</span> <span class="nx">Wallet</span><span class="p">.</span><span class="nx">getRandomMnemonic</span><span class="p">()</span>
+<span class="kr">const</span> <span class="nx">wallet</span> <span class="o">=</span> <span class="nx">Wallet</span><span class="p">.</span><span class="nx">fromMnemonic</span><span class="p">(</span><span class="nx">mnemonic</span><span class="p">)</span>
+</code></pre>
+<p>Generates <code>BitcoinWallet</code> from a the mnemonic.</p>
+<h3 id='type-2'>Type</h3>
+<p><code>static getRandomMnemonic(mnemonic: string): BitcoinWallet</code></p>
+<h2 id='getmnemonic'>getMnemonic</h2>
+<blockquote>
+<p>Return the mnemonic</p>
+</blockquote>
+<pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">wallet</span> <span class="o">=</span> <span class="nx">Wallet</span><span class="p">.</span><span class="nx">fromMnemonic</span><span class="p">(</span><span class="s1">'rail install size scorpion orchard kingdom vacuum collect pencil element fall enhance media island medal'</span><span class="p">)</span>
+<span class="kr">const</span> <span class="nx">mnemonic</span> <span class="o">=</span> <span class="nx">wallet</span><span class="p">.</span><span class="nx">getMnemonic</span><span class="p">()</span>
+
+<span class="c1">// menominc === 'rail install size scorpion orchard kingdom vacuum collect pencil element fall enhance media island medal'</span>
+</code></pre>
+<p>Returns the mnemonic of the wallet</p>
+<h3 id='type-3'>Type</h3>
+<p><code>getMnemonic(): string</code></p>
+<h2 id='getprivatekey'>getPrivateKey</h2>
+<blockquote>
+<p>Return the private key</p>
+</blockquote>
+<pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">privateKey</span> <span class="o">=</span> <span class="nx">wallet</span><span class="p">.</span><span class="nx">getPrivateKey</span><span class="p">()</span>
+</code></pre>
+<p>Every BitcoinWallet is associated with a Bitcoin account consisting of a private-public keypair and an address. These can be accessed using <code>getPrivateKey</code>, <code>getPublicKey</code> and <code>getAddress</code>.</p>
+
+<p><code>getPrivateKey</code> return the private key stored in the wallet.</p>
+<h3 id='type-4'>Type</h3>
+<p><code>getPrivateKey(): string</code></p>
+<h2 id='getpublickey'>getPublicKey</h2>
+<blockquote>
+<p>Return the public key</p>
+</blockquote>
+<pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">publicKey</span> <span class="o">=</span> <span class="nx">wallet</span><span class="p">.</span><span class="nx">getPublicKey</span><span class="p">()</span>
+</code></pre>
+<p>Returns the public key.</p>
+<h3 id='type-5'>Type</h3>
+<p><code>getPublicKey(): string</code></p>
+<h2 id='getaddress'>getAddress</h2>
+<blockquote>
+<p>Return the address</p>
+</blockquote>
+<pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">address</span> <span class="o">=</span> <span class="nx">wallet</span><span class="p">.</span><span class="nx">getAddress</span><span class="p">()</span>
+<span class="kr">const</span> <span class="nx">CashAddress</span> <span class="o">=</span> <span class="nx">wallet</span><span class="p">.</span><span class="nx">getAddress</span><span class="p">(</span><span class="s1">'cashaddr'</span><span class="p">)</span>
+</code></pre>
+<p>Returns the address in <code>legacy</code> format. To return the address in a different format pass in <code>legacy</code>, <code>bitpay</code>, or <code>cashaddr</code> as a parameter.</p>
+<h3 id='type-6'>Type</h3>
+<p><code>
+type Format = &#39;legacy&#39; | &#39;bitpay&#39; | &#39;cashaddr&#39;<br />
+getAddress(format?: Format = &#39;legacy&#39;): string
+</code></p>
+<h2 id='getbalance'>getBalance</h2>
+<blockquote>
+<p>Return the current balance</p>
+</blockquote>
+<pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">satoshi</span> <span class="o">=</span> <span class="nx">await</span> <span class="nx">wallet</span><span class="p">.</span><span class="nx">getBalance</span><span class="p">()</span>
+<span class="kr">const</span> <span class="nx">bitcoin</span> <span class="o">=</span> <span class="nx">satoshi</span> <span class="o">/</span> <span class="mi">1</span><span class="nx">e8</span>
+</code></pre>
+<p>Returns the current balance in satoshi. Divide by <code>1e8</code> to compute the balance in Bitcoin.</p>
+<h3 id='type-7'>Type</h3>
+<p><code>async getBalance(): number</code></p>
+
+<aside class="notice">Note that `getBalance` returns the balance of the current account and not the balance of derived accounts.</aside>
+<h2 id='send'>send</h2>
+<blockquote>
+<p>Send Bitcoin</p>
+</blockquote>
+<pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">address</span> <span class="o">=</span> <span class="nx">randomWallet</span><span class="p">.</span><span class="nx">getAddress</span><span class="p">()</span>
+<span class="kr">const</span> <span class="nx">outputId</span> <span class="o">=</span> <span class="nx">await</span> <span class="nx">wallet</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="mi">15000</span><span class="p">,</span> <span class="nx">address</span><span class="p">)</span>
+
+<span class="c1">// outputId === {</span>
+<span class="c1">//   txId: '3404832a17d996dffaa9ac1aea48a2fafc9d855e5fdca5100481d8a562523dfb',</span>
+<span class="c1">//   outputNumber: 0</span>
+<span class="c1">// }</span>
+</code></pre>
+<p>Sends bitcoin. The first parameter is the amount to send in satoshi, the second is the recipients address, and the third (optional) paramater is the change address. If no change address is provided, the address of the wallet is used.</p>
+<h3 id='type-8'>Type</h3>
+<p><code>type OutputId = {|<br />
+&nbsp;&nbsp;txId: string,<br />
+&nbsp;&nbsp;outputNumber: number<br />
+}<br />
+<br />
+async send(<br />
+&nbsp;&nbsp;amount: number,<br />
+&nbsp;&nbsp;address: string,<br />
+&nbsp;&nbsp;changeAddress: ?string<br />
+): Promise&lt;OutputId&gt;<br />
+</code></p>
+<h2 id='transaction'>transaction</h2>
+<blockquote>
+<p>Send Bitcoin to multiple recipients</p>
+</blockquote>
+<pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">address</span> <span class="o">=</span> <span class="nx">randomWallet</span><span class="p">.</span><span class="nx">getAddress</span><span class="p">()</span>
+<span class="kr">const</span> <span class="nx">data1</span> <span class="o">=</span> <span class="p">{</span> <span class="na">amount</span><span class="p">:</span> <span class="mi">2000</span><span class="p">,</span> <span class="na">address</span><span class="p">:</span> <span class="s1">'mvQPGnzRT6gMWASZBMg7NcT3vmvsSKSQtf'</span> <span class="p">}</span>
+<span class="kr">const</span> <span class="nx">data2</span> <span class="o">=</span> <span class="p">{</span> <span class="na">amount</span><span class="p">:</span> <span class="mi">5000</span><span class="p">,</span> <span class="na">address</span><span class="p">:</span> <span class="s1">'n1xqzrckuoohZPj3XoMn1mRgJZ3nkCLSq3'</span> <span class="p">}</span>
+<span class="kr">const</span> <span class="nx">outputIds</span> <span class="o">=</span> <span class="nx">await</span> <span class="nx">wallet</span><span class="p">.</span><span class="nx">transaction</span><span class="p">([</span><span class="nx">data1</span><span class="p">,</span> <span class="nx">data2</span><span class="p">])</span>
+
+<span class="c1">// outputIds === [{</span>
+<span class="c1">//   txId: '3404832a17d996dffaa9ac1aea48a2fafc9d855e5fdca5100481d8a562523dfb',</span>
+<span class="c1">//   outputNumber: 0</span>
+<span class="c1">// }, {</span>
+<span class="c1">//   txId: '3404832a17d996dffaa9ac1aea48a2fafc9d855e5fdca5100481d8a562523dfb',</span>
+<span class="c1">//   outputNumber: 1</span>
+<span class="c1">// }]</span>
+</code></pre>
+<p>Use <code>transaction</code> to pay multiple parties at once. </p>
+<h3 id='type-9'>Type</h3>
+<p><code>type OutputId = {|<br />
+&nbsp;&nbsp;txId: string,<br />
+&nbsp;&nbsp;outputNumber: number<br />
+}<br />
+<br />
+type PkhData = {|<br />
+&nbsp;&nbsp;amount: number,<br />
+&nbsp;&nbsp;address: string<br />
+|}<br />
+<br />
+async transaction(<br />
+&nbsp;&nbsp;outputs: Array&lt;PkhData&gt;,<br />
+&nbsp;&nbsp;changeAddress?: string<br />
+): Promise&lt;Array&lt;OutputId&gt;&gt;<br />
+</code></p>
+<h2 id='derive'>derive</h2>
+<blockquote>
+<p>Derive a child wallet</p>
+</blockquote>
+<pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">derivedWallet</span> <span class="o">=</span> <span class="nx">wallet</span><span class="p">.</span><span class="nx">derive</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+</code></pre>
+<p>A BitcoinWallet can deterministically derive <em>2<sup>32</sup></em> child wallets. To derive a child wallet call <code>derive</code> with a number <em>&le; 2<sup>32</sup></em>. The second optional parameter determines if the wallet if hardened or not. Read more about hardened wallets in <a href="https://github.com/bitcoin/bips/blob/master/bip-0032.mediawiki">BIP32</a>.</p>
+
+<blockquote>
+<p>Derive wallet with path <code>m/44&#39;/0&#39;/0&#39;</code></p>
+</blockquote>
+<pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">wallet</span> <span class="o">=</span> <span class="nx">wallet</span><span class="p">.</span><span class="nx">derive</span><span class="p">(</span><span class="s1">'m'</span><span class="p">,</span> <span class="kc">false</span><span class="p">).</span><span class="nx">derive</span><span class="p">(</span><span class="mi">44</span><span class="p">,</span> <span class="kc">true</span><span class="p">).</span><span class="nx">derive</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="kc">true</span><span class="p">).</span><span class="nx">derive</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="kc">true</span><span class="p">)</span>
+</code></pre>
+<p>There exists a standard for how to use derivation paths to generate interoperable wallets (<a href="https://github.com/bitcoin/bips/blob/master/bip-0044.mediawiki">BIP44</a>). Two popular derivation paths are</p>
+
+<ul>
+<li><code>m/44&#39;/0&#39;/0&#39;</code> used eg by Yours.org, Bitcoin.com, or Coinbase.com</li>
+<li><code>m/44&#39;/145&#39;/0&#39;</code> used eg by Bitpay. </li>
+</ul>
+<h3 id='type-10'>Type</h3>
+<p><code>
+derive(<br />
+&nbsp;&nbsp;index: ?number = 0,<br />
+&nbsp;&nbsp;hardened: ?boolean = false<br />
+): BitcoinWallet
+</code></p>
+<h2 id='getpath'>getPath</h2>
+<blockquote>
+<p>Return the current derivation path</p>
+</blockquote>
+<pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">wallet</span> <span class="o">=</span> <span class="nx">wallet</span><span class="p">.</span><span class="nx">derive</span><span class="p">(</span><span class="s1">'m'</span><span class="p">,</span> <span class="kc">false</span><span class="p">).</span><span class="nx">derive</span><span class="p">(</span><span class="mi">44</span><span class="p">,</span> <span class="kc">true</span><span class="p">).</span><span class="nx">derive</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="kc">true</span><span class="p">).</span><span class="nx">derive</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="kc">true</span><span class="p">)</span>
+<span class="kr">const</span> <span class="nx">path</span> <span class="o">=</span> <span class="nx">wallet</span><span class="p">.</span><span class="nx">getPath</span><span class="p">()</span>
+
+<span class="c1">// path === `m/44'/0'/0'`</span>
+</code></pre>
+<p>Returns the current derivation path.</p>
+<h3 id='type-11'>Type</h3>
+<p><code>
+getPath(): string
+</code></p>
+<h1 id='bitcoindb'>BitcoinDb</h1>
+<p><code>BitcoinDb</code> can read, store, and update data on the Bitcoin Cash blockchain.</p>
+<pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="p">{</span> <span class="nx">Db</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'bitcointoken'</span><span class="p">)</span>
+</code></pre>
+<p>Bitcoin exposes two ways to store data: in <a href="https://en.bitcoin.it/wiki/OP_RETURN">op_return</a> outputs and in output scripts via <a href="https://en.bitcoin.it/wiki/Pay_to_script_hash">p2sh</a>. Both are supported by BitcoinToken.</p>
+
+<ul>
+<li><p>To store flat files that do not need to be updated we recommended you use <code>db.putReturn</code> to store data in an op_return output.</p></li>
+<li><p>If your application requires data types, updates, or transactions it is recommended to store data in p2sh outputs via <code>db.put</code>. The trade off is that your data will only be stored on the blockchain once you update the data, before that only a hash of the data is stored in the blockchain.</p></li>
+</ul>
+
+<aside class="notice">You need to run a <a href="https://github.com/the-bitcoin-token/bitcoin-non-standard-server">non-standard server</a> to use BitcoinDb.</aside>
+
+<!-- The storage model of BitcoinDb is designed to work as similar to Bitcoin as possible. In Bitcoin, the current state is stored in the unspent transaction output (utxo) set. The state is updated when a Bitcoin transaction is broadcast. The outputs representing the old state are removed from the utxo set and replaced by the outputs of the transaction that represent the new state.
+
+Similarly, BitcoinDb stores data is unspent transaction outputs. When data is updated, the outputs representing the old state are spent and outputs representing the new state are created. The convention is that the i-th output represents the new state of the i-th input being spent. This leads to a natural notion of data ownership where the data is owned by the users(s) that can spend and thereby update the output that contains the data.
+
+The location on the blockchain where data is stored is captured by an <code>OutputId</code> object, which contains two keys <code>txId</code> and <code>outputNumber</code> (that is an <code>OutputId</code> object has type <code>{| txId: string, outputNumber: number |})</code> in <a href="https://flow.org/">flow type</a> notation). -->
+<h2 id='constructor'>constructor</h2>
+<blockquote>
+<p>Create random BitcoinDb</p>
+</blockquote>
+<pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">randomDb</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Db</span><span class="p">()</span>
+</code></pre>
+<p>A <code>BicoinDb</code> object stores a <code>BitcoinWallet</code> object to pay for storage space on the blockchain. To generate a <code>BitcoinDb</code> object from a new randomly generated <code>BitcoinWallet</code> object call the constructor without a parameter.</p>
+
+<blockquote>
+<p>Create BitcoinDb from a BitcoinWallet</p>
+</blockquote>
+<pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">wallet</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Wallet</span><span class="p">()</span>
+<span class="kr">const</span> <span class="nx">db</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Db</span><span class="p">(</span><span class="nx">wallet</span><span class="p">)</span>
+</code></pre>
+<p>You can also create a new <code>BitcoinWallet</code> object from an existing <code>BitcoinWallet</code> object by passing it into the constructor.</p>
+<h2 id='frommnemonic'>fromMnemonic</h2>
+<blockquote>
+<p>Generate a BitcoinDb from a mnemonic</p>
+</blockquote>
+<pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">mnemonic</span> <span class="o">=</span> <span class="nx">Wallet</span><span class="p">.</span><span class="nx">getRandomMnemonic</span><span class="p">()</span>
+<span class="kr">const</span> <span class="nx">db</span> <span class="o">=</span> <span class="nx">Db</span><span class="p">.</span><span class="nx">fromMnemonic</span><span class="p">(</span><span class="nx">mnemonic</span><span class="p">)</span>
+</code></pre>
+<p>Generates <code>BitcoinDb</code> object and initialize the embedded <code>BitcoinWallet</code> using the mnemonic.</p>
+<h3 id='type'>Type</h3>
+<p><code>static fromMnemonic(mnemonic: string): BitcoinWallet</code></p>
+
+<aside class="notice">The mnemonic of a `BitcoinDb` object can be accessed via `db.getWallet().getMnemonic()`.</aside>
+<h2 id='getwallet'>getWallet</h2>
+<blockquote>
+<p>Return the wallet stored in the db</p>
+</blockquote>
+<pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">wallet</span> <span class="o">=</span> <span class="nx">db</span><span class="p">.</span><span class="nx">getWallet</span><span class="p">()</span>
+
+<span class="c1">// wallet.constructor.name === 'BitcoinWallet`</span>
+</code></pre>
+<p>Returns the <code>BitcoinWallet</code> stored in a <code>BitcoinDb</code> object.</p>
+<h3 id='type-2'>Type</h3>
+<p><code>getWallet(): BitcoinWallet</code></p>
+<h2 id='putreturn'>putReturn</h2>
+<blockquote>
+<p>Store a string on the blockchain</p>
+</blockquote>
+<pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">data</span> <span class="o">=</span> <span class="s1">'some string'</span>
+<span class="kr">const</span> <span class="nx">outputId</span> <span class="o">=</span> <span class="nx">await</span> <span class="nx">db</span><span class="p">.</span><span class="nx">putReturn</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span>
+
+<span class="c1">// outputId === {</span>
+<span class="c1">//   txId: '3404832a17d996dffaa9ac1aea48a2fafc9d855e5fdca5100481d8a562523dfb',</span>
+<span class="c1">//   outputNumber: 0</span>
+<span class="c1">// }</span>
+</code></pre>
+<p>Stores a string in an op_return output of a Bitcoin transaction. The string can have up to 110 characters.</p>
+<h3 id='type-3'>Type</h3>
+<p><code>async putReturn(data: string): OutputId</code></p>
+<h2 id='put'>put</h2>
+<blockquote>
+<p>Store structured data</p>
+</blockquote>
+<pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">outputId</span> <span class="o">=</span> <span class="nx">await</span> <span class="nx">db</span><span class="p">.</span><span class="nx">put</span><span class="p">({</span>
+  <span class="na">text</span><span class="p">:</span> <span class="s1">'Lorem ipsum'</span><span class="p">,</span>
+  <span class="na">author</span><span class="p">:</span> <span class="s1">'Alice'</span>
+<span class="p">})</span>
+
+<span class="c1">// outputId === {</span>
+<span class="c1">//   txId: '3404832a17d996dffaa9ac1aea48a2fafc9d855e5fdca5100481d8a562523dfb',</span>
+<span class="c1">//   outputNumber: 0</span>
+<span class="c1">// }</span>
+</code></pre>
+<p>Stores json on the Bitcoin Cash blockchain.</p>
+
+<p>The data is stored in a Bitcoin output script. Data stored in this way can be updated the same way that coin ownership is updated in Bitcoin: by spending the outputs containing the old data into outputs containing the new data.</p>
+
+<blockquote>
+<p>Script encoding the above json</p>
+</blockquote>
+<pre class="highlight javascript tab-javascript"><code><span class="c1">// 2-of-2 multisig script</span>
+<span class="nx">OP_1</span> 
+<span class="mi">33</span> <span class="mh">0x03a70e0e5f7c300d9685195bbac132873cb5b68e9787aa7d63549cd0de5e4ace10</span>
+<span class="nx">OP_1</span>
+<span class="nx">OP_CHECKMULTISIG</span>
+
+<span class="c1">// section encoding the data</span>
+ <span class="mi">4</span> <span class="mh">0x74657874</span> <span class="nx">OP_DROP</span> <span class="c1">// text</span>
+<span class="mi">11</span> <span class="mh">0x4c6f72656d20697073756d</span> <span class="nx">OP_DROP</span> <span class="c1">// Lorem ipsum</span>
+ <span class="mi">6</span> <span class="mh">0x617574686f72</span> <span class="nx">OP_DROP</span> <span class="c1">// author</span>
+<span class="mi">13</span> <span class="mh">0x416c69636520616e6420426f62</span> <span class="nx">OP_DROP</span> <span class="c1">// Alice and Bob</span>
+</code></pre>
+<p>The json data get&#39;s encoded into the script on the right. It consists of a 1-of-1 multisig script and a section that encodes the data. The data is stored by pushing a value onto the stack and popping it off immediately thereafter (OP_DROP). </p>
+
+<p>Data stored in this way comes with a very strong guaranty: only the person in possession of the private key for <code>0x03a70e0e5f7...</code> can spend the output containing the data. We call that user the owner of the data. By default the user to issue the command is the owner, to designate a different owner, pass in that users public key as the second argument. Multiple public keys can be passed in to model co-ownership of data.</p>
+
+<blockquote>
+<p>Store structured data and it&#39;s owner</p>
+</blockquote>
+<pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">publicKey</span> <span class="o">=</span> <span class="nx">randomWallet</span><span class="p">.</span><span class="nx">getPublicKey</span><span class="p">()</span>
+<span class="kr">const</span> <span class="nx">outputId</span> <span class="o">=</span> <span class="nx">await</span> <span class="nx">db</span><span class="p">.</span><span class="nx">put</span><span class="p">({</span> <span class="na">key</span><span class="p">:</span> <span class="s1">'string value'</span><span class="p">},</span> <span class="p">[</span><span class="nx">publicKey</span><span class="p">])</span>
+</code></pre>
+<p>The third argument is an amount of satoshi that will be stored in the output containing the data.</p>
+
+<blockquote>
+<p>Store a structured data, it&#39;s owner, and an amount</p>
+</blockquote>
+<pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">publicKey</span> <span class="o">=</span> <span class="nx">randomWallet</span><span class="p">.</span><span class="nx">getPublicKey</span><span class="p">()</span>
+<span class="kr">const</span> <span class="nx">outputId</span> <span class="o">=</span> <span class="nx">await</span> <span class="nx">db</span><span class="p">.</span><span class="nx">put</span><span class="p">({</span> <span class="na">key</span><span class="p">:</span> <span class="s1">'string value'</span><span class="p">},</span> <span class="p">[</span><span class="nx">publicKey</span><span class="p">],</span> <span class="mi">1</span> <span class="o">*</span> <span class="mi">1</span><span class="nx">e8</span><span class="p">)</span>
+</code></pre><h3 id='type-4'>Type</h3>
+<p><code>
+type OutputId = {|<br />
+&nbsp;&nbsp;txId: string,<br />
+&nbsp;&nbsp;outputNumber: number<br />
+|}<br />
+<br />
+async put(<br />
+&nbsp;&nbsp;data: Object,<br />
+&nbsp;&nbsp;owners?: Array&lt;string&gt;,<br />
+&nbsp;&nbsp;amount?: number = MIN_NON_DUST_AMOUNT<br />
+): Promise&lt;OutputId&gt;<br />
+</code></p>
+
+<aside class="notice">Note: We currently only support objects with string keys and string values. Also the strings much be relatively short (around 300 characters). Please let us know if your application needs to store bigger documents and we will add support for that.</aside>
+<h2 id='get'>get</h2>
+<blockquote>
+<p>Retrieve data from the blockchain</p>
+</blockquote>
+<pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">id</span> <span class="o">=</span> <span class="nx">BitcoinDb</span><span class="p">.</span><span class="nx">put</span><span class="p">({</span> <span class="na">value</span><span class="p">:</span> <span class="s1">'a'</span> <span class="p">})</span>
+<span class="kr">const</span> <span class="nx">res</span> <span class="o">=</span> <span class="nx">BitcoinDb</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">id</span><span class="p">)</span>
+
+<span class="c1">// res === { </span>
+<span class="c1">//   data: { value: 'a' },</span>
+<span class="c1">//   owners: [ '03223d34686d6f19d20519156a030f7216e5d5bd6daa9442572bbaa446d06c8dfe' ],</span>
+<span class="c1">//   amount: 2750</span>
+<span class="c1">// }</span>
+</code></pre>
+<p>Retrieves a json object from the Bitcoin Cash blockchain given an <code>OutputId</code> object that specifies a location on the blockchain.</p>
+
+<p>The return value is an object with three keys: <code>data</code> contains the data stored at the <code>OutputId</code>, <code>owners</code> contains the owners string encoded public keys, and <code>amount</code> is the number of satoshis stored in the output.</p>
+<h3 id='type-5'>Type</h3>
+<p><code>
+type OutputId = {|<br />
+&nbsp;&nbsp;txId: string,<br />
+&nbsp;&nbsp;outputNumber: number<br />
+|}<br />
+<br />
+type OutputData = {|<br />
+&nbsp;&nbsp;data: string,<br />
+&nbsp;&nbsp;owners: Array&lt;string&gt;,<br />
+&nbsp;&nbsp;amount: number<br />
+|}<br />
+<br />
+async get(<br />
+&nbsp;&nbsp;outputId: OutputId<br />
+): Promise&lt;OutputData&gt;
+</code></p>
+<h2 id='update'>update</h2>
+<blockquote>
+<p>Update a piece of data</p>
+</blockquote>
+<pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">db</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">BitcoinDb</span><span class="p">()</span>
+<span class="kr">const</span> <span class="nx">outputId1</span> <span class="o">=</span> <span class="nx">await</span> <span class="nx">db</span><span class="p">.</span><span class="nx">put</span><span class="p">({</span> <span class="na">value</span><span class="p">:</span> <span class="s1">'a'</span> <span class="p">})</span>
+<span class="kr">const</span> <span class="nx">outputId2</span> <span class="o">=</span> <span class="nx">await</span> <span class="nx">db</span><span class="p">.</span><span class="nx">update</span><span class="p">(</span><span class="nx">outputId1</span><span class="p">,</span> <span class="p">{</span> <span class="na">value</span><span class="p">:</span> <span class="s1">'b'</span><span class="p">})</span>
+
+<span class="c1">// outputId2 === {</span>
+<span class="c1">//   txId: '3404832a17d996dffaa9ac1aea48a2fafc9d855e5fdca5100481d8a562523dfb',</span>
+<span class="c1">//   outputNumber: 0</span>
+<span class="c1">// }</span>
+</code></pre>
+<p>Updates an object stored on the blockchain and returns the location of the new data. The first parameter is the <code>OutputId</code> of the output containing the data that is to be updated, the second parameter is the new data. There are two optional parameters &quot;owners&quot; and &quot;amount&quot; that act just like the optional parameters of <code>db.put</code>. </p>
+
+<blockquote>
+<p>Only the owner can update data</p>
+</blockquote>
+<pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">db1</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">BitcoinDb</span><span class="p">()</span>
+<span class="kr">const</span> <span class="nx">db2</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">BitcoinDb</span><span class="p">()</span>
+<span class="kr">const</span> <span class="nx">outputId1</span> <span class="o">=</span> <span class="nx">await</span> <span class="nx">db1</span><span class="p">.</span><span class="nx">put</span><span class="p">({</span> <span class="na">value</span><span class="p">:</span> <span class="s1">'a'</span> <span class="p">})</span>
+
+<span class="c1">// works bc data at outputId1 is owned by db1</span>
+<span class="kr">const</span> <span class="nx">outputId2</span> <span class="o">=</span> <span class="nx">await</span> <span class="nx">db1</span><span class="p">.</span><span class="nx">update</span><span class="p">(</span><span class="nx">outputId1</span><span class="p">,</span> <span class="p">{</span> <span class="na">value</span><span class="p">:</span> <span class="s1">'b'</span><span class="p">},</span> <span class="p">[</span><span class="nx">db2</span><span class="p">.</span><span class="nx">getWallet</span><span class="p">().</span><span class="nx">getPublicKey</span><span class="p">()])</span>
+
+<span class="c1">// throws an error bc the data at outputId2 is owned by db2</span>
+<span class="kr">const</span> <span class="nx">outputId3</span> <span class="o">=</span> <span class="nx">await</span> <span class="nx">db1</span><span class="p">.</span><span class="nx">update</span><span class="p">(</span><span class="nx">outputId2</span><span class="p">,</span> <span class="p">{</span> <span class="na">value</span><span class="p">:</span> <span class="s1">'c'</span><span class="p">})</span>
+</code></pre>
+<p>BitcoinDb enforces two properties with respect to updates:</p>
+
+<ul>
+<li><p>Only the owner of a piece of data can update it, <code>db.update()</code> with throw an error if a user that does not own the data is trying to update it.</p></li>
+<li><p>Data can only be updated once, an attempt to update the same data twice will throw an error</p></li>
+</ul>
+
+<blockquote>
+<p>Data can only be updated once</p>
+</blockquote>
+<pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">db</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">BitcoinDb</span><span class="p">()</span>
+<span class="kr">const</span> <span class="nx">outputId1</span> <span class="o">=</span> <span class="nx">await</span> <span class="nx">db</span><span class="p">.</span><span class="nx">put</span><span class="p">({</span> <span class="na">value</span><span class="p">:</span> <span class="s1">'a'</span> <span class="p">})</span>
+
+<span class="c1">// works </span>
+<span class="kr">const</span> <span class="nx">outputId2</span> <span class="o">=</span> <span class="nx">await</span> <span class="nx">db</span><span class="p">.</span><span class="nx">update</span><span class="p">(</span><span class="nx">outputId1</span><span class="p">,</span> <span class="p">{</span> <span class="na">value</span><span class="p">:</span> <span class="s1">'b'</span><span class="p">})</span>
+
+<span class="c1">// throws an error bc the data at outputId1 has been updated</span>
+<span class="kr">const</span> <span class="nx">outputId3</span> <span class="o">=</span> <span class="nx">await</span> <span class="nx">db</span><span class="p">.</span><span class="nx">update</span><span class="p">(</span><span class="nx">outputId1</span><span class="p">,</span> <span class="p">{</span> <span class="na">value</span><span class="p">:</span> <span class="s1">'c'</span><span class="p">})</span>
+</code></pre><h3 id='type-6'>Type</h3>
+<p><code>
+type OutputId = {|<br />
+&nbsp;&nbsp;txId: string,<br />
+&nbsp;&nbsp;outputNumber: number<br />
+|}<br />
+<br />
+async update(<br />
+&nbsp;&nbsp;outputId: OutputId,<br />
+&nbsp;&nbsp;data: object,<br />
+&nbsp;&nbsp;owners?: Array&lt;string&gt;,<br />
+&nbsp;&nbsp;amount?: number = MIN_NON_DUST_AMOUNT<br />
+): Promise&lt;OutputId&gt;
+</code></p>
+<h2 id='transaction'>transaction</h2>
+<blockquote>
+<p>Update multiple pieces of data simultaneously</p>
+</blockquote>
+<pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">db</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">BitcoinDb</span><span class="p">()</span>
+<span class="kr">const</span> <span class="nx">outputId1</span> <span class="o">=</span> <span class="nx">await</span> <span class="nx">db</span><span class="p">.</span><span class="nx">put</span><span class="p">({</span> <span class="na">value</span><span class="p">:</span> <span class="s1">'a'</span> <span class="p">})</span>
+<span class="kr">const</span> <span class="nx">outputId2</span> <span class="o">=</span> <span class="nx">await</span> <span class="nx">db</span><span class="p">.</span><span class="nx">put</span><span class="p">({</span> <span class="na">value</span><span class="p">:</span> <span class="s1">'b'</span> <span class="p">})</span>
+<span class="kr">const</span> <span class="p">[</span><span class="nx">outputId3</span><span class="p">,</span> <span class="nx">outputId4</span><span class="p">]</span> <span class="o">=</span> <span class="nx">await</span> <span class="nx">db</span><span class="p">.</span><span class="nx">transaction</span><span class="p">([</span>
+  <span class="p">{</span>
+    <span class="na">outputId</span><span class="p">:</span> <span class="nx">outputId1</span><span class="p">,</span>
+    <span class="na">value</span><span class="p">:</span> <span class="s1">'aa'</span>
+  <span class="p">},</span> <span class="p">{</span>
+    <span class="na">outputId</span><span class="p">:</span> <span class="nx">outputId2</span><span class="p">,</span>
+    <span class="na">value</span><span class="p">:</span> <span class="s1">'bb'</span><span class="p">,</span>
+    <span class="na">owners</span><span class="p">:</span> <span class="p">[</span><span class="o">&lt;</span><span class="nx">publicKey</span><span class="o">&gt;</span><span class="p">]</span>
+  <span class="p">}</span>
+<span class="p">])</span>
+</code></pre>
+<p>You can group multiple updates into a single transaction by calling <code>db.transaction</code>. A BitcoinDb transaction satisfies the <a href="https://en.m.wikipedia.org/wiki/ACID_(computer_science)">ACID</a> properties of traditional database systems.</p>
+<h3 id='type-7'>Type</h3>
+<p><code>
+type OutputId = {|<br />
+&nbsp;&nbsp;txId: string,<br />
+&nbsp;&nbsp;outputNumber: number<br />
+|}<br />
+<br />
+type Update = {|<br />
+&nbsp;&nbsp;outputId: OutputId,<br />
+&nbsp;&nbsp;data: Object,<br />
+&nbsp;&nbsp;owners: Array&lt;string&gt;,<br />
+&nbsp;&nbsp;amount?: number<br />
+|}<br />
+<br />
+async transaction(<br />
+&nbsp;&nbsp;update: Array&lt;Update&gt;<br />
+): Promise&lt;Array&lt;OutputId&gt;&gt; {<br />
+</code></p>
+<h1 id='bitcointoken'>BitcoinToken</h1>
+<p><code>BitcoinToken</code> can issue, send, and store tokens on the Bitcoin Cash blockchain.</p>
+<pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="p">{</span> <span class="nx">Token</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'bitcointoken'</span><span class="p">)</span>
+</code></pre>
+<p>It uses <code>BitcoinDb</code> to build and broadcast transactions that encode meta information about token issuances and transfers.</p>
+
+<aside class="notice">You need to run a <a href="https://github.com/the-bitcoin-token/bitcoin-non-standard-server">non-standard server</a> to use BitcoinToken.</aside>
+<h2 id='constructor'>constructor</h2>
+<blockquote>
+<p>Create random BitcoinToken</p>
+</blockquote>
+<pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="p">{</span> <span class="nx">Token</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'bitcointoken'</span><span class="p">)</span>
+<span class="kr">const</span> <span class="nx">randomToken</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Token</span><span class="p">()</span>
+</code></pre>
+<p>A <code>BitcoinToken</code> object contains a <code>BitcoinDb</code> object to store data on the blockchain. Recall that each <code>BitcoinDb</code> object stores a mnemonic that serves as it&#39;s identity. To generate a <code>BitcoinToken</code> object from a new randomly generated <code>BitcoinWallet</code> object call the constructor without a parameter.</p>
+
+<blockquote>
+<p>Create BitcoinToken from a BitcoinDb</p>
+</blockquote>
+<pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="p">{</span> <span class="nx">Token</span><span class="p">,</span> <span class="nx">Db</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'bitcointoken'</span><span class="p">)</span>
+<span class="kr">const</span> <span class="nx">db</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Db</span><span class="p">()</span>
+<span class="kr">const</span> <span class="nx">token</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Token</span><span class="p">(</span><span class="nx">db</span><span class="p">)</span>
+</code></pre>
+<p>You can also create a new <code>BitcoinToken</code> object from an existing <code>BitcoinDb</code> object by passing it into the constructor.</p>
+<h2 id='frommnemonic'>fromMnemonic</h2>
+<blockquote>
+<p>Generate a BitcoinToken from a mnemonic</p>
+</blockquote>
+<pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">mnemonic</span> <span class="o">=</span> <span class="nx">Wallet</span><span class="p">.</span><span class="nx">getRandomMnemonic</span><span class="p">()</span>
+<span class="kr">const</span> <span class="nx">token</span> <span class="o">=</span> <span class="nx">Token</span><span class="p">.</span><span class="nx">fromMnemonic</span><span class="p">(</span><span class="nx">mnemonic</span><span class="p">)</span>
+</code></pre>
+<p>Generates <code>BitcoinToken</code> object and initialize the embedded <code>BitcoinWallet</code> using the mnemonic.</p>
+<h3 id='type'>Type</h3>
+<p><code>static fromMnemonic(mnemonic: string): BitcoinToken</code></p>
+
+<aside class="notice">The mnemonic and other properties of the wallet contained in a <code>BitcoinToken</code> object can be accessed via <code>db.getWallet().getMnemonic()</code>.</aside>
+<h2 id='getwallet'>getWallet</h2>
+<blockquote>
+<p>Return the wallet</p>
+</blockquote>
+<pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">wallet</span> <span class="o">=</span> <span class="nx">token</span><span class="p">.</span><span class="nx">getWallet</span><span class="p">()</span>
+
+<span class="c1">// wallet.constructor.name === 'Wallet`</span>
+</code></pre>
+<p>Returns the wallet stored in the db contained in the <code>BitcoinToken</code> object.</p>
+<h3 id='type-2'>Type</h3>
+<p><code>getWallet(): BitcoinWallet</code></p>
+<h2 id='getdb'>getDb</h2>
+<blockquote>
+<p>Return the db</p>
+</blockquote>
+<pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">db</span> <span class="o">=</span> <span class="nx">token</span><span class="p">.</span><span class="nx">getDb</span><span class="p">()</span>
+
+<span class="c1">// db.constructor.name === 'Db`</span>
+</code></pre>
+<p>Returns the <code>BitcoinDb</code> stored in the <code>BitcoinToken</code> object.</p>
+<h3 id='type-3'>Type</h3>
+<p><code>getDb(): BitcoinDb</code></p>
+<h2 id='create'>create</h2>
+<blockquote>
+<p>Issue a token</p>
+</blockquote>
+<pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">tokenId</span> <span class="o">=</span> <span class="nx">await</span> <span class="nx">token</span><span class="p">.</span><span class="nx">create</span><span class="p">({</span>
+  <span class="na">balance</span><span class="p">:</span> <span class="s1">'10'</span><span class="p">,</span>
+  <span class="na">name</span><span class="p">:</span> <span class="s1">'my-token'</span><span class="p">,</span>
+  <span class="na">url</span><span class="p">:</span> <span class="s1">'www.mytoken.com'</span><span class="p">,</span>
+<span class="p">})</span>
+</code></pre>
+<p>Issues a new fungible token, similar to ERC20 tokens on Ethereum. The parameter must be an object that can be passes into <code>BitcoinDb.put</code>, that is a json object with string keys and string values. It must have one key <code>balance</code> whose value indicates the initial number of tokens.</p>
+
+<p>The create command calls <code>db.put</code> to store the token meta data in the blockchain. The return value is the id of the output that stores the data.</p>
+<h3 id='type-4'>Type</h3>
+<p><code>async create(data: Object): Promise&lt;OutputId&gt;</code></p>
+
+<aside class="warning"><strong>Known issue</strong> In order for the token implementation to be trustless it must verify the history of every token when <code>send</code> or <code>getBalance</code> are called. The current implementation is trustless, but it does not store intermediary results and is consequently not efficient. This will be addressed in an upcoming release.<br /><br />
+
+In development we recommend to delete both tables in data base of the non-standard server from time to time.
+</aside>
+<h2 id='join'>join</h2>
+<blockquote>
+<p>Connect to an issued token</p>
+</blockquote>
+<pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">tokenAlice</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Token</span><span class="p">()</span>
+<span class="kr">const</span> <span class="nx">tokenBob</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Token</span><span class="p">()</span>
+<span class="kr">const</span> <span class="nx">tokenId</span> <span class="o">=</span> <span class="nx">await</span> <span class="nx">tokenAlice</span><span class="p">.</span><span class="nx">create</span><span class="p">({</span> <span class="na">balance</span><span class="p">:</span> <span class="s1">'10'</span> <span class="p">})</span>
+<span class="nx">tokenBob</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="nx">tokenId</span><span class="p">)</span>
+</code></pre>
+<p>Connects a <code>BitcoinToken</code> object a token that has been issued using <code>token.create</code>. The balance will be calculated with respect to the token being joined.</p>
+<h3 id='type-5'>Type</h3>
+<p><code>join(tokenId: OutputId): void</code></p>
+<h2 id='send'>send</h2>
+<blockquote>
+<p>Send a token</p>
+</blockquote>
+<pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">tokenAlice</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Token</span><span class="p">()</span>
+<span class="kr">const</span> <span class="nx">tokenId</span> <span class="o">=</span> <span class="nx">await</span> <span class="nx">tokenAlice</span><span class="p">.</span><span class="nx">create</span><span class="p">({</span> <span class="na">balance</span><span class="p">:</span> <span class="s1">'10'</span> <span class="p">})</span>
+
+<span class="kr">const</span> <span class="nx">tokenBob</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Token</span><span class="p">()</span>
+<span class="nx">tokenBob</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="nx">tokenId</span><span class="p">)</span>
+
+<span class="kr">const</span> <span class="nx">publicKeyBob</span> <span class="o">=</span> <span class="nx">tokenBob</span><span class="p">.</span><span class="nx">getWallet</span><span class="p">().</span><span class="nx">getPublicKey</span><span class="p">()</span>
+<span class="kr">const</span> <span class="nx">outputIds</span> <span class="o">=</span> <span class="kr">const</span> <span class="nx">tokenAlice</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nx">publicKeyBob</span><span class="p">)</span>
+
+<span class="c1">// outputIds === [{</span>
+<span class="c1">//   txId: '3404832a17d996dffaa9ac1aea48a2fafc9d855e5fdca5100481d8a562523dfb',</span>
+<span class="c1">//   outputNumber: 0</span>
+<span class="c1">// }]</span>
+</code></pre>
+<p>Sends tokens to another user. The first parameter is the number of tokens to send and the second is the public key of the recipient. Sending a token might involve a change output, just like the change output used when sending Bitcoin. The function returns a promise that resolves to an array of OutputIds that containing the newly created outputs that reflect the new state.</p>
+
+<p><code>token.send</code> calls <code>db.transaction</code> to broadcast a transaction that stores meta data about associated with the token transfer.</p>
+<h3 id='type-6'>Type</h3>
+<p><code>
+type OutputId = {|<br />
+&nbsp;&nbsp;txId: string,<br />
+&nbsp;&nbsp;outputNumber: number<br />
+|}<br />
+<br />
+async send(<br />
+&nbsp;&nbsp;amount: number,<br />
+&nbsp;&nbsp;publicKey: string<br />
+): Promise&lt;Array&lt;OutputId&gt;&gt;<br />
+</code></p>
+<h2 id='getbalance'>getBalance</h2>
+<blockquote>
+<p>Return the balance in tokens</p>
+</blockquote>
+<pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">token</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">BitcoinToken</span><span class="p">()</span>
+<span class="kr">const</span> <span class="nx">tokenId</span> <span class="o">=</span> <span class="nx">await</span> <span class="nx">token</span><span class="p">.</span><span class="nx">create</span><span class="p">({</span>
+  <span class="na">balance</span><span class="p">:</span> <span class="mi">10</span>
+<span class="p">})</span>
+
+<span class="kr">const</span> <span class="nx">balance1</span> <span class="o">=</span> <span class="nx">await</span> <span class="nx">token</span><span class="p">.</span><span class="nx">getBalance</span><span class="p">()</span>
+<span class="c1">// balance1 === 10</span>
+
+<span class="kr">const</span> <span class="nx">randomPublicKey</span>  <span class="o">=</span> <span class="k">new</span> <span class="nx">BitcoinWallet</span><span class="p">().</span><span class="nx">getPublicKey</span><span class="p">()</span>
+<span class="nx">await</span> <span class="nx">token</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nx">randomPublicKey</span><span class="p">)</span>
+
+<span class="kr">const</span> <span class="nx">balance2</span> <span class="o">=</span> <span class="nx">await</span> <span class="nx">token</span><span class="p">.</span><span class="nx">getBalance</span><span class="p">()</span>
+<span class="c1">// balance2 === 9</span>
+</code></pre>
+<p>Returns the number of tokens owned by the current <code>BitcoinToken</code> object. The balance will be computed with respect to the token that was created by the object, or with respect to the token that was joined. <code>token.getBalance()</code> will throw an error if the <code>token</code> object has not created or joined a token.</p>
+<h3 id='type-7'>Type</h3>
+<p><code>async getBalance(): Promise&lt;number&gt;</code></p>
+<h1 id='bitcoinsource'>BitcoinSource</h1>
+<p><code>BitcoinSource</code> is a readable Bitcoin implementation in modern Javascript.</p>
+<pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="p">{</span> <span class="nx">Source</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'bitcointoken'</span><span class="p">)</span>
+</code></pre>
+<p>It is a fork of Bitcore and shares it&#39;s <a href="https://bitcore.io/api/">api</a>. You can find the source code <a href="https://github.com/the-bitcoin-token/BitcoinSource">here</a></p>
+
       </div>
-
-      <h3 class="alt-h3 border-bottom border-gray-dark mb-2 mt-4">Initialization</h3>
-      <p class="f4-light">To create a wallet from random, call the constructor. To initialize from an existing private key call <code>BitcoinDb.fromHdPrivateKey()</code>. The third option is to pass in a BitcoinWallet object.</p>
-      <div class="markdown-body mb-2">
-        <pre class="box highlight">
-          const db1 = new BitcoinDb()
-
-          const hdPrivateKey = BitcoinDb.getHdPrivateKey()
-          const db2 = BitcoinDb.fromHdPrivateKey(hdPrivateKey)
-
-          const bitcoinWallet = new BitcoinWallet()
-          const db3 = new BitcoinDb(bitcoinWallet)
-        </pre>
+      <div class="dark-box">
       </div>
-
-      <h3 class="alt-h3 border-bottom border-gray-dark mb-2 mt-4">Storing data</h3>
-      <p class="f4-light">The function <code>db.put()</code> takes a json object as input and encodes it in an output script of a Bitcoin Cash transaction. It then signs and broadcasts the transaction using Bitcoinwallet. We currently support json data with string keys and values that need to be shorter than 350 charachters. </p>
-      <div class="markdown-body mb-2">
-        <pre class="box highlight">
-              await db1.put({ a: 'aaa' })
-            </pre>
-      </div>
-      <p class="f4-light">Data stored using BitcoinDb is stored on the blockchain and readable by anybody. If you want to restrict read access we recommend you encrypt data before you store it in BitcoinDb.</p>
-        
-      <p class="f4-light">While anyone can read the data that is stored in BitcoinDB, only a specified user (group) called "owners" can update the data. To specify that group of users, you can pass an optional second parameter to <code>db.put()</code> that contains the public keys of the owners. By default the current user is the only owner.</p>
-      <div class="markdown-body mb-2">
-        <pre class="box highlight">
-          await db1.put({ a: 'aaa' }, [db2.getPublicKey()])
-        </pre>
-      </div>
-      <p class="f4-light"><code>db.put()</code> takes a third optional argument that specifies an account of satoshis that will be stored in one atomic unit together with that data and the owners. When you call <code>db.put()</code> this amount of satoshis that will be transferred from the user calling the function to the new owners of the data. This feature can be used to build a token exchange and has many other use cases.</p>
-      <div class="markdown-body mb-2">
-        <pre class="box highlight">
-          await db1.put({ a: 'aaa' }, [db2.getPublicKey()], 100000)
-        </pre>
-      </div>
-
-      <h3 class="alt-h3 border-bottom border-gray-dark mb-2 mt-4">Reading data</h3>
-      <p class="f4-light">The return value of <code>db.put()</code> is a json object that encode the location on the blockchain where the data is stored. It consists of a  transaction id as well as the output number of the output encoding the data.</p>
-      <div class="markdown-body mb-2">
-        <pre class="box highlight">
-          { txId: 'f9ed485e2a528cf1c0570b8f1c65b1521a68b1e63b50f3011e9e7d4d2eeecf04', outputNumber: 0 }
-        </pre>
-      </div>
-      <p class="f4-light">The id returned from <code>db.put()</code> can be used to lookup the data stored in that location on the blockchain. BitcoinDb syncs across the globe in seconds, so data stored by one user is visible by every other user within seconds. To read data, pass the identifier returned by <code>db.put()</code> into <code>db.get()</code>.</p>
-      <div class="markdown-body mb-2">
-        <pre class="box highlight">
-              const id = await db1.put({ a: 'aaa' })
-              await db2.get(id)
-            </pre>
-      </div>
-      <p class="f4-light">The value returned from <code>db.get()</code> is a json object with three keys: <code>data</code> contains the initially stored data, <code>owners</code> is the list of the public keys of the owners, and <code>amount</code> contains the number of satoshi contained in the output that stores the data.</p>
-      <div class="markdown-body mb-2">
-        <pre class="box highlight">
-          { 
-            &nbsp;&nbsp;data: { a: 'aaa' },
-            &nbsp;&nbsp;owners: [ &lt;PublicKey: 03fc00d6e3044a17b17ff443f14f2eb23181071c9140a71a7cdc26fcc5d6d597e8&gt; ],
-            &nbsp;&nbsp;amount: 5000
-          }
-          </pre>
-      </div>
-
-      <h3 class="alt-h3 border-bottom border-gray-dark mb-2 mt-4">Updating data</h3>
-      <p class="f4-light">You can use <code>db.update()</code> to update data stored with BitcoinDb. The first parameter is the id of the output that contains the data that is to be updated. The second parameter is the new data. A third optional parameter can contain a list of owners like in <code>db.put()</code> that defaults to the current user. The fourth optional parameter is an amount of satoshis, also like in <code>db.put()</code>.
-
-      <div class="markdown-body mb-2">
-        <pre class="box highlight">
-          const id1 = await db1.put({ a: 'aaa' })
-          const id2 = await db1.update(id1, { b: 'bbb' })
-          const id3 = await db1.update(id2, { c: 'ccc' }, [db2.getPublicKey()])
-          // the next line throws an error bc id3 is owned by db2
-          const id4 = await db1.update(id3, { d: 'ddd' }, [db1.getPublicKey()], 100000)
-        </pre>
-      </div>
-
-      <h3 class="alt-h3 border-bottom border-gray-dark mb-2 mt-4">Under the hood</h3>
-
-      <p class="f4-light">Internally, <code>db.update()</code> builds and broadcasts the following Bitcoin Cash transaction: it spends the outputs specified by the first parameter and spends them into a new output that encodes the data from the second parameter. The output is an n-of-n multisig output, spendable by the owners from the third parameter. This output contains the number of Bitcoin specified by the last parameter.</p>
-    </section>
-  </div>
-
-  <!-- ########################################################## -->
-
-  <div class="bg-blue-light py-10">
-    <section class="main-content mx-auto p-responsive pt-3 pb-12" id='bitcoin-token'>
-      <h2 class="alt-h2 border-bottom mb-2">BitcoinToken</h2>
-      <p class="f4-light">Bitcoin token lets you create tokens and other smart contracts on top of Bitcoin Cash. We currently support fungible tokens, similar to Ethereums ERC20 contract. We will be adding support for more smart contracts soon.</p>
-      <div class="markdown-body mb-2">
-        <pre class="box highlight">
-          const token = new BitcoinToken()
-          await token.create({ balance: '10' })
-          await token.send(1, &lt;public key&gt;)
-          await token.getBalance() // returns 9
-        </pre>
-      </div>
-      <h3 class="alt-h3 border-bottom border-gray-dark mb-2 mt-4">Initialization</h3>
-      <p class="f4-light">A BitcoinToken object can be created from random by calling the constructor. Or, it can be initialized from an existing private key using <code>BitcoinToken.fromHdPrivateKey()</code>. You can also pass an existing BitcoinDb object into the constructor.</p>
-      <div class="markdown-body mb-2">
-        <pre class="box highlight">
-          const token1 = new BitcoinToken()
-
-          const hdPrivateKey = BitcoinDb.getHdPrivateKey()
-          const token2 = BitcoinToken.fromHdPrivateKey(hdPrivateKey)
-
-          const db = new BitcoinDb()
-          const token3 = new BitcoinToken(db)
-        </pre>
-      </div>
-      <h3 class="alt-h3 border-bottom border-gray-dark mb-2 mt-4">Issuing a Token</h3>
-      <p class="f4-light">A token can be issued by calling <code>token.create()</code>. The parameter must be a json object with one key "balance" and a string value that encodes an integer. The balance encodes the numbers of tokens to be created. Initially all tokens are owned by the private key of the token object on which <code>token.create()</code> is called.</p>
-      <div class="markdown-body mb-2">
-        <pre class="box highlight">
-            await token.create({ balance: '10' })
-          </pre>
-      </div>
-
-      <p class="f4-light">Internally, <code>token.create()</code> calls the <code>db.put()</code> function of a BitcoinDb object that is a property of the token object. Then <code>db.put()</code> builds, signs and broadcasts a transaction using BitcoinWallet. That transaction stores the meta data of the token in the blockchain.</p>
-
-      <p class="f4-light">You can add your own meta data to the token creation transaction:</p>
-
-      <div class="markdown-body mb-2">
-        <pre class="box highlight">
-            await token.create({
-              &nbsp;&nbsp;balance: '10',
-              &nbsp;&nbsp;name: 'my-token',
-              &nbsp;&nbsp;url: 'www.mytoken.com',
-              &nbsp;&nbsp;...
-            })
-          </pre>
-      </div>
-
-
-      <h3 class="alt-h3 border-bottom border-gray-dark mt-4">Checking the token balance</h3>
-      <p class="f4-light mt-2">The function <code>token.getBalance()</code> returns the number of tokens owned by the object.</p>
-      <div class="markdown-body mb-2">
-        <pre class="box highlight">
-              await token.getBalance()
-            </pre>
-      </div>
-    </section>
-  </div>
-
-  <div class="py-10 bg-gray-dark">
-    &nbsp;
-    <p class="text-white text-center">Talk to us on <a class="text-inherit" href="https://twitter.com/thebitcointoken">Twitter</a> or <a class="text-inherit" href="https://t.me/joinchat/FMrjOUWRuUkNuIt7zJL8tg">Telegram</a></p>
-  </div>
-</body>
+    </div>
+  </body>
 </html>
