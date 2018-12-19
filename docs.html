@@ -497,7 +497,7 @@ The functions of a <code>BitcoinWallet</code> object are listed below. -->
 </code></pre>
 <p>Generates a new mnemonic from a secure random source.</p>
 <h3 id='type'>Type</h3>
-<p><code>static getHdPrivateKey(): string</code></p>
+<p><code>static getRandomMnemonic(): string</code></p>
 <h2 id='frommnemonic'>fromMnemonic</h2>
 <blockquote>
 <p>Generate a BitcoinWallet from a mnemonic</p>
@@ -505,9 +505,9 @@ The functions of a <code>BitcoinWallet</code> object are listed below. -->
 <pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">mnemonic</span> <span class="o">=</span> <span class="nx">Wallet</span><span class="p">.</span><span class="nx">getRandomMnemonic</span><span class="p">()</span>
 <span class="kr">const</span> <span class="nx">wallet</span> <span class="o">=</span> <span class="nx">Wallet</span><span class="p">.</span><span class="nx">fromMnemonic</span><span class="p">(</span><span class="nx">mnemonic</span><span class="p">)</span>
 </code></pre>
-<p>Generates <code>BitcoinWallet</code> from a the mnemonic.</p>
+<p>Generates <code>BitcoinWallet</code> from a mnemonic string.</p>
 <h3 id='type-2'>Type</h3>
-<p><code>static getRandomMnemonic(mnemonic: string): BitcoinWallet</code></p>
+<p><code>static fromMnemonic(mnemonic: string): BitcoinWallet</code></p>
 <h2 id='getmnemonic'>getMnemonic</h2>
 <blockquote>
 <p>Return the mnemonic</p>
@@ -799,7 +799,7 @@ async put(<br />
 ): Promise&lt;OutputId&gt;<br />
 </code></p>
 
-<aside class="notice">Note: We currently only support objects with string keys and string values. Also the strings much be relatively short (around 300 characters). Please let us know if your application needs to store bigger documents and we will add support for that.</aside>
+<aside class="notice">Note: We currently only support objects with string keys and string values. Also the strings must be relatively short (around 300 characters). Please let us know if your application needs to store bigger documents and we will add support for that.</aside>
 <h2 id='get'>get</h2>
 <blockquote>
 <p>Retrieve data from the blockchain</p>
