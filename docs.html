@@ -365,7 +365,9 @@
 </blockquote>
 <pre class="highlight shell_session"><code>npm i bitcointoken
 </code></pre>
-<p><code>npm i bitcointoken</code></p>
+<p>Run <code>npm init -yes</code> and</p>
+
+<p><code>npm install bitcointoken</code></p>
 
 <p>If you only want to use BitcoinWallet you are done. If you want to use BitcoinDb or BitcoinToken you need to install and run a non-standard server in a second terminal window.</p>
 <h3 id='install-and-run-the-non-standard-server'>Install and run the non-standard server</h3>
@@ -754,7 +756,7 @@ The location on the blockchain where data is stored is captured by an <code>Outp
 <blockquote>
 <p>Script encoding the above json</p>
 </blockquote>
-<pre class="highlight javascript tab-javascript"><code><span class="c1">// 2-of-2 multisig script</span>
+<pre class="highlight javascript tab-javascript"><code><span class="c1">// 1-of-1 multisig script</span>
 <span class="nx">OP_1</span> 
 <span class="mi">33</span> <span class="mh">0x03a70e0e5f7c300d9685195bbac132873cb5b68e9787aa7d63549cd0de5e4ace10</span>
 <span class="nx">OP_1</span>
