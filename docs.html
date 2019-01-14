@@ -239,13 +239,13 @@
             <a href="#bitcoinwallet" class="toc-h1 toc-link" data-title="BitcoinWallet">BitcoinWallet</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#wallet.constructor" class="toc-h2 toc-link" data-title="constructor">constructor</a>
+                    <a href="#constructor" class="toc-h2 toc-link" data-title="constructor">constructor</a>
                   </li>
                   <li>
                     <a href="#getrandommnemonic" class="toc-h2 toc-link" data-title="getRandomMnemonic">getRandomMnemonic</a>
                   </li>
                   <li>
-                    <a href="#wallet.frommnemonic" class="toc-h2 toc-link" data-title="fromMnemonic">fromMnemonic</a>
+                    <a href="#frommnemonic" class="toc-h2 toc-link" data-title="fromMnemonic">fromMnemonic</a>
                   </li>
                   <li>
                     <a href="#getmnemonic" class="toc-h2 toc-link" data-title="getMnemonic">getMnemonic</a>
@@ -260,13 +260,13 @@
                     <a href="#getaddress" class="toc-h2 toc-link" data-title="getAddress">getAddress</a>
                   </li>
                   <li>
-                    <a href="#wallet.getbalance" class="toc-h2 toc-link" data-title="getBalance">getBalance</a>
+                    <a href="#getbalance" class="toc-h2 toc-link" data-title="getBalance">getBalance</a>
                   </li>
                   <li>
-                    <a href="#wallet.send" class="toc-h2 toc-link" data-title="send">send</a>
+                    <a href="#send" class="toc-h2 toc-link" data-title="send">send</a>
                   </li>
                   <li>
-                    <a href="#wallet.transaction" class="toc-h2 toc-link" data-title="transaction">transaction</a>
+                    <a href="#transaction" class="toc-h2 toc-link" data-title="transaction">transaction</a>
                   </li>
                   <li>
                     <a href="#derive" class="toc-h2 toc-link" data-title="derive">derive</a>
@@ -280,13 +280,13 @@
             <a href="#bitcoindb" class="toc-h1 toc-link" data-title="BitcoinDb">BitcoinDb</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#db.constructor" class="toc-h2 toc-link" data-title="constructor">constructor</a>
+                    <a href="#constructor" class="toc-h2 toc-link" data-title="constructor">constructor</a>
                   </li>
                   <li>
-                    <a href="#db.frommnemonic" class="toc-h2 toc-link" data-title="fromMnemonic">fromMnemonic</a>
+                    <a href="#frommnemonic" class="toc-h2 toc-link" data-title="fromMnemonic">fromMnemonic</a>
                   </li>
                   <li>
-                    <a href="#db.getwallet" class="toc-h2 toc-link" data-title="getWallet">getWallet</a>
+                    <a href="#getwallet" class="toc-h2 toc-link" data-title="getWallet">getWallet</a>
                   </li>
                   <li>
                     <a href="#putreturn" class="toc-h2 toc-link" data-title="putReturn">putReturn</a>
@@ -301,7 +301,7 @@
                     <a href="#update" class="toc-h2 toc-link" data-title="update">update</a>
                   </li>
                   <li>
-                    <a href="#db.transaction" class="toc-h2 toc-link" data-title="transaction">transaction</a>
+                    <a href="#transaction" class="toc-h2 toc-link" data-title="transaction">transaction</a>
                   </li>
               </ul>
           </li>
@@ -309,13 +309,13 @@
             <a href="#bitcointoken" class="toc-h1 toc-link" data-title="BitcoinToken">BitcoinToken</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#token.constructor" class="toc-h2 toc-link" data-title="constructor">constructor</a>
+                    <a href="#constructor" class="toc-h2 toc-link" data-title="constructor">constructor</a>
                   </li>
                   <li>
-                    <a href="#token.frommnemonic" class="toc-h2 toc-link" data-title="fromMnemonic">fromMnemonic</a>
+                    <a href="#frommnemonic" class="toc-h2 toc-link" data-title="fromMnemonic">fromMnemonic</a>
                   </li>
                   <li>
-                    <a href="#token.getwallet" class="toc-h2 toc-link" data-title="getWallet">getWallet</a>
+                    <a href="#getwallet" class="toc-h2 toc-link" data-title="getWallet">getWallet</a>
                   </li>
                   <li>
                     <a href="#getdb" class="toc-h2 toc-link" data-title="getDb">getDb</a>
@@ -327,10 +327,10 @@
                     <a href="#join" class="toc-h2 toc-link" data-title="join">join</a>
                   </li>
                   <li>
-                    <a href="#token.send" class="toc-h2 toc-link" data-title="send">send</a>
+                    <a href="#send" class="toc-h2 toc-link" data-title="send">send</a>
                   </li>
                   <li>
-                    <a href="#token.getbalance" class="toc-h2 toc-link" data-title="getBalance">getBalance</a>
+                    <a href="#getbalance" class="toc-h2 toc-link" data-title="getBalance">getBalance</a>
                   </li>
               </ul>
           </li>
@@ -473,7 +473,7 @@ browserify index.js &gt; bundle.js
 <pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="p">{</span> <span class="nx">Wallet</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'bitcointoken'</span><span class="p">)</span>
 </code></pre>
 <p>A BitcoinWallet stores a secrete passphrase called menmonic. The mnemonic represents an identity, for example every user in an application would have their own mnemonic. The mnemonic can be used to send Bitcoin to another user, or to generate public addresses that can receive Bitcoin.</p>
-<h2 id='wallet.constructor'>constructor</h2>
+<h2 id='constructor'>constructor</h2>
 <blockquote>
 <p>Generate a random BitcoinWallet</p>
 </blockquote>
@@ -498,14 +498,14 @@ The functions of a <code>BitcoinWallet</code> object are listed below. -->
 <p>Generates a new mnemonic from a secure random source.</p>
 <h3 id='type'>Type</h3>
 <p><code>static getRandomMnemonic(): string</code></p>
-<h2 id='wallet.frommnemonic'>fromMnemonic</h2>
+<h2 id='frommnemonic'>fromMnemonic</h2>
 <blockquote>
 <p>Generate a BitcoinWallet from a mnemonic</p>
 </blockquote>
 <pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">mnemonic</span> <span class="o">=</span> <span class="nx">Wallet</span><span class="p">.</span><span class="nx">getRandomMnemonic</span><span class="p">()</span>
 <span class="kr">const</span> <span class="nx">wallet</span> <span class="o">=</span> <span class="nx">Wallet</span><span class="p">.</span><span class="nx">fromMnemonic</span><span class="p">(</span><span class="nx">mnemonic</span><span class="p">)</span>
 </code></pre>
-<p>Generates <code>BitcoinWallet</code> from a mnemonic string.</p>
+<p>Generates <code>BitcoinWallet</code> from a mnemonic.</p>
 <h3 id='type-2'>Type</h3>
 <p><code>static fromMnemonic(mnemonic: string): BitcoinWallet</code></p>
 <h2 id='getmnemonic'>getMnemonic</h2>
@@ -553,7 +553,7 @@ The functions of a <code>BitcoinWallet</code> object are listed below. -->
 type Format = &#39;legacy&#39; | &#39;bitpay&#39; | &#39;cashaddr&#39;<br />
 getAddress(format?: Format = &#39;legacy&#39;): string
 </code></p>
-<h2 id='wallet.getbalance'>getBalance</h2>
+<h2 id='getbalance'>getBalance</h2>
 <blockquote>
 <p>Return the current balance</p>
 </blockquote>
@@ -565,7 +565,7 @@ getAddress(format?: Format = &#39;legacy&#39;): string
 <p><code>async getBalance(): number</code></p>
 
 <aside class="notice">Note that `getBalance` returns the balance of the current account and not the balance of derived accounts.</aside>
-<h2 id='wallet.send'>send</h2>
+<h2 id='send'>send</h2>
 <blockquote>
 <p>Send Bitcoin</p>
 </blockquote>
@@ -590,7 +590,7 @@ async send(<br />
 &nbsp;&nbsp;changeAddress: ?string<br />
 ): Promise&lt;OutputId&gt;<br />
 </code></p>
-<h2 id='wallet.transaction'>transaction</h2>
+<h2 id='transaction'>transaction</h2>
 <blockquote>
 <p>Send Bitcoin to multiple recipients</p>
 </blockquote>
@@ -682,7 +682,7 @@ getPath(): string
 Similarly, BitcoinDb stores data is unspent transaction outputs. When data is updated, the outputs representing the old state are spent and outputs representing the new state are created. The convention is that the i-th output represents the new state of the i-th input being spent. This leads to a natural notion of data ownership where the data is owned by the users(s) that can spend and thereby update the output that contains the data.
 
 The location on the blockchain where data is stored is captured by an <code>OutputId</code> object, which contains two keys <code>txId</code> and <code>outputNumber</code> (that is an <code>OutputId</code> object has type <code>{| txId: string, outputNumber: number |})</code> in <a href="https://flow.org/">flow type</a> notation). -->
-<h2 id='db.constructor'>constructor</h2>
+<h2 id='constructor'>constructor</h2>
 <blockquote>
 <p>Create random BitcoinDb</p>
 </blockquote>
@@ -697,7 +697,7 @@ The location on the blockchain where data is stored is captured by an <code>Outp
 <span class="kr">const</span> <span class="nx">db</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Db</span><span class="p">(</span><span class="nx">wallet</span><span class="p">)</span>
 </code></pre>
 <p>You can also create a new <code>BitcoinWallet</code> object from an existing <code>BitcoinWallet</code> object by passing it into the constructor.</p>
-<h2 id='db.frommnemonic'>fromMnemonic</h2>
+<h2 id='frommnemonic'>fromMnemonic</h2>
 <blockquote>
 <p>Generate a BitcoinDb from a mnemonic</p>
 </blockquote>
@@ -709,7 +709,7 @@ The location on the blockchain where data is stored is captured by an <code>Outp
 <p><code>static fromMnemonic(mnemonic: string): BitcoinWallet</code></p>
 
 <aside class="notice">The mnemonic of a `BitcoinDb` object can be accessed via `db.getWallet().getMnemonic()`.</aside>
-<h2 id='db.getwallet'>getWallet</h2>
+<h2 id='getwallet'>getWallet</h2>
 <blockquote>
 <p>Return the wallet stored in the db</p>
 </blockquote>
@@ -893,7 +893,7 @@ async update(<br />
 &nbsp;&nbsp;amount?: number = MIN_NON_DUST_AMOUNT<br />
 ): Promise&lt;OutputId&gt;
 </code></p>
-<h2 id='db.transaction'>transaction</h2>
+<h2 id='transaction'>transaction</h2>
 <blockquote>
 <p>Update multiple pieces of data simultaneously</p>
 </blockquote>
@@ -937,7 +937,7 @@ async transaction(<br />
 <p>It uses <code>BitcoinDb</code> to build and broadcast transactions that encode meta information about token issuances and transfers.</p>
 
 <aside class="notice">You need to run a <a href="https://github.com/the-bitcoin-token/bitcoin-non-standard-server">non-standard server</a> to use BitcoinToken.</aside>
-<h2 id='token.constructor'>constructor</h2>
+<h2 id='constructor'>constructor</h2>
 <blockquote>
 <p>Create random BitcoinToken</p>
 </blockquote>
@@ -954,7 +954,7 @@ async transaction(<br />
 <span class="kr">const</span> <span class="nx">token</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Token</span><span class="p">(</span><span class="nx">db</span><span class="p">)</span>
 </code></pre>
 <p>You can also create a new <code>BitcoinToken</code> object from an existing <code>BitcoinDb</code> object by passing it into the constructor.</p>
-<h2 id='token.frommnemonic'>fromMnemonic</h2>
+<h2 id='frommnemonic'>fromMnemonic</h2>
 <blockquote>
 <p>Generate a BitcoinToken from a mnemonic</p>
 </blockquote>
@@ -966,7 +966,7 @@ async transaction(<br />
 <p><code>static fromMnemonic(mnemonic: string): BitcoinToken</code></p>
 
 <aside class="notice">The mnemonic and other properties of the wallet contained in a <code>BitcoinToken</code> object can be accessed via <code>db.getWallet().getMnemonic()</code>.</aside>
-<h2 id='token.getwallet'>getWallet</h2>
+<h2 id='getwallet'>getWallet</h2>
 <blockquote>
 <p>Return the wallet</p>
 </blockquote>
@@ -1020,7 +1020,7 @@ In development we recommend to delete both tables in data base of the non-standa
 <p>Connects a <code>BitcoinToken</code> object a token that has been issued using <code>token.create</code>. The balance will be calculated with respect to the token being joined.</p>
 <h3 id='type-5'>Type</h3>
 <p><code>join(tokenId: OutputId): void</code></p>
-<h2 id='token.send'>send</h2>
+<h2 id='send'>send</h2>
 <blockquote>
 <p>Send a token</p>
 </blockquote>
@@ -1053,7 +1053,7 @@ async send(<br />
 &nbsp;&nbsp;publicKey: string<br />
 ): Promise&lt;Array&lt;OutputId&gt;&gt;<br />
 </code></p>
-<h2 id='token.getbalance'>getBalance</h2>
+<h2 id='getbalance'>getBalance</h2>
 <blockquote>
 <p>Return the balance in tokens</p>
 </blockquote>
